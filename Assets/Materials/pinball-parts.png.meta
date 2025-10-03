@@ -1,0 +1,650 @@
+fileFormatVersion: 2
+guid: 116b07fc476b26c49a1a2156520aeb56
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2533469206384590020
+    second: pinball-parts_0
+  - first:
+      213: 6044767142118511773
+    second: pinball-parts_1
+  - first:
+      213: 6671250488593513503
+    second: pinball-parts_2
+  - first:
+      213: 8393297069285791813
+    second: pinball-parts_3
+  - first:
+      213: -6575024855968922865
+    second: pinball-parts_4
+  - first:
+      213: 5801785226977107894
+    second: pinball-parts_5
+  - first:
+      213: -9070827758443181396
+    second: pinball-parts_6
+  - first:
+      213: -8620844248596647833
+    second: pinball-parts_7
+  - first:
+      213: 3520875185217164391
+    second: pinball-parts_8
+  - first:
+      213: 4174788316372641186
+    second: pinball-parts_9
+  - first:
+      213: -1086491831887979635
+    second: pinball-parts_10
+  - first:
+      213: 2876639123642967440
+    second: pinball-parts_11
+  - first:
+      213: -5573972334933910910
+    second: pinball-parts_12
+  - first:
+      213: 4021294810534032386
+    second: pinball-parts_13
+  - first:
+      213: 8291369034318957158
+    second: pinball-parts_14
+  - first:
+      213: 4314637015133468882
+    second: pinball-parts_15
+  - first:
+      213: 7704890837907527955
+    second: pinball-parts_16
+  - first:
+      213: 2516429242457032466
+    second: pinball-parts_17
+  - first:
+      213: -615890131089194630
+    second: pinball-parts_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pinball-parts_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 1901
+        width: 368
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47d1e492924393549847f9f17771675e
+      internalID: 1342420631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_1
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 1251
+        width: 771
+        height: 761
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af2dd2c98f25e5d40a88bc64978f59c9
+      internalID: 1756747907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_2
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 1929
+        width: 240
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9ac669d0505a974187de284e4ae8920
+      internalID: -1239915119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_3
+      rect:
+        serializedVersion: 2
+        x: 1498
+        y: 1929
+        width: 240
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c0ab2b403822e84d94c39e0dd3c0838
+      internalID: 1398556329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_4
+      rect:
+        serializedVersion: 2
+        x: 1802
+        y: 1931
+        width: 28
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7d5dd547a77d104b87b7ec73ee4e097
+      internalID: -1222525833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_5
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 1765
+        width: 380
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52bf185b3c07f794cb267e30bcfdd634
+      internalID: -1286438139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_6
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 1745
+        width: 156
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 531a3c0e0632d5d45b60f85acaef0a08
+      internalID: 64774052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_7
+      rect:
+        serializedVersion: 2
+        x: 1392
+        y: 1745
+        width: 155
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94f625b80ddc2a1489530546c483ae6b
+      internalID: -1347522647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_8
+      rect:
+        serializedVersion: 2
+        x: 1563
+        y: 1746
+        width: 156
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cacad39c867a464d8ac03c098ff51f3
+      internalID: -2021866088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_9
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 1745
+        width: 155
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 007af2b9c2348954da481655a786f549
+      internalID: -468815705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_10
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 1668
+        width: 65
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5f30ac859f1c874d844e12feedb4da2
+      internalID: 1799497747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_11
+      rect:
+        serializedVersion: 2
+        x: 1316
+        y: 1559
+        width: 153
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a53366bc9256584499b43da7eadf8b8c
+      internalID: 1690129536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_12
+      rect:
+        serializedVersion: 2
+        x: 1682
+        y: 1571
+        width: 319
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35c4870aaa9d5f84a96da2c288c816d0
+      internalID: -931392497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_13
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 1603
+        width: 64
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40cffbd8c6340234ea64699f8c116d9f
+      internalID: 1659994902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_14
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 1543
+        width: 78
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cf03f25f8e556d46bc394ccd82c85c7
+      internalID: -1127494259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_15
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 1466
+        width: 432
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ea985ab3ea31f04a80241115d912a86
+      internalID: -1305777167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_16
+      rect:
+        serializedVersion: 2
+        x: 1779
+        y: 1195
+        width: 187
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 658aa15acb4cce34183a6d1949fbe23f
+      internalID: -737752405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_17
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 72
+        width: 783
+        height: 1123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91fdc37133a68ee4f8f9b45e83d700be
+      internalID: 1122933125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pinball-parts_18
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 78
+        width: 772
+        height: 1112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e58d5a83c2667da40880e487dfc6eb3b
+      internalID: -112511993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 4c262354697ca3742ba2202faf5f0af1
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      pinball-parts_0: 1342420631
+      pinball-parts_1: 1756747907
+      pinball-parts_10: 1799497747
+      pinball-parts_11: 1690129536
+      pinball-parts_12: -931392497
+      pinball-parts_13: 1659994902
+      pinball-parts_14: -1127494259
+      pinball-parts_15: -1305777167
+      pinball-parts_16: -737752405
+      pinball-parts_17: 1122933125
+      pinball-parts_18: -112511993
+      pinball-parts_2: -1239915119
+      pinball-parts_3: 1398556329
+      pinball-parts_4: -1222525833
+      pinball-parts_5: -1286438139
+      pinball-parts_6: 64774052
+      pinball-parts_7: -1347522647
+      pinball-parts_8: -2021866088
+      pinball-parts_9: -468815705
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
