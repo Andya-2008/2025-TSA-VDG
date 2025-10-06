@@ -17,7 +17,7 @@ public class KartController : MonoBehaviour
             sphere.transform.position.y - 0.5f,
             sphere.transform.position.z);
 
-        if (Input.GetButton("Fire1"))
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
             speed = acceleration;
         }
