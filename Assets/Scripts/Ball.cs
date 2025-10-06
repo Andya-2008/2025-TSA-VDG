@@ -3,6 +3,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField] float maxSpeed = 100f;
+    public ParticleSystem crossEffect;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
