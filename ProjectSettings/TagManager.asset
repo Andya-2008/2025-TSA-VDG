@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pinball Ball
   - Ball End
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX

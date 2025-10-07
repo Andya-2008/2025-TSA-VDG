@@ -22,7 +22,6 @@ public class SplitScreenManager : MonoBehaviour
     private int _prevSide = 0;            // +1, -1, 0 = unknown/inside deadzone
     private Vector2 _A, _B, _P;           // screen-space endpoints + ball
     private float _nextReacquireAt;
-
     void OnValidate()
     {
         if (gameplayCamera == null) gameplayCamera = Camera.main;
@@ -51,7 +50,16 @@ public class SplitScreenManager : MonoBehaviour
         {
             string dir = (_prevSide == 1 && side == -1) ? "A?B" : "B?A";
             Debug.Log($"[SplitLineCrossDebug] CROSS {dir} at dist={signedDist:F2}px  ball={_P}  lineA={_A}  lineB={_B}");
-            ball.GetComponent<Ball>().crossEffect.Play();
+
+            //ball.GetComponent<Ball>().crossEffect.Play();
+            if (dir == "A?B")
+            {
+                SwitchPacManBall(1);
+            }
+            else
+            {
+                SwitchPacManBall(0);
+            }
         }
 
         if (side != 0) _prevSide = side;
@@ -113,5 +121,27 @@ public class SplitScreenManager : MonoBehaviour
         float t = Vector3.Dot(p - a, ab) / Mathf.Max(ab.sqrMagnitude, 1e-6f);
         t = Mathf.Clamp01(t);
         return a + t * ab;
+    }
+
+   public void SwitchPacManBall(int num)
+    {
+        //Pacman switches into ball
+        if(num == 1)
+        {
+            ball.GetComponent<Pacman>().enabled = false;
+            ball.GetComponent<Movement>().enabled = false;
+            ball.GetComponent<Ball>().enabled = true;
+            ball.gameObject.layer = 7;
+            ball.GetComponent<CircleCollider2D>().radius = .8f;
+        }   
+        //Ball switches to pacman
+        else
+        {
+            ball.GetComponent<Pacman>().enabled = true;
+            ball.GetComponent<Movement>().enabled = true;
+            ball.GetComponent<Ball>().enabled = false;
+            ball.gameObject.layer = 6;
+            ball.GetComponent<CircleCollider2D>().radius = .4f;
+        }
     }
 }
