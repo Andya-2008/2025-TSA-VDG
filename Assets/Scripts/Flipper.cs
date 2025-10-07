@@ -15,12 +15,12 @@ public class Flipper : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.A) && isLeft)
         {
-            flipperJoint.GetComponent<Rigidbody2D>().AddTorque(500);
+            flipperJoint.GetComponent<Rigidbody2D>().AddTorque(1500 * Time.deltaTime * 100);
         }
 
         if (Input.GetKey(KeyCode.D) && !isLeft)
         {
-            flipperJoint.GetComponent<Rigidbody2D>().AddTorque(-500);
+            flipperJoint.GetComponent<Rigidbody2D>().AddTorque(-1500 * Time.deltaTime * 100);
         }
     }
 }
