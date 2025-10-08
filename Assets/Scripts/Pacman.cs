@@ -11,7 +11,7 @@ public class Pacman : MonoBehaviour
 
     private void Awake()
     {
-        //spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         circleCollider = GetComponent<CircleCollider2D>();
         movement = GetComponent<Movement>();
     }
@@ -39,26 +39,26 @@ public class Pacman : MonoBehaviour
 
     public void ResetState()
     {
-        /*
+        
         enabled = true;
         spriteRenderer.enabled = true;
         circleCollider.enabled = true;
         deathSequence.enabled = false;
         movement.ResetState();
         gameObject.SetActive(true);
-        */
+        
     }
 
     public void DeathSequence()
     {
-        /*
+        
         enabled = false;
         spriteRenderer.enabled = false;
         circleCollider.enabled = false;
         movement.enabled = false;
         deathSequence.enabled = true;
         deathSequence.Restart();
-        */
+        
     }
 
 }
