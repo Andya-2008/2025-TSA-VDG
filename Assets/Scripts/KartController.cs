@@ -1,3 +1,5 @@
+using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -9,6 +11,8 @@ public class KartController : MonoBehaviour
 
     private float speed, currentSpeed;
     private float rotate, currentRotation;
+    public float Speed = 0;
+    private bool canMove = true;
 
     // Update is called once per frame
     void Update()
@@ -17,19 +21,21 @@ public class KartController : MonoBehaviour
             sphere.transform.position.y - 0.5f,
             sphere.transform.position.z);
 
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        Speed = (int)Math.Floor(sphere.linearVelocity.magnitude);
+
+        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && canMove)
         {
             speed = acceleration;
         }
 
-        if (Input.GetAxis("Horizontal") != 0)
+        if (Input.GetAxis("Horizontal") != 0 && canMove)
         {
             int dir = Input.GetAxis("Horizontal") > 0f ? 1 : -1;
             float amount = Mathf.Abs(Input.GetAxis("Horizontal"));
             Steer(dir, amount);
         }
 
-        spriteVisual.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
+        if (canMove) spriteVisual.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
 
         currentSpeed = Mathf.SmoothStep(currentSpeed, speed, 12f * Time.deltaTime);
         speed = 0f;
@@ -48,5 +54,11 @@ public class KartController : MonoBehaviour
     void Steer(int dir, float amount)
     {
         rotate = (steering * dir) * amount;
+    }
+
+    public void RaceFinished()
+    {
+        canMove = false;
+        speed = 0;
     }
 }
