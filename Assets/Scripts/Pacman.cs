@@ -5,13 +5,12 @@ public class Pacman : MonoBehaviour
 {
     [SerializeField]
     private AnimatedSprite deathSequence;
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     private CircleCollider2D circleCollider;
     private Movement movement;
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         circleCollider = GetComponent<CircleCollider2D>();
         movement = GetComponent<Movement>();
     }

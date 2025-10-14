@@ -175,7 +175,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 375
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -12619,6 +12619,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8398b287235293d469d1683369c48531, type: 3}
+--- !u!212 &1952484615 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4215633027018846086, guid: e09a7563a12c8ac43ae4d9b67f14bca6, type: 3}
+  m_PrefabInstance: {fileID: 6290000065232662211}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2021508978
 GameObject:
   m_ObjectHideFlags: 0
@@ -12737,6 +12742,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2033981648309478699, guid: e09a7563a12c8ac43ae4d9b67f14bca6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6404928725081819924, guid: e09a7563a12c8ac43ae4d9b67f14bca6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -12777,6 +12786,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7646100033128244014, guid: e09a7563a12c8ac43ae4d9b67f14bca6, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 1952484615}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
