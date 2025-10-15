@@ -57,7 +57,6 @@ public class Pacman : MonoBehaviour
         movement.enabled = false;
         deathSequence.enabled = true;
         deathSequence.Restart();
-        
     }
 
 }

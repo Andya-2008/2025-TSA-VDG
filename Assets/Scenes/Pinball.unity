@@ -324,7 +324,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8028785201591874913, guid: 0d1f951e4ac24fe478d688dbf86a5c39, type: 3}
       propertyPath: m_Radius
-      value: 0.4
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028785201591874913, guid: 0d1f951e4ac24fe478d688dbf86a5c39, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8387899861712857102, guid: 0d1f951e4ac24fe478d688dbf86a5c39, type: 3}
       propertyPath: m_Layer
@@ -349,7 +353,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 111825724445146315, guid: 25f5544974e8f0b409f1c5070cbb2c0e, type: 3}
       propertyPath: m_Radius
-      value: 0.4
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 111825724445146315, guid: 25f5544974e8f0b409f1c5070cbb2c0e, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1909947384695562660, guid: 25f5544974e8f0b409f1c5070cbb2c0e, type: 3}
       propertyPath: m_Layer
@@ -539,7 +547,7 @@ GameObject:
   - component: {fileID: 120972903}
   - component: {fileID: 120972905}
   - component: {fileID: 120972904}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Passage_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -798,7 +806,7 @@ GameObject:
   - component: {fileID: 147801494}
   - component: {fileID: 147801493}
   - component: {fileID: 147801492}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6859,7 +6867,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 339961557}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Connection_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7060,7 +7068,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 604705355}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Outside
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7988,7 +7996,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1445440566}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Inside
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8021,7 +8029,7 @@ GameObject:
   - component: {fileID: 1514712328}
   - component: {fileID: 1514712330}
   - component: {fileID: 1514712329}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Passage_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8200,7 +8208,7 @@ GameObject:
   - component: {fileID: 1564415873}
   - component: {fileID: 1564415875}
   - component: {fileID: 1564415874}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Nodes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9261,7 +9269,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4091674504361172207, guid: 87e861fcfe4201c4d8213cba69c0f024, type: 3}
       propertyPath: m_Radius
-      value: 0.4
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091674504361172207, guid: 87e861fcfe4201c4d8213cba69c0f024, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4650505912170184721, guid: 87e861fcfe4201c4d8213cba69c0f024, type: 3}
       propertyPath: m_Layer
@@ -9386,7 +9398,7 @@ GameObject:
   - component: {fileID: 1755750601}
   - component: {fileID: 1755750603}
   - component: {fileID: 1755750602}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pellets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12521,7 +12533,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305613954942454138, guid: 8398b287235293d469d1683369c48531, type: 3}
       propertyPath: m_Radius
-      value: 0.4
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305613954942454138, guid: 8398b287235293d469d1683369c48531, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4864445190958814596, guid: 8398b287235293d469d1683369c48531, type: 3}
       propertyPath: m_Layer
@@ -12645,7 +12661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2146317934}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Connection_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}

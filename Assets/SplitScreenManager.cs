@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SplitScreenManager : MonoBehaviour
@@ -191,8 +192,7 @@ public class SplitScreenManager : MonoBehaviour
                 rb.angularVelocity = 0f;
             }
 
-            if (forceUpOnBallToPacman && move)
-                move.SetDirection(Vector2.up);
+            move.SetDirectionOnChange(Vector2.up);
         }
         else
         {
