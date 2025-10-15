@@ -54,10 +54,12 @@ public class Ghost : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Pacman"))
+        if (collision.gameObject.tag == ("Pinball Ball"))
         {
             if (frightened.enabled) {
+                Debug.Log("Ghost eaten");
                 GameManager.Instance.GhostEaten(this);
+                ResetState();
             } else {
                 GameManager.Instance.PacmanEaten();
             }

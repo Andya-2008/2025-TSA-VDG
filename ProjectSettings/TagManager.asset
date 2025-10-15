@@ -17,10 +17,10 @@ TagManager:
   - Top
   - Bottom
   - Pacman
-  - 
-  - 
-  - 
-  - 
+  - Obstacle
+  - Pellet
+  - Node
+  - Ghost
   - 
   - 
   - 
