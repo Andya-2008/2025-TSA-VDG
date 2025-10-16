@@ -5,7 +5,7 @@ public class Passage : MonoBehaviour
 {
     public Transform connection;
 
-    bool left;
+    public bool left;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -17,6 +17,7 @@ public class Passage : MonoBehaviour
 
         if (!left)
             other.GetComponent<Movement>().SetDirection(Vector2.right);
+        
     }
 
 }
