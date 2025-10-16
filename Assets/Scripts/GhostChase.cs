@@ -1,7 +1,15 @@
+using UnityEditor.VisionOS;
 using UnityEngine;
 
 public class GhostChase : GhostBehavior
 {
+    private void Update()
+    {
+        if(GameObject.Find("SplitScreenManager").GetComponent<SplitScreenManager>().isBall)
+        {
+            Disable();
+        }
+    }
     private void OnDisable()
     {
         ghost.scatter.Enable();
