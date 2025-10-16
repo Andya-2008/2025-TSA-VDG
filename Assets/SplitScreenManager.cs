@@ -33,6 +33,8 @@ public class SplitScreenManager : MonoBehaviour
 
     public ParticleSystem crossEffect;
 
+    public bool isBall;
+
     // ---- internals ----
     private Vector2 _A, _B, _P;            // screen-space endpoints and ball
     private int _prevSide = 0;             // +1, -1, 0=unknown or in deadzone
@@ -193,6 +195,7 @@ public class SplitScreenManager : MonoBehaviour
             }
 
             move.SetDirectionOnChange(Vector2.up);
+            isBall = false;
         }
         else
         {
@@ -209,6 +212,7 @@ public class SplitScreenManager : MonoBehaviour
             }
             if (rb) rb.gravityScale = 1.5f;
             // NOTE: Do NOT force direction here (your original requirement)
+            isBall = true;
         }
     }
 }

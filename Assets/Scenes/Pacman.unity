@@ -575,6 +575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connection: {fileID: 1651544309}
+  left: 0
 --- !u!61 &512613669
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1619,6 +1620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connection: {fileID: 812224647}
+  left: 0
 --- !u!61 &1064051194
 BoxCollider2D:
   m_ObjectHideFlags: 0
