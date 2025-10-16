@@ -66,6 +66,7 @@ public class Movement : MonoBehaviour
             nextDirection = direction;
         }
     }
+
     public void SetDirectionOnChange(Vector2 direction)
     {
         this.direction = direction;
