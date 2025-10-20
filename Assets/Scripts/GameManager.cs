@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Pacman pacman;
     [SerializeField] private Transform pellets;
     [SerializeField] private Text gameOverText;
+    [SerializeField] private Text successText;
     [SerializeField] private Text scoreText;
     [SerializeField] private Text livesText;
 
@@ -46,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (lives <= 0 && Input.anyKeyDown)
+        if (lives <= 0 && Input.GetKeyDown(KeyCode.Space))
         {
             NewGame();
         }
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        Debug.Log("Game  Over");
         gameOverText.enabled = true;
 
         for (int i = 0; i < ghosts.Length; i++)
@@ -90,7 +92,7 @@ public class GameManager : MonoBehaviour
             ghosts[i].gameObject.SetActive(false);
         }
 
-        pacman.gameObject.SetActive(false);
+        //pacman.gameObject.SetActive(false);
     }
 
     private void SetLives(int lives)
@@ -155,6 +157,8 @@ public class GameManager : MonoBehaviour
         {
             pacman.gameObject.SetActive(false);
             Invoke(nameof(NewRound), 3f);
+            Debug.Log("Finished round!");
+            successText.enabled = true;
         }
     }
 
