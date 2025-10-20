@@ -1,3 +1,4 @@
+using System.Data.Common;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -108,6 +109,22 @@ public class GameManager : MonoBehaviour
     {
         pacman.DeathSequence();
 
+        SetLives(lives - 1);
+
+        if (lives > 0)
+        {
+            Invoke(nameof(ResetState), 3f);
+        }
+        else
+        {
+            GameOver();
+        }
+    }
+    public void BallDestroyed()
+    {
+        GameObject.Find("SplitScreenManager").GetComponent<SplitScreenManager>().SwitchPacManBall(1, true);
+
+        pacman.DeathSequence();
         SetLives(lives - 1);
 
         if (lives > 0)
