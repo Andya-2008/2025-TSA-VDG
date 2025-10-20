@@ -6,6 +6,7 @@ public class PowerPellet : Pellet
 
     protected override void Eat()
     {
+        GameObject.Find("PelletSpawner").GetComponent<PelletSpawner>().GrabbedPellet();
         GameManager.Instance.PowerPelletEaten(this);
     }
 
