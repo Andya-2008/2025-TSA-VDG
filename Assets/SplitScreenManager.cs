@@ -49,7 +49,7 @@ public class SplitScreenManager : MonoBehaviour
     private bool _armed = true;            // flip-flop guard
     private float _nextArmTime = 0f;       // time-based guard
     private float _lastAbsDist = Mathf.Infinity; // for logs
-
+    public bool ghostBall;
     // ---- per-ghost internals ----
     private class GhostState
     {
@@ -297,27 +297,65 @@ public class SplitScreenManager : MonoBehaviour
     // toPacmanMode = false -> enable Ball physics for the ghost (bottom)
     public void SwitchGhostPacBall(Transform g, bool toPacmanMode)
     {
-        if (!g) return;
-
-        var colC = g.GetComponent<CircleCollider2D>();
-        var col = (Collider2D)colC ?? g.GetComponent<Collider2D>();
-
-        if (toPacmanMode)
+        if (ghostBall)
         {
-            g.gameObject.layer = 12;
+            if (!g) return;
+            if (crossEffect) crossEffect.Play();
 
-            if (colC) colC.radius = 0.5f;
-            //if (col) col.sharedMaterial = ghostMat;
+            var rb = g.GetComponent<Rigidbody2D>();
+            var colC = g.GetComponent<CircleCollider2D>();
+            var col = (Collider2D)colC ?? g.GetComponent<Collider2D>();
+            var move = g.GetComponent<Movement>();   // optional
+            var ghostAI = g.GetComponent<Ghost>();   // rename to your ghost AI script if different
+            var ghostCH = g.GetComponent<GhostChase>();
+            var ghostSC = g.GetComponent<GhostScatter>();
+            var ghostH = g.GetComponent<GhostHome>();
+            var pin = g.GetComponent<Ball>();       // pinball behaviour
 
-        }
-        else
-        {
+            if (toPacmanMode)
+            {
+                // Ball -> Ghost (Pac) mode
+                if (pin) pin.enabled = false;
+                if (ghostAI) ghostAI.enabled = true;
+                if (ghostCH) ghostCH.enabled = false;
+                if (ghostSC) ghostSC.enabled = true;
+                if (ghostH) ghostH.enabled = false;
+                if (move) move.enabled = true;
 
-            g.gameObject.layer = 7;
+                g.gameObject.layer = 12;
 
-            if (colC) colC.radius = 0.5f;
-            //if (col) col.sharedMaterial = ghostBallMat;
+                if (colC) colC.radius = 0.5f;
+                if (col) col.sharedMaterial = ghostMat;
 
+                if (rb)
+                {
+                    rb.gravityScale = 0f;
+                    rb.linearVelocity = Vector2.zero;
+                    rb.angularVelocity = 0f;
+                }
+                move.SetDirectionOnChange(Vector2.up);
+            }
+            else
+            {
+
+                if (!ghostH.enabled)
+                {
+                    // Ghost (Pac) -> Ball mode
+                    if (pin) pin.enabled = true;
+                    if (ghostAI) ghostAI.enabled = false;
+                    if (ghostCH) ghostCH.enabled = false;
+                    if (ghostSC) ghostSC.enabled = false;
+                    if (ghostH) ghostH.enabled = false;
+                    if (move) move.enabled = false;
+
+                    g.gameObject.layer = 7;
+
+                    if (colC) colC.radius = 0.8f;
+                    if (col) col.sharedMaterial = ghostBallMat;
+
+                    if (rb) rb.gravityScale = 1.5f;
+                }
+            }
         }
     }
 }

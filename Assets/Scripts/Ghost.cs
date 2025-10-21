@@ -56,13 +56,18 @@ public class Ghost : MonoBehaviour
     {
         if (collision.gameObject.tag == ("Pinball Ball"))
         {
-            if (frightened.enabled) {
-                Debug.Log("Ghost eaten");
-                GameManager.Instance.GhostEaten(this);
-                ResetState();
-            } else {
-                GameManager.Instance.PacmanEaten();
-            }
+
+            if (!GetComponent<Ball>().enabled)
+                if (frightened.enabled)
+                {
+                    Debug.Log("Ghost eaten");
+                    GameManager.Instance.GhostEaten(this);
+                    ResetState();
+                }
+                else
+                {
+                    GameManager.Instance.PacmanEaten();
+                }
         }
     }
 
