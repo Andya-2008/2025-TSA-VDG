@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,13 +35,37 @@ public class SplitScreenManager : MonoBehaviour
 
     public bool isBall;
 
-    // ---- internals ----
+    // ------- Ghost (shared) -------
+    [Header("Ghosts")]
+    [Tooltip("Add your 4 ghost Transforms here.")]
+    public List<Transform> ghosts = new List<Transform>();
+    [SerializeField] PhysicsMaterial2D ghostMat;       // Pac-mode material for ghosts
+    [SerializeField] PhysicsMaterial2D ghostBallMat;   // Ball-mode material for ghosts
+
+    // ---- internals (player) ----
     private Vector2 _A, _B, _P;            // screen-space endpoints and ball
     private int _prevSide = 0;             // +1, -1, 0=unknown or in deadzone
     private float _nextReacquireAt;
     private bool _armed = true;            // flip-flop guard
     private float _nextArmTime = 0f;       // time-based guard
     private float _lastAbsDist = Mathf.Infinity; // for logs
+
+    // ---- per-ghost internals ----
+    private class GhostState
+    {
+        public int prevSide = 0;
+        public bool armed = true;
+        public float nextArmTime = 0f;
+        public float lastAbsDist = Mathf.Infinity;
+    }
+    private List<GhostState> _ghostStates = new List<GhostState>();
+
+    void EnsureGhostStateSize()
+    {
+        // keep states list aligned with ghosts list
+        while (_ghostStates.Count < ghosts.Count) _ghostStates.Add(new GhostState());
+        while (_ghostStates.Count > ghosts.Count) _ghostStates.RemoveAt(_ghostStates.Count - 1);
+    }
 
     void OnValidate()
     {
@@ -51,67 +75,116 @@ public class SplitScreenManager : MonoBehaviour
     void Update()
     {
         TryAcquireBall();
-        if (!ball || !gameplayCamera || !uiLine) return;
+        if (!gameplayCamera || !uiLine) return;
 
-        // 1) UI line endpoints in screen space
+        // endpoints of UI line once per frame
         GetUILineScreenEndpoints(uiLine, out _A, out _B);
         Vector2 ab = _B - _A;
         float abLen = Mathf.Max(ab.magnitude, 0.0001f);
 
-        // 2) Ball in screen space
-        _P = gameplayCamera.WorldToScreenPoint(ball.position);
-
-        // 3) Signed distance (pixels) of the center to the infinite line
-        float signedDist = Cross(ab, _P - _A) / abLen;
-        float absDist = Mathf.Abs(signedDist);
-
-        // 4) Determine which side we're on (with a tiny dead zone)
-        int side = absDist <= deadZonePixels ? 0 : (signedDist > 0f ? 1 : -1);
-
-        // 5) Crossing detection with flip-flop guard
-        if (_armed && _prevSide != 0 && side != 0 && side != _prevSide)
+        // ---------- PLAYER (ball) ----------
+        if (ball)
         {
-            string dir = (_prevSide == 1 && side == -1) ? "A→B" : "B→A";
-            Debug.Log($"[SplitLineCrossDebug] CROSS {dir} at dist={signedDist:F2}px  ball={_P}  lineA={_A}  lineB={_B}");
+            _P = gameplayCamera.WorldToScreenPoint(ball.position);
+            float signedDist = Cross(ab, _P - _A) / abLen;
+            float absDist = Mathf.Abs(signedDist);
+            int side = absDist <= deadZonePixels ? 0 : (signedDist > 0f ? 1 : -1);
 
-            // Switch modes based on which side we entered:
-            // Convention: side = +1 is one side (e.g., top), -1 is the other (bottom).
-            if (dir == "A→B")
-                SwitchPacManBall(enteringSide: -1, pacmanMode: false); // entering bottom -> Ball mode
-            else
-                SwitchPacManBall(enteringSide: +1, pacmanMode: true);  // entering top -> Pacman mode
+            if (_armed && _prevSide != 0 && side != 0 && side != _prevSide)
+            {
+                string dir = (_prevSide == 1 && side == -1) ? "A→B" : "B→A";
+                Debug.Log($"[SplitLineCrossDebug:PLAYER] CROSS {dir}   dist={signedDist:F2}px  p={_P}");
 
-            // Disarm until we move away enough (and cooldown time expires)
-            _armed = false;
-            _nextArmTime = Time.time + Mathf.Max(0f, cooldown);
-        }
+                if (dir == "A→B")
+                    SwitchPacManBall(enteringSide: -1, pacmanMode: false); // bottom => Ball
+                else
+                    SwitchPacManBall(enteringSide: +1, pacmanMode: true);  // top => Pac
 
-        // Re-arm logic: once we’re far enough away from the line (hysteresis)
-        if (!_armed)
-        {
-            if (Time.time >= _nextArmTime && absDist >= rearmPixels)
+                _armed = false;
+                _nextArmTime = Time.time + Mathf.Max(0f, cooldown);
+            }
+
+            if (!_armed && Time.time >= _nextArmTime && absDist >= rearmPixels)
                 _armed = true;
+
+            if (side != 0) _prevSide = side;
+
+            if (logPerFrame && Mathf.Abs(absDist - _lastAbsDist) > 0.05f)
+            {
+                Debug.Log($"[SplitLineCrossDebug:PLAYER] side={side} |dist|={absDist:F2}px armed={_armed}");
+                _lastAbsDist = absDist;
+            }
         }
 
-        if (side != 0) _prevSide = side;
-        if (logPerFrame && Mathf.Abs(absDist - _lastAbsDist) > 0.05f)
+        // ---------- GHOSTS (independent per-ghost) ----------
+        EnsureGhostStateSize();
+
+        for (int i = 0; i < ghosts.Count; i++)
         {
-            Debug.Log($"[SplitLineCrossDebug] side={side}  |dist|={absDist:F2}px  armed={_armed}");
-            _lastAbsDist = absDist;
+            var g = ghosts[i];
+            if (!g) continue;
+            var gs = _ghostStates[i];
+
+            Vector2 Pg = gameplayCamera.WorldToScreenPoint(g.position);
+            float signedDistG = Cross(ab, Pg - _A) / abLen;
+            float absDistG = Mathf.Abs(signedDistG);
+            int sideG = absDistG <= deadZonePixels ? 0 : (signedDistG > 0f ? 1 : -1);
+
+            if (gs.armed && gs.prevSide != 0 && sideG != 0 && sideG != gs.prevSide)
+            {
+                string dirG = (gs.prevSide == 1 && sideG == -1) ? "A→B" : "B→A";
+                Debug.Log($"[SplitLineCrossDebug:GHOST{i}] CROSS {dirG}  dist={signedDistG:F2}px  p={Pg}");
+
+                bool toPac = (dirG != "A→B"); // B→A = top => Pac-mode; A→B = bottom => Ball-mode
+                SwitchGhostPacBall(g, toPac);
+
+                gs.armed = false;
+                gs.nextArmTime = Time.time + Mathf.Max(0f, cooldown);
+            }
+
+            if (!gs.armed && Time.time >= gs.nextArmTime && absDistG >= rearmPixels)
+                gs.armed = true;
+
+            if (sideG != 0) gs.prevSide = sideG;
+
+            if (logPerFrame && Mathf.Abs(absDistG - gs.lastAbsDist) > 0.05f)
+            {
+                Debug.Log($"[SplitLineCrossDebug:GHOST{i}] side={sideG} |dist|={absDistG:F2}px armed={gs.armed}");
+                gs.lastAbsDist = absDistG;
+            }
         }
     }
 
     void LateUpdate()
     {
-        if (!drawGizmos || !gameplayCamera || !ball) return;
+        if (!drawGizmos || !gameplayCamera) return;
 
-        float zBallScreen = gameplayCamera.WorldToScreenPoint(ball.position).z;
-        Vector3 wA = gameplayCamera.ScreenToWorldPoint(new Vector3(_A.x, _A.y, zBallScreen));
-        Vector3 wB = gameplayCamera.ScreenToWorldPoint(new Vector3(_B.x, _B.y, zBallScreen));
-        Vector3 wP = ball.position;
+        // choose any valid anchor for z
+        Transform anchor = ball;
+        if (!anchor)
+        {
+            for (int i = 0; i < ghosts.Count; i++) { if (ghosts[i]) { anchor = ghosts[i]; break; } }
+            if (!anchor) return;
+        }
 
-        Debug.DrawLine(wA, wB, Color.black);                             // UI line in world
-        Debug.DrawLine(wP, ClosestPointOnSegment(wA, wB, wP), Color.magenta); // perpendicular to line
+        float zScreen = gameplayCamera.WorldToScreenPoint(anchor.position).z;
+        Vector3 wA = gameplayCamera.ScreenToWorldPoint(new Vector3(_A.x, _A.y, zScreen));
+        Vector3 wB = gameplayCamera.ScreenToWorldPoint(new Vector3(_B.x, _B.y, zScreen));
+        Debug.DrawLine(wA, wB, Color.black); // UI line in world
+
+        if (ball)
+        {
+            Vector3 wP = ball.position;
+            Debug.DrawLine(wP, ClosestPointOnSegment(wA, wB, wP), Color.magenta);
+        }
+
+        for (int i = 0; i < ghosts.Count; i++)
+        {
+            var g = ghosts[i];
+            if (!g) continue;
+            Vector3 wG = g.position;
+            Debug.DrawLine(wG, ClosestPointOnSegment(wA, wB, wG), Color.cyan);
+        }
     }
 
     // ---------------- helpers ----------------
@@ -161,17 +234,18 @@ public class SplitScreenManager : MonoBehaviour
         return a + t * ab;
     }
 
-    // ---------------- switching ----------------
+    // ---------------- switching (PLAYER) ----------------
     // pacmanMode = true  -> enable Pacman controls (top)
     // pacmanMode = false -> enable Ball physics (bottom)
     public void SwitchPacManBall(int enteringSide, bool pacmanMode)
     {
-        crossEffect.Play();
-        var rb = ball.GetComponent<Rigidbody2D>();
-        var col = ball.GetComponent<CircleCollider2D>();
-        var move = ball.GetComponent<Movement>();
-        var pac = ball.GetComponent<Pacman>();
-        var pin = ball.GetComponent<Ball>();
+        if (crossEffect) crossEffect.Play();
+
+        var rb = ball ? ball.GetComponent<Rigidbody2D>() : null;
+        var col = ball ? ball.GetComponent<CircleCollider2D>() : null;
+        var move = ball ? ball.GetComponent<Movement>() : null;
+        var pac = ball ? ball.GetComponent<Pacman>() : null;
+        var pin = ball ? ball.GetComponent<Ball>() : null;
 
         if (pacmanMode)
         {
@@ -180,13 +254,13 @@ public class SplitScreenManager : MonoBehaviour
             if (pac) pac.enabled = true;
             if (move) move.enabled = true;
 
-            ball.gameObject.layer = 6;
+            if (ball) ball.gameObject.layer = 6;
             if (col)
-            { 
+            {
                 col.radius = .5f;
                 col.sharedMaterial = pacManMat;
             }
-            
+
             if (rb)
             {
                 rb.gravityScale = 0f;
@@ -194,7 +268,9 @@ public class SplitScreenManager : MonoBehaviour
                 rb.angularVelocity = 0f;
             }
 
-            move.SetDirectionOnChange(Vector2.up);
+            if (move && forceUpOnBallToPacman)
+                move.SetDirectionOnChange(Vector2.up);
+
             isBall = false;
         }
         else
@@ -204,15 +280,44 @@ public class SplitScreenManager : MonoBehaviour
             if (move) move.enabled = false;
             if (pin) pin.enabled = true;
 
-            ball.gameObject.layer = 7;
+            if (ball) ball.gameObject.layer = 7;
             if (col)
             {
                 col.radius = .8f;
                 col.sharedMaterial = ballMat;
             }
             if (rb) rb.gravityScale = 1.5f;
-            // NOTE: Do NOT force direction here (your original requirement)
+
             isBall = true;
+        }
+    }
+
+    // ---------------- switching (GHOST) ----------------
+    // toPacmanMode = true  -> enable Ghost Pac/AI mode (top)
+    // toPacmanMode = false -> enable Ball physics for the ghost (bottom)
+    public void SwitchGhostPacBall(Transform g, bool toPacmanMode)
+    {
+        if (!g) return;
+
+        var colC = g.GetComponent<CircleCollider2D>();
+        var col = (Collider2D)colC ?? g.GetComponent<Collider2D>();
+
+        if (toPacmanMode)
+        {
+            g.gameObject.layer = 12;
+
+            if (colC) colC.radius = 0.5f;
+            //if (col) col.sharedMaterial = ghostMat;
+
+        }
+        else
+        {
+
+            g.gameObject.layer = 7;
+
+            if (colC) colC.radius = 0.5f;
+            //if (col) col.sharedMaterial = ghostBallMat;
+
         }
     }
 }
