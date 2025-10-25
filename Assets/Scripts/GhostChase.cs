@@ -1,4 +1,3 @@
-using UnityEditor.VisionOS;
 using UnityEngine;
 
 public class GhostChase : GhostBehavior
