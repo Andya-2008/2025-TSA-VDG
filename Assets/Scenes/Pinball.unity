@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 11019319}
   m_Layer: 0
   m_Name: TopCamera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,7 +175,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8055
+    m_Bits: 8023
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -4347,7 +4347,7 @@ GameObject:
   - component: {fileID: 519420029}
   m_Layer: 0
   m_Name: BottomCamera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
