@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    [SerializeField] AudioSource PlaySFX;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,5 +20,6 @@ public class MenuManager : MonoBehaviour
     {
         //Load the 1st cutscene
         SceneManager.LoadScene("Pinball", LoadSceneMode.Single);
+        SFXManager.Instance.PlaySFX(0);
     }
 }
