@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 206149500}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TitleScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 386738048}
   - component: {fileID: 386738047}
   - component: {fileID: 386738046}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: MenuCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 521822531}
   - component: {fileID: 521822533}
   - component: {fileID: 521822532}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: RawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 1159890094}
   - component: {fileID: 1159890093}
   - component: {fileID: 1159890092}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: PlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,7 +610,7 @@ GameObject:
   - component: {fileID: 1372530022}
   - component: {fileID: 1372530024}
   - component: {fileID: 1372530023}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
