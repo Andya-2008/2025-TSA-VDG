@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
     public float speedMultiplier = 1f;
     public Vector2 initialDirection;
     public LayerMask obstacleLayer;
+    public bool switched;
 
     public Rigidbody2D rb { get; private set; }
     public Vector2 direction { get; private set; }
@@ -56,10 +57,16 @@ public class Movement : MonoBehaviour
         // Only set the direction if the tile in that direction is available
         // otherwise we set it as the next direction so it'll automatically be
         // set when it does become available
-        if (forced || !Occupied(direction))
+        if (forced || !Occupied(direction) && !switched)
         {
             this.direction = direction;
             nextDirection = Vector2.zero;
+        }
+        else if (forced || switched && direction != Vector2.up)
+        {
+            this.direction = direction;
+            nextDirection = Vector2.zero;
+            switched = false;
         }
         else
         {
