@@ -43,6 +43,7 @@ public class Pacman : MonoBehaviour
         spriteRenderer.enabled = true;
         circleCollider.enabled = true;
         deathSequence.enabled = false;
+        GetComponent<PacBall>().Ball.SetActive(true);
         movement.ResetState();
         gameObject.SetActive(true);
         
@@ -56,6 +57,7 @@ public class Pacman : MonoBehaviour
         circleCollider.enabled = false;
         movement.enabled = false;
         deathSequence.enabled = true;
+        GetComponent<PacBall>().Ball.SetActive(false);
         deathSequence.Restart();
     }
 
