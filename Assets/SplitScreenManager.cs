@@ -211,6 +211,7 @@ public class SplitScreenManager : MonoBehaviour
                 col.sharedMaterial = ballMat;
             }
             if (rb) rb.gravityScale = 1.5f;
+
             // NOTE: Do NOT force direction here (your original requirement)
             isBall = true;
         }
