@@ -12,7 +12,7 @@ public class SFXManager : MonoBehaviour
         {
             // If the instance hasn't been assigned yet, find it in the scene
             if (_instance == null)
-                _instance = FindObjectOfType<SFXManager>();
+                _instance = FindFirstObjectByType<SFXManager>();
             return _instance;
         }
     }

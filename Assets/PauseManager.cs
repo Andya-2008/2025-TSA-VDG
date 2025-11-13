@@ -45,7 +45,7 @@ public class PauseManager : MonoBehaviour
         while (Time.timeScale > .01)
         {
             Debug.Log("time.timescale: " + Time.timeScale);
-            Time.timeScale -= slowSpeed;
+            Time.timeScale -= slowSpeed * 60 * Time.fixedDeltaTime;
             yield return null;
         }
         Time.timeScale = 0;
