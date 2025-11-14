@@ -166,6 +166,13 @@ public class SplitScreenManager : MonoBehaviour
     // pacmanMode = false -> enable Ball physics (bottom)
     public void SwitchPacManBall(int enteringSide, bool pacmanMode)
     {
+        foreach(GlitchFlickerController fC in FindObjectsByType<GlitchFlickerController>(FindObjectsSortMode.None))
+        {
+            fC.CallGlitch(.15f);
+        }
+
+        SFXManager.Instance.PlaySFX(1);
+        
         crossEffect.Play();
         var rb = ball.GetComponent<Rigidbody2D>();
         var col = ball.GetComponent<CircleCollider2D>();
