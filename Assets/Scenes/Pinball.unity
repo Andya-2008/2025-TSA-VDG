@@ -6825,6 +6825,7 @@ GameObject:
   - component: {fileID: 1513181033}
   - component: {fileID: 1513181032}
   - component: {fileID: 1513181031}
+  - component: {fileID: 1513181034}
   m_Layer: 7
   m_Name: Bouncy
   m_TagString: Untagged
@@ -6842,7 +6843,7 @@ CircleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 4c13bba143365514da2ea580844eeb46, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -6938,6 +6939,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1513181034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513181030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 387613d0341420c48b5d6c37bf65410f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceSpeed: 20
 --- !u!1 &1514712327
 GameObject:
   m_ObjectHideFlags: 0
@@ -9856,6 +9870,7 @@ GameObject:
   - component: {fileID: 1979809483}
   - component: {fileID: 1979809482}
   - component: {fileID: 1979809481}
+  - component: {fileID: 1979809484}
   m_Layer: 7
   m_Name: Bouncy (1)
   m_TagString: Untagged
@@ -9873,7 +9888,7 @@ CircleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 4c13bba143365514da2ea580844eeb46, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -9969,6 +9984,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1979809484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979809480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 387613d0341420c48b5d6c37bf65410f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceSpeed: 20
 --- !u!1 &2021508978
 GameObject:
   m_ObjectHideFlags: 0

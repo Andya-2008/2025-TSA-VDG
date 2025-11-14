@@ -170,7 +170,7 @@ public class SplitScreenManager : MonoBehaviour
         {
             fC.CallGlitch(.15f);
         }
-
+        if(SFXManager.Instance)
         SFXManager.Instance.PlaySFX(1);
         
         crossEffect.Play();
