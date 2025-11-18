@@ -1,23 +1,28 @@
-using System;
+﻿using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class PauseManager : MonoBehaviour
 {
     public bool paused;
-    [SerializeField] float slowSpeed;
-    [SerializeField] Canvas pauseCanvas;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    [SerializeField] float slowSpeed = 0.5f;
+    [SerializeField] CanvasGroup pauseGroup;
+    [SerializeField] float maxBlur = 16f;
+
+    private bool isTransitioning = false;
+
+    private void Awake()
     {
-        
+        if (pauseGroup != null)
+            pauseGroup.alpha = 0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!paused)
                 Pause();
@@ -26,41 +31,69 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+    public void Pause()
+    {
+        if (paused || isTransitioning) return;   // ⛔ block mid-animation
+        paused = true;
+        StartCoroutine(SlowTime());
+    }
+
     public void Resume()
     {
-        if (!paused) { return; }
+        if (!paused || isTransitioning) return;  // ⛔ block mid-animation
         paused = false;
         StartCoroutine(SpeedTime());
     }
 
-    public void Pause()
+    IEnumerator SlowTime()
     {
-        if (paused) { return; }
-        paused = true;
-        StartCoroutine(SlowTime());
+        isTransitioning = true;
+        SFXManager.Instance.PlaySFX(2);
+        pauseGroup.blocksRaycasts = true;
+        pauseGroup.interactable = true;
 
-    }
-
-    public IEnumerator SlowTime()
-    {
-        while (Time.timeScale > .01)
+        while (Time.timeScale > 0.01f)
         {
-            Debug.Log("time.timescale: " + Time.timeScale);
-            Time.timeScale -= slowSpeed * 60 * Time.fixedDeltaTime;
+            float newScale = Time.timeScale - slowSpeed * Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Clamp(newScale, 0.01f, 1f);
+
+            float linear = 1f - Time.timeScale;
+            float eased = Mathf.SmoothStep(0f, 1f, linear);
+
+            pauseGroup.alpha = eased;
+
             yield return null;
         }
-        pauseCanvas.enabled = true;
-        Time.timeScale = 0;
+
+        Time.timeScale = 0f;
+        pauseGroup.alpha = 1f;
+
+        isTransitioning = false;   // ✔ animation done
     }
-    public IEnumerator SpeedTime()
+
+    IEnumerator SpeedTime()
     {
-        pauseCanvas.enabled = false;
+        isTransitioning = true;
+
+        SFXManager.Instance.PlaySFX(3);
+        pauseGroup.blocksRaycasts = false;
+        pauseGroup.interactable = false;
+
         while (Time.timeScale < 1f)
         {
-            Time.timeScale += slowSpeed * Time.unscaledDeltaTime * 100f; // scale for smoothness
-            Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-            Debug.Log("Speeding time: " + Time.timeScale);
-            yield return null; // still okay, we use unscaledDeltaTime for movement
+            float newScale = Time.timeScale + slowSpeed * Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Clamp(newScale, 0f, 1f);
+
+            float linear = 1f - Time.timeScale;
+            float eased = Mathf.SmoothStep(0f, 1f, linear);
+
+            pauseGroup.alpha = eased;
+
+            yield return null;
         }
+
+        pauseGroup.alpha = 0f;
+
+        isTransitioning = false;   // ✔ animation done
     }
 }
