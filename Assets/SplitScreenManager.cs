@@ -202,6 +202,7 @@ public class SplitScreenManager : MonoBehaviour
             }
             move.switched = true;
             move.SetDirectionOnChange(Vector2.up);
+            move.hasMoved = false;
             isBall = false;
         }
         else

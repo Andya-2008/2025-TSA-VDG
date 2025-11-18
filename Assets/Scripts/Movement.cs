@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     public Vector2 initialDirection;
     public LayerMask obstacleLayer;
     public bool switched;
+    public bool hasMoved;
 
     public Rigidbody2D rb { get; private set; }
     public Vector2 direction { get; private set; }
@@ -62,7 +63,7 @@ public class Movement : MonoBehaviour
             this.direction = direction;
             nextDirection = Vector2.zero;
         }
-        else if (forced || switched && direction != Vector2.up)
+        else if (forced || (switched && !hasMoved) && direction != Vector2.up)
         {
             this.direction = direction;
             nextDirection = Vector2.zero;

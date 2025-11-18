@@ -7,6 +7,7 @@ public class PauseManager : MonoBehaviour
 {
     public bool paused;
     [SerializeField] float slowSpeed;
+    [SerializeField] Canvas pauseCanvas;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,7 +26,7 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    private void Resume()
+    public void Resume()
     {
         if (!paused) { return; }
         paused = false;
@@ -48,10 +49,12 @@ public class PauseManager : MonoBehaviour
             Time.timeScale -= slowSpeed * 60 * Time.fixedDeltaTime;
             yield return null;
         }
+        pauseCanvas.enabled = true;
         Time.timeScale = 0;
     }
     public IEnumerator SpeedTime()
     {
+        pauseCanvas.enabled = false;
         while (Time.timeScale < 1f)
         {
             Time.timeScale += slowSpeed * Time.unscaledDeltaTime * 100f; // scale for smoothness
