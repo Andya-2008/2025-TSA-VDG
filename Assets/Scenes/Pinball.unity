@@ -8403,6 +8403,10 @@ PrefabInstance:
       propertyPath: outside
       value: 
       objectReference: {fileID: 604705355}
+    - target: {fileID: 4988485570163000569, guid: 87e861fcfe4201c4d8213cba69c0f024, type: 3}
+      propertyPath: duration
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5084496363199431488, guid: 87e861fcfe4201c4d8213cba69c0f024, type: 3}
       propertyPath: m_Layer
       value: 12
