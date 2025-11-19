@@ -62,6 +62,7 @@ public class GhostHome : GhostBehavior
         ghost.movement.SetDirection(new Vector2(Random.value < 0.5f ? -1f : 1f, 0f), true);
         ghost.movement.rb.isKinematic = false;
         ghost.movement.enabled = true;
+        ghost.scatter.enabled = true;
     }
 
 }
