@@ -33,6 +33,7 @@ public class Movement : MonoBehaviour
         nextDirection = Vector2.zero;
         transform.position = startingPosition;
         rb.isKinematic = false;
+        switched = false;
         enabled = true;
     }
 
