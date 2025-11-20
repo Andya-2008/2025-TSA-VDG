@@ -7041,7 +7041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paused: 0
-  slowSpeed: 1
+  slowSpeed: 0.7
   pauseGroup: {fileID: 1125377638}
   maxBlur: 16
 --- !u!4 &1354018589
