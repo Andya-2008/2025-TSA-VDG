@@ -51,8 +51,10 @@ public class MusicManager : MonoBehaviour
             {
                 // Fade IN the desired song
                 if (!music[i].isPlaying)
+                {
                     Debug.Log("New music playing");
                     music[i].Play();
+                }
 
                 StartCoroutine(FadeMusic(music[i], 1)); // fade in
             }
