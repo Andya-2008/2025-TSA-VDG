@@ -10,6 +10,31 @@ public class AIRacerController : MonoBehaviour
 
     private void Start()
     {
+        if (AStarManager.instance.startingNodes.Length > 0)
+        {
+            RacingNode closestNode = AStarManager.instance.startingNodes[0];
+            float minDistance = Vector3.Distance(transform.position, closestNode.transform.position);
+
+            // Check the rest of the nodes
+            for (int i = 1; i < AStarManager.instance.startingNodes.Length; i++)
+            {
+                float dist = Vector3.Distance(transform.position, AStarManager.instance.startingNodes[i].transform.position);
+                if (dist < minDistance)
+                {
+                    minDistance = dist;
+                    closestNode = AStarManager.instance.startingNodes[i];
+                }
+            }
+
+            currentNode = closestNode;
+        }
+        else
+        {
+            Debug.LogError("No starting nodes assigned to AI Racer!");
+            return;
+        }
+
+        // Then generate the path from this starting node
         GenerateNewPath();
     }
 

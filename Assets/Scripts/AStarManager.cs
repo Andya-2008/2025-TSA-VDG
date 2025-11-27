@@ -4,6 +4,7 @@ using UnityEngine;
 public class AStarManager : MonoBehaviour
 {
     public static AStarManager instance;
+    public RacingNode[] startingNodes;
 
     private void Awake()
     {
