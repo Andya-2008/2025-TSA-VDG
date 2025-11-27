@@ -4,66 +4,76 @@ using UnityEngine;
 public class AIRacerController : MonoBehaviour
 {
     public RacingNode currentNode;
+    public RacingNode goalNode; // assign the last node here in the inspector
     public List<RacingNode> path = new List<RacingNode>();
+    [SerializeField] private float speed = 5f;
+
+    private void Start()
+    {
+        GenerateNewPath();
+    }
 
     private void Update()
     {
-        CreatePath();
+        FollowPath();
     }
 
-    public void CreatePath()
+    private void FollowPath()
     {
-        RacingNode targetNode = FindClosestNode();
-
-        if (targetNode != null && currentNode != targetNode)
+        if (path.Count == 0)
         {
-            path = AStarManager.instance.GeneratePath(currentNode, targetNode);
+            GenerateNewPath();
+            return;
         }
 
-        // Use kartcontroller movement to follow path
-        if (path.Count > 0)
+        RacingNode target = path[0];
+
+        // Move in XZ, keep Y the same
+        Vector3 targetPos = new Vector3(
+            target.transform.position.x,
+            transform.position.y,
+            target.transform.position.z
+        );
+
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            targetPos,
+            speed * Time.deltaTime
+        );
+
+        // XZ distance only
+        Vector2 ai = new Vector2(transform.position.x, transform.position.z);
+        Vector2 tgt = new Vector2(target.transform.position.x, target.transform.position.z);
+
+        if (Vector2.Distance(ai, tgt) < 0.15f)
         {
-            Vector3 targetPosition = path[0].transform.position;
-            Vector3 direction = (targetPosition - transform.position).normalized;
-
-            float angle = Vector3.SignedAngle(transform.forward, direction, Vector3.up);
-
-            KartController kartController = GetComponent<KartController>();
-
-            if (angle > 5f)
-            {
-                kartController.Steer(1, Mathf.Abs(angle) / 90f);
-            }
-            else if (angle < -5f)
-            {
-                kartController.Steer(-1, Mathf.Abs(angle) / 90f);
-            }
-
-            kartController.speed = kartController.acceleration;
-
-            if (Vector3.Distance(transform.position, targetPosition) < 1f)
-            {
-                path.RemoveAt(0);
-            }
+            currentNode = target;
+            path.RemoveAt(0);
         }
     }
-
-    private RacingNode FindClosestNode()
+    
+    private void GenerateNewPath()
     {
-        RacingNode closestNode = null;
-        float closestDistance = float.MaxValue;
-
-        foreach (RacingNode node in FindObjectsByType<RacingNode>(FindObjectsSortMode.None))
+        if (currentNode == null || goalNode == null)
         {
-            float distance = Vector2.Distance(transform.position, node.transform.position);
-
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closestNode = node;
-            }
+            Debug.LogError("Current node or goal node not assigned!");
+            return;
         }
 
-        return closestNode;
+        var newPath = AStarManager.instance.GeneratePath(currentNode, goalNode);
+
+        if (newPath == null || newPath.Count == 0)
+        {
+            Debug.LogWarning("AStar returned no path");
+            return;
+        }
+
+        path = newPath;
+
+        Debug.Log("New path length: " + newPath.Count);
+        foreach (var n in newPath)
+        {
+            Debug.Log(" -> " + n.name);
+        }
     }
 }
