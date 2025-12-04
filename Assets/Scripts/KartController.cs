@@ -5,12 +5,12 @@ using UnityEngine.XR;
 
 public class KartController : MonoBehaviour
 {
-    [SerializeField] private float acceleration, gravity, steering;
+    [SerializeField] public float acceleration, gravity, steering;
     [SerializeField] Rigidbody sphere;
     [SerializeField] Animator spriteVisual;
 
-    private float speed, currentSpeed;
-    private float rotate, currentRotation;
+    public float speed, currentSpeed;
+    public float rotate, currentRotation;
     public float Speed = 0;
     private bool canMove = true;
 
@@ -51,7 +51,7 @@ public class KartController : MonoBehaviour
             new Vector3(0f, transform.eulerAngles.y + currentRotation, 0f), 5f * Time.deltaTime);
     }
 
-    void Steer(int dir, float amount)
+    public void Steer(int dir, float amount)
     {
         rotate = (steering * dir) * amount;
     }
