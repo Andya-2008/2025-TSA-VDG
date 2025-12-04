@@ -15,6 +15,8 @@ public class Movement : MonoBehaviour
     public Vector2 nextDirection { get; private set; }
     public Vector3 startingPosition { get; private set; }
 
+    public bool tutorial;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -72,6 +74,7 @@ public class Movement : MonoBehaviour
         }
         else
         {
+            Debug.Log("Hi");
             nextDirection = direction;
         }
     }

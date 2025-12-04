@@ -13,7 +13,6 @@ public class Ball : MonoBehaviour
     void FixedUpdate()
     {
         GetComponent<Rigidbody2D>().linearVelocity = Vector3.ClampMagnitude(GetComponent<Rigidbody2D>().linearVelocity, maxSpeed);
-        
     }
 }
     

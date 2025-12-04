@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [DefaultExecutionOrder(-10)]
 [RequireComponent(typeof(Movement))]
@@ -12,7 +14,7 @@ public class Ghost : MonoBehaviour
     public GhostBehavior initialBehavior;
     public Transform target;
     public int points = 200;
-
+    public bool tutorial;
     private void Awake()
     {
         movement = GetComponent<Movement>();
@@ -25,23 +27,51 @@ public class Ghost : MonoBehaviour
     private void Start()
     {
         ResetState();
+        if (tutorial)
+        {
+            movement.enabled = false;
+        }
     }
 
     public void ResetState()
     {
-        gameObject.SetActive(true);
-        movement.ResetState();
+        if (!tutorial)
+        {
+            gameObject.SetActive(true);
+            movement.ResetState();
 
-        frightened.Disable();
-        chase.Disable();
-        //scatter.Enable();
+            frightened.Disable();
+            chase.Disable();
+            //scatter.Enable();
 
-        if (home != initialBehavior) {
-            home.Disable();
+            if (home != initialBehavior)
+            {
+                home.Disable();
+            }
+
+            if (initialBehavior != null)
+            {
+                initialBehavior.Enable();
+            }
         }
+        if (tutorial)
+        {
+            gameObject.SetActive(true);
+            movement.ResetState();
 
-        if (initialBehavior != null) {
-            initialBehavior.Enable();
+            frightened.Disable();
+            chase.Enable();
+            //scatter.Enable();
+
+            if (home != initialBehavior)
+            {
+                home.Disable();
+            }
+
+            if (initialBehavior != null)
+            {
+                //initialBehavior.Enable();
+            }
         }
     }
 
@@ -62,8 +92,25 @@ public class Ghost : MonoBehaviour
                 ResetState();
             } else {
                 GameManager.Instance.PacmanEaten();
+                if (tutorial)
+                    StartCoroutine(ResetScene());
+
             }
         }
+    }
+
+    public void ActivateInTutorial()
+    {
+        if(tutorial)
+        {
+            movement.enabled = true;
+        }
+    }
+
+    public IEnumerator ResetScene()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(1);
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,7 +43,7 @@ public class SplitScreenManager : MonoBehaviour
     private bool _armed = true;            // flip-flop guard
     private float _nextArmTime = 0f;       // time-based guard
     private float _lastAbsDist = Mathf.Infinity; // for logs
-
+    public bool tutorial;
     void OnValidate()
     {
         if (gameplayCamera == null) gameplayCamera = Camera.main;
@@ -166,9 +167,12 @@ public class SplitScreenManager : MonoBehaviour
     // pacmanMode = false -> enable Ball physics (bottom)
     public void SwitchPacManBall(int enteringSide, bool pacmanMode)
     {
-        foreach(GlitchFlickerController fC in FindObjectsByType<GlitchFlickerController>(FindObjectsSortMode.None))
+        if (!tutorial)
         {
-            fC.CallGlitch(.15f);
+            foreach (GlitchFlickerController fC in FindObjectsByType<GlitchFlickerController>(FindObjectsSortMode.None))
+            {
+                fC.CallGlitch(.15f);
+            }
         }
         if(SFXManager.Instance)
         SFXManager.Instance.PlaySFX(1);
@@ -201,7 +205,9 @@ public class SplitScreenManager : MonoBehaviour
                 rb.angularVelocity = 0f;
             }
             move.switched = true;
+            if(!tutorial)
             move.SetDirectionOnChange(Vector2.up);
+            else move.SetDirectionOnChange(Vector2.right);
             move.hasMoved = false;
             isBall = false;
         }

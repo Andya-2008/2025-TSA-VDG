@@ -19,6 +19,10 @@ public class SceneAnimationController1 : MonoBehaviour
     {
         Debug.Log("Collided with glitch");
         GameObject.Find("SplitScreenManager").GetComponent<TutorialSplitManager>().TutorialSwitch(false);
+        foreach (GlitchFlickerController fC in FindObjectsByType<GlitchFlickerController>(FindObjectsSortMode.None))
+        {
+            fC.CallGlitch(1f);
+        }
         bigGlitch.Play();
     }
 }
