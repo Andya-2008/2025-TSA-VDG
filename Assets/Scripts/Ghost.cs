@@ -106,6 +106,13 @@ public class Ghost : MonoBehaviour
             movement.enabled = true;
         }
     }
+    public void DeactivateInTutorial()
+    {
+        if (tutorial)
+        {
+            movement.enabled = false;
+        }
+    }
 
     public IEnumerator ResetScene()
     {

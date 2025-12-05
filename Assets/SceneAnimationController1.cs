@@ -24,5 +24,6 @@ public class SceneAnimationController1 : MonoBehaviour
             fC.CallGlitch(1f);
         }
         bigGlitch.Play();
+        GameObject.Find("Ghost_Blinky").GetComponent<Ghost>().DeactivateInTutorial();
     }
 }

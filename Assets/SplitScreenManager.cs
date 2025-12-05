@@ -204,9 +204,11 @@ public class SplitScreenManager : MonoBehaviour
                 rb.linearVelocity = Vector2.zero;            // remove any downward bounce
                 rb.angularVelocity = 0f;
             }
-            move.switched = true;
-            if(!tutorial)
-            move.SetDirectionOnChange(Vector2.up);
+            if (!tutorial)
+            {
+                move.switched = true;
+                move.SetDirectionOnChange(Vector2.up);
+            }
             else move.SetDirectionOnChange(Vector2.right);
             move.hasMoved = false;
             isBall = false;
