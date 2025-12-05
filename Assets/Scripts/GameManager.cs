@@ -84,7 +84,6 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("Game  Over");
         gameOverText.enabled = true;
 
         for (int i = 0; i < ghosts.Length; i++)
@@ -157,7 +156,6 @@ public class GameManager : MonoBehaviour
         {
             pacman.gameObject.SetActive(false);
             Invoke(nameof(NewRound), 3f);
-            Debug.Log("Finished round!");
             successText.enabled = true;
         }
     }

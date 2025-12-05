@@ -18,7 +18,6 @@ public class BallDeath : MonoBehaviour
     {
         if(collision.gameObject.name == "Player")
         {
-            Debug.Log("Game Over");
             GameObject.Find("GameManager").GetComponent<GameManager>().BallDestroyed();
         }
     }

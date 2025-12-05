@@ -3041,7 +3041,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &827016922
 Transform:
   m_ObjectHideFlags: 0
@@ -3521,6 +3521,7 @@ MonoBehaviour:
   pulseScaleMin: 1.7
   pulseScaleMax: 1.9
   pulseSpeed: 2
+  primarySquare: 1
 --- !u!4 &1266312961
 Transform:
   m_ObjectHideFlags: 0
@@ -4390,6 +4391,7 @@ MonoBehaviour:
   pulseScaleMin: 1.7
   pulseScaleMax: 1.9
   pulseSpeed: 2
+  primarySquare: 0
 --- !u!4 &1514556375
 Transform:
   m_ObjectHideFlags: 0

@@ -87,7 +87,6 @@ public class Ghost : MonoBehaviour
         if (collision.gameObject.tag == ("Pinball Ball"))
         {
             if (frightened.enabled) {
-                Debug.Log("Ghost eaten");
                 GameManager.Instance.GhostEaten(this);
                 ResetState();
             } else {
@@ -117,7 +116,10 @@ public class Ghost : MonoBehaviour
     public IEnumerator ResetScene()
     {
         yield return new WaitForSeconds(3);
-        SceneManager.LoadScene(1);
+        if (!tutorial)
+            SceneManager.LoadScene("Pinball");
+        else
+            SceneManager.LoadScene("PinballTutorial");
     }
 
 }

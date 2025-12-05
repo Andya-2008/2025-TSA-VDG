@@ -46,7 +46,6 @@ public class Movement : MonoBehaviour
         if (nextDirection != Vector2.zero) {
             SetDirection(nextDirection);
         }
-        Debug.Log(switched);
     }
 
     private void FixedUpdate()

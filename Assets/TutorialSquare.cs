@@ -17,14 +17,16 @@ public class TutorialSquare : MonoBehaviour
 
     private Coroutine pulseRoutine;
     private bool triggered = false;
-    private bool waitingForResume = false;
-
     private bool interruptRequested = false;
+    private bool waitingForResume = false;
+    public bool primarySquare;
 
     private void Start()
     {
         tutorialUI.alpha = 0;
+        pulseTarget.localScale = Vector3.one;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (triggered) return;
@@ -54,6 +56,7 @@ public class TutorialSquare : MonoBehaviour
 
                 // immediately start speeding up
                 StartCoroutine(SpeedUpTime());
+                if(primarySquare)
                 GetComponent<AudioSource>().Play();
             }
         }
@@ -64,20 +67,19 @@ public class TutorialSquare : MonoBehaviour
     // ------------------------------
     private IEnumerator SlowDownTime()
     {
-        float target = 0.05f;
+        float target = 0f;
         float duration = 1f;
         float start = Time.timeScale;
         float t = 0;
 
-        // Fade UI in
+        // Fade in UI
         StartCoroutine(FadeCanvasGroup(tutorialUI, 0f, 1f, fadeDuration));
 
-        // Start pulsing animation
+        // Start pulsing
         pulseRoutine = StartCoroutine(PulseRoutine());
 
         while (t < 1)
         {
-            // IF USER INTERRUPTS → EXIT IMMEDIATELY
             if (interruptRequested)
                 yield break;
 
@@ -94,15 +96,15 @@ public class TutorialSquare : MonoBehaviour
     // ------------------------------
     private IEnumerator SpeedUpTime()
     {
-        // Stop pulse animation
+        // Stop pulsing
         if (pulseRoutine != null)
             StopCoroutine(pulseRoutine);
 
-        // Fade UI OUT
-        StartCoroutine(FadeCanvasGroup(tutorialUI, tutorialUI.alpha, 0f, fadeDuration));
+        // Fade UI OUT smoothly
+        yield return StartCoroutine(FadeCanvasGroup(tutorialUI, tutorialUI.alpha, 0f, fadeDuration));
 
-        // Reset scale smoothly
-        pulseTarget.localScale = Vector3.one;
+        // Now that it's invisible, smoothly reset scale
+        yield return StartCoroutine(SmoothResetScale());
 
         float target = 1f;
         float duration = .1f;
@@ -120,6 +122,26 @@ public class TutorialSquare : MonoBehaviour
 
         interruptRequested = false;
         waitingForResume = false;
+    }
+
+    // ------------------------------
+    // Smooth Reset Scale Coroutine
+    // ------------------------------
+    private IEnumerator SmoothResetScale()
+    {
+        Vector3 start = pulseTarget.localScale;
+        Vector3 end = Vector3.one;
+        float duration = 0.2f;
+        float t = 0;
+
+        while (t < 1f)
+        {
+            t += Time.unscaledDeltaTime / duration;
+            pulseTarget.localScale = Vector3.Lerp(start, end, Mathf.SmoothStep(0, 1, t));
+            yield return null;
+        }
+
+        pulseTarget.localScale = end;
     }
 
     // ------------------------------
