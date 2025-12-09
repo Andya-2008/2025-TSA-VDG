@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text scoreText;
     [SerializeField] private Text livesText;
 
+    public bool tutorial;
+
+    [SerializeField] GameObject tutorial1Thing; 
+    [SerializeField] GameObject tutorial2Thing; 
+
     public int score { get; private set; } = 0;
     public int lives { get; private set; } = 3;
 
@@ -154,9 +159,18 @@ public class GameManager : MonoBehaviour
 
         if (!HasRemainingPellets())
         {
-            pacman.gameObject.SetActive(false);
-            Invoke(nameof(NewRound), 3f);
-            successText.enabled = true;
+            if (!tutorial)
+            {
+                pacman.gameObject.SetActive(false);
+                Invoke(nameof(NewRound), 3f);
+                successText.enabled = true;
+            }
+
+            else
+            {
+                tutorial1Thing.SetActive(false);
+                tutorial2Thing.SetActive(true);
+            }
         }
     }
 

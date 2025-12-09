@@ -1,25 +1,34 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+public enum TutorialInputType
+{
+    Down,
+    Right
+}
+
 public class TutorialSquare : MonoBehaviour
 {
     public int square;
 
     [Header("UI Settings")]
-    public CanvasGroup tutorialUI;        // Assign in Inspector
-    public Transform pulseTarget;         // The text or panel that should pulse
+    public CanvasGroup tutorialUI;
+    public Transform pulseTarget;
     public float fadeDuration = 0.3f;
 
-    // Pulse settings
+    [Header("Pulse Settings")]
     public float pulseScaleMin = 1.7f;
     public float pulseScaleMax = 1.9f;
     public float pulseSpeed = 2f;
+
+    [Header("Input Settings")]
+    public TutorialInputType inputType;      // NEW: choose Down or Right in Inspector
+    public bool primaryAudioSquare;
 
     private Coroutine pulseRoutine;
     private bool triggered = false;
     private bool interruptRequested = false;
     private bool waitingForResume = false;
-    public bool primarySquare;
 
     private void Start()
     {
@@ -41,25 +50,62 @@ public class TutorialSquare : MonoBehaviour
         if (square == 1)
         {
             Movement g = GameObject.Find("Ghost_Blinky").GetComponent<Movement>();
+            StartCoroutine(SpeedUpGhost(g, 8.2f, 1f));
+        }
+
+        if (square == 2)
+        {
+            Movement g = GameObject.Find("Ghost_Blinky").GetComponent<Movement>();
+            StartCoroutine(SpeedUpGhost(g, 7f, 1f));
+            StartCoroutine(SlowDownTime());
+        }
+        if (square == 3)
+        {
+            Movement g = GameObject.Find("Ghost_Blinky").GetComponent<Movement>();
             StartCoroutine(SpeedUpGhost(g, 8.4f, 1f));
         }
     }
 
     private void Update()
     {
-        // If the player presses Down or S at ANY moment:
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (!interruptRequested && triggered)
-            {
-                interruptRequested = true;
+        if (!triggered) return;
 
-                // immediately start speeding up
-                StartCoroutine(SpeedUpTime());
-                if(primarySquare)
-                GetComponent<AudioSource>().Play();
-            }
+        // Detect correct input depending on tutorial type
+        if (CheckInput())
+        {
+            HandleInterrupt();
         }
+    }
+
+    // ------------------------------------
+    // NEW: Unified input check
+    // ------------------------------------
+    private bool CheckInput()
+    {
+        switch (inputType)
+        {
+            case TutorialInputType.Down:
+                return Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
+
+            case TutorialInputType.Right:
+                return Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
+        }
+
+        return false;
+    }
+
+    // ------------------------------------
+    // NEW: interrupt handler
+    // ------------------------------------
+    private void HandleInterrupt()
+    {
+        if (interruptRequested) return;
+
+        interruptRequested = true;
+        StartCoroutine(SpeedUpTime());
+
+        if (primaryAudioSquare)
+            GetComponent<AudioSource>().Play();
     }
 
     // ------------------------------
@@ -103,7 +149,7 @@ public class TutorialSquare : MonoBehaviour
         // Fade UI OUT smoothly
         yield return StartCoroutine(FadeCanvasGroup(tutorialUI, tutorialUI.alpha, 0f, fadeDuration));
 
-        // Now that it's invisible, smoothly reset scale
+        // Smoothly reset scale to normal
         yield return StartCoroutine(SmoothResetScale());
 
         float target = 1f;
@@ -163,7 +209,7 @@ public class TutorialSquare : MonoBehaviour
     }
 
     // ------------------------------
-    // Text pulsing effect
+    // Pulsing UI effect
     // ------------------------------
     private IEnumerator PulseRoutine()
     {
