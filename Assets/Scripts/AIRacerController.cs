@@ -7,6 +7,10 @@ public class AIRacerController : MonoBehaviour
     public RacingNode goalNode; // assign the last node here in the inspector
     public List<RacingNode> path = new List<RacingNode>();
     [SerializeField] private float speed = 5f;
+    [SerializeField] private float steering = 30f;
+    [SerializeField] private float rotate, currentRotation;
+    [SerializeField] private Animator spriteVisual;
+    private bool canMove = true;
 
     private void Start()
     {
@@ -43,6 +47,26 @@ public class AIRacerController : MonoBehaviour
         FollowPath();
     }
 
+    void FixedUpdate()
+    {
+        if (path.Count > 0)
+        {
+            // Direction to next node
+            Vector3 dir = (path[0].transform.position - transform.position);
+            dir.y = 0f;
+
+            if (dir.sqrMagnitude > 0.001f)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(dir.normalized, Vector3.up);
+                transform.rotation = Quaternion.Lerp(
+                    transform.rotation,
+                    targetRot,
+                    steering * Time.deltaTime
+                );
+            }
+        }
+    }
+
     private void FollowPath()
     {
         if (path.Count == 0)
@@ -76,7 +100,7 @@ public class AIRacerController : MonoBehaviour
             path.RemoveAt(0);
         }
     }
-    
+
     private void GenerateNewPath()
     {
         if (currentNode == null || goalNode == null)
@@ -100,5 +124,11 @@ public class AIRacerController : MonoBehaviour
         {
             Debug.Log(" -> " + n.name);
         }
+    }
+    
+    public void RaceFinished()
+    {
+        canMove = false;
+        speed = 0;
     }
 }

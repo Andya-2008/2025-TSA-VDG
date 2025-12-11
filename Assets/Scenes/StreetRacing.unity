@@ -945,6 +945,10 @@ MonoBehaviour:
   goalNode: {fileID: 1969481127}
   path: []
   speed: 30
+  steering: 30
+  rotate: 0
+  currentRotation: 0
+  spriteVisual: {fileID: 126929819}
 --- !u!1 &394678373
 GameObject:
   m_ObjectHideFlags: 0
@@ -4797,6 +4801,10 @@ MonoBehaviour:
   goalNode: {fileID: 1969481127}
   path: []
   speed: 25
+  steering: 30
+  rotate: 0
+  currentRotation: 0
+  spriteVisual: {fileID: 928098573}
 --- !u!4 &2039662481
 Transform:
   m_ObjectHideFlags: 0
