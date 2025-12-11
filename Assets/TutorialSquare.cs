@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public enum TutorialInputType
 {
@@ -26,9 +27,16 @@ public class TutorialSquare : MonoBehaviour
     public bool primaryAudioSquare;
 
     private Coroutine pulseRoutine;
-    private bool triggered = false;
+    public bool triggered = false;
     private bool interruptRequested = false;
     private bool waitingForResume = false;
+
+
+    [SerializeField] GameObject tutorial1Thing;
+    [SerializeField] GameObject tutorial2Thing;
+
+    [SerializeField] Transform lockedCamTransform;
+
 
     private void Start()
     {
@@ -40,7 +48,7 @@ public class TutorialSquare : MonoBehaviour
     {
         if (triggered) return;
         triggered = true;
-
+        
         if (square == 0)
         {
             GameObject.Find("Ghost_Blinky").GetComponent<Ghost>().ActivateInTutorial();
@@ -50,7 +58,7 @@ public class TutorialSquare : MonoBehaviour
         if (square == 1)
         {
             Movement g = GameObject.Find("Ghost_Blinky").GetComponent<Movement>();
-            StartCoroutine(SpeedUpGhost(g, 8.2f, 1f));
+            StartCoroutine(SpeedUpGhost(g, 8.4f, 1f));
         }
 
         if (square == 2)
@@ -60,6 +68,12 @@ public class TutorialSquare : MonoBehaviour
             StartCoroutine(SlowDownTime());
         }
         if (square == 3)
+        {
+            tutorial1Thing.SetActive(true);
+            tutorial2Thing.SetActive(false);
+            GameObject.Find("CineCamera").GetComponent<PacCameraFollow>().MoveToPoint(lockedCamTransform.position);
+        }
+        if (square == 5)
         {
             Movement g = GameObject.Find("Ghost_Blinky").GetComponent<Movement>();
             StartCoroutine(SpeedUpGhost(g, 8.4f, 1f));

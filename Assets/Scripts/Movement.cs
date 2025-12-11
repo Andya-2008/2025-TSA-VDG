@@ -1,3 +1,4 @@
+using System.Transactions;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -13,14 +14,19 @@ public class Movement : MonoBehaviour
     public Rigidbody2D rb { get; private set; }
     public Vector2 direction { get; private set; }
     public Vector2 nextDirection { get; private set; }
-    public Vector3 startingPosition { get; private set; }
+    public Vector3 startingPosition { get; set; }
 
     public bool tutorial;
+    bool startedTutorial;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        startingPosition = transform.position;
+        if (!tutorial || !startedTutorial)
+        {
+            startedTutorial = true;
+            startingPosition = transform.position;
+        }
     }
 
     private void Start()

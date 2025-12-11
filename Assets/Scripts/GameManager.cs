@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
 
         SetLives(lives - 1);
 
-        if (lives > 0)
+        if (lives > 0 || tutorial)
         {
             Invoke(nameof(ResetState), 3f);
         }
@@ -170,6 +170,8 @@ public class GameManager : MonoBehaviour
             {
                 tutorial1Thing.SetActive(false);
                 tutorial2Thing.SetActive(true);
+
+                GameObject.Find("CineCamera").GetComponent<PacCameraFollow>().ReturnToPlayer();
             }
         }
     }
