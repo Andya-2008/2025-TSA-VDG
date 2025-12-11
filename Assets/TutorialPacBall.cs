@@ -15,19 +15,17 @@ public class TutorialPacBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SetCheckpoint(int checkPoint)
     {
         currentCheckpoint = checkPoints[checkPoint];
-        
+        Vector3 tempPos = currentCheckpoint.position;
         GameObject.Find("Player").GetComponent<Movement>().startingPosition = currentCheckpoint.position;
     }
-    public void SetGhostCheckpoint(Transform checkPoint)
+    public void SetGhostCheckpoint(Vector3 checkPoint)
     {
-        currentGhostCheckpoint = checkPoint;
-        Debug.Log("Setting ghost CheckPoint:" + checkPoint.name);
-        GameObject.Find("Ghost_Blinky").GetComponent<Movement>().startingPosition = currentGhostCheckpoint.position;
+        GameObject.Find("Ghost_Blinky").GetComponent<Movement>().startingPosition = checkPoint;
     }
 }

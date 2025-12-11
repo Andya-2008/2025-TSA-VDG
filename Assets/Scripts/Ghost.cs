@@ -15,6 +15,7 @@ public class Ghost : MonoBehaviour
     public Transform target;
     public int points = 200;
     public bool tutorial;
+
     private void Awake()
     {
         movement = GetComponent<Movement>();
@@ -52,13 +53,13 @@ public class Ghost : MonoBehaviour
         }
         if (tutorial)
         {
+            movement.speed = 6;
             gameObject.SetActive(true);
             movement.ResetState();
-            movement.enabled = false;
-
+            //movement.enabled = false;
             frightened.Disable();
             chase.Enable();
-            //scatter.Enable();
+            scatter.Disable();
 
             if (home != initialBehavior)
             {
@@ -67,8 +68,9 @@ public class Ghost : MonoBehaviour
 
             if (initialBehavior != null)
             {
-                //initialBehavior.Enable();
+                initialBehavior.Enable();
             }
+            target = GameObject.FindGameObjectWithTag("Pinball Ball").transform;
         }
     }
 
@@ -94,7 +96,7 @@ public class Ghost : MonoBehaviour
             }
         }
     }
-
+    /*
     public void ActivateInTutorial()
     {
         if(tutorial)
@@ -110,7 +112,7 @@ public class Ghost : MonoBehaviour
             movement.enabled = false;
         }
     }
-
+    */
     public IEnumerator ResetScene()
     {
         yield return new WaitForSeconds(3);

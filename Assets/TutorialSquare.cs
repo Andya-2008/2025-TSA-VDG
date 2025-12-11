@@ -46,12 +46,12 @@ public class TutorialSquare : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (triggered) return;
+        if (triggered || collision.gameObject.tag != "Pinball Ball")     return;
         triggered = true;
         
         if (square == 0)
         {
-            GameObject.Find("Ghost_Blinky").GetComponent<Ghost>().ActivateInTutorial();
+            //GameObject.Find("Ghost_Blinky").GetComponent<Ghost>().ActivateInTutorial();
             StartCoroutine(SlowDownTime());
         }
 
