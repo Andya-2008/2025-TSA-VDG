@@ -27,10 +27,6 @@ public class Ghost : MonoBehaviour
     private void Start()
     {
         ResetState();
-        if (tutorial)
-        {
-            movement.enabled = false;
-        }
     }
 
     public void ResetState()
@@ -58,6 +54,7 @@ public class Ghost : MonoBehaviour
         {
             gameObject.SetActive(true);
             movement.ResetState();
+            movement.enabled = false;
 
             frightened.Disable();
             chase.Enable();
@@ -87,13 +84,12 @@ public class Ghost : MonoBehaviour
         if (collision.gameObject.tag == ("Pinball Ball"))
         {
             if (frightened.enabled) {
-                Debug.Log("Ghost eaten");
                 GameManager.Instance.GhostEaten(this);
                 ResetState();
             } else {
                 GameManager.Instance.PacmanEaten();
-                if (tutorial)
-                    StartCoroutine(ResetScene());
+                //if (tutorial)
+                    //StartCoroutine(ResetScene());
 
             }
         }
@@ -103,14 +99,25 @@ public class Ghost : MonoBehaviour
     {
         if(tutorial)
         {
+            Debug.Log("Enabling movement");
             movement.enabled = true;
+        }
+    }
+    public void DeactivateInTutorial()
+    {
+        if (tutorial)
+        {
+            movement.enabled = false;
         }
     }
 
     public IEnumerator ResetScene()
     {
         yield return new WaitForSeconds(3);
-        SceneManager.LoadScene(1);
+        if (!tutorial)
+            SceneManager.LoadScene("Pinball");
+        else
+            SceneManager.LoadScene("PinballTutorial");
     }
 
 }

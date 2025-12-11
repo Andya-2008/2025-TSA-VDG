@@ -19,7 +19,7 @@ public class MenuManager : MonoBehaviour
     public void OnPressPlay()
     {
         //Load the 1st cutscene
-        SceneManager.LoadScene("Pinball", LoadSceneMode.Single);
+        SceneManager.LoadScene("PinballTutorial", LoadSceneMode.Single);
         SFXManager.Instance.PlaySFX(0);
     }
 }

@@ -73,7 +73,6 @@ public class SplitScreenManager : MonoBehaviour
         if (_armed && _prevSide != 0 && side != 0 && side != _prevSide)
         {
             string dir = (_prevSide == 1 && side == -1) ? "A→B" : "B→A";
-            Debug.Log($"[SplitLineCrossDebug] CROSS {dir} at dist={signedDist:F2}px  ball={_P}  lineA={_A}  lineB={_B}");
 
             // Switch modes based on which side we entered:
             // Convention: side = +1 is one side (e.g., top), -1 is the other (bottom).
@@ -97,7 +96,6 @@ public class SplitScreenManager : MonoBehaviour
         if (side != 0) _prevSide = side;
         if (logPerFrame && Mathf.Abs(absDist - _lastAbsDist) > 0.05f)
         {
-            Debug.Log($"[SplitLineCrossDebug] side={side}  |dist|={absDist:F2}px  armed={_armed}");
             _lastAbsDist = absDist;
         }
     }
@@ -110,9 +108,7 @@ public class SplitScreenManager : MonoBehaviour
         Vector3 wA = gameplayCamera.ScreenToWorldPoint(new Vector3(_A.x, _A.y, zBallScreen));
         Vector3 wB = gameplayCamera.ScreenToWorldPoint(new Vector3(_B.x, _B.y, zBallScreen));
         Vector3 wP = ball.position;
-
-        Debug.DrawLine(wA, wB, Color.black);                             // UI line in world
-        Debug.DrawLine(wP, ClosestPointOnSegment(wA, wB, wP), Color.magenta); // perpendicular to line
+        
     }
 
     // ---------------- helpers ----------------
@@ -204,9 +200,11 @@ public class SplitScreenManager : MonoBehaviour
                 rb.linearVelocity = Vector2.zero;            // remove any downward bounce
                 rb.angularVelocity = 0f;
             }
-            move.switched = true;
-            if(!tutorial)
-            move.SetDirectionOnChange(Vector2.up);
+            if (!tutorial)
+            {
+                move.switched = true;
+                move.SetDirectionOnChange(Vector2.up);
+            }
             else move.SetDirectionOnChange(Vector2.right);
             move.hasMoved = false;
             isBall = false;

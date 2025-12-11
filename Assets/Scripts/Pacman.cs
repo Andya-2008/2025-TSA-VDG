@@ -46,7 +46,10 @@ public class Pacman : MonoBehaviour
         GetComponent<PacBall>().Ball.SetActive(true);
         movement.ResetState();
         gameObject.SetActive(true);
-        
+        foreach(TutorialSquare square in GameObject.FindObjectsByType<TutorialSquare>(FindObjectsSortMode.None))
+        {
+            square.triggered = false;
+        }
     }
 
     public void DeathSequence()
