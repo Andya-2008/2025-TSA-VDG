@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Playables;
 
 public enum TutorialInputType
 {
@@ -23,7 +22,7 @@ public class TutorialSquare : MonoBehaviour
     public float pulseSpeed = 2f;
 
     [Header("Input Settings")]
-    public TutorialInputType inputType;      // NEW: choose Down or Right in Inspector
+    public TutorialInputType inputType;
     public bool primaryAudioSquare;
 
     private Coroutine pulseRoutine;
@@ -31,27 +30,32 @@ public class TutorialSquare : MonoBehaviour
     private bool interruptRequested = false;
     private bool waitingForResume = false;
 
+    // 🔥 NEW: ensures audio plays only once
+    private bool audioPlayed = false;
 
     [SerializeField] GameObject tutorial1Thing;
     [SerializeField] GameObject tutorial2Thing;
 
     [SerializeField] Transform lockedCamTransform;
 
+    private AudioSource audioSrc;
+
+    public bool gotPellets;
 
     private void Start()
     {
         tutorialUI.alpha = 0;
         pulseTarget.localScale = Vector3.one;
+        audioSrc = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (triggered) return;
+        if (triggered || collision.gameObject.tag != "Pinball Ball") return;
         triggered = true;
-        
+
         if (square == 0)
         {
-            GameObject.Find("Ghost_Blinky").GetComponent<Ghost>().ActivateInTutorial();
             StartCoroutine(SlowDownTime());
         }
 
@@ -67,12 +71,14 @@ public class TutorialSquare : MonoBehaviour
             StartCoroutine(SpeedUpGhost(g, 7f, 1f));
             StartCoroutine(SlowDownTime());
         }
-        if (square == 3)
+
+        if (square == 3 && !gotPellets)
         {
             tutorial1Thing.SetActive(true);
             tutorial2Thing.SetActive(false);
             GameObject.Find("CineCamera").GetComponent<PacCameraFollow>().MoveToPoint(lockedCamTransform.position);
         }
+
         if (square == 5)
         {
             Movement g = GameObject.Find("Ghost_Blinky").GetComponent<Movement>();
@@ -84,16 +90,15 @@ public class TutorialSquare : MonoBehaviour
     {
         if (!triggered) return;
 
-        // Detect correct input depending on tutorial type
         if (CheckInput())
         {
             HandleInterrupt();
         }
     }
 
-    // ------------------------------------
-    // NEW: Unified input check
-    // ------------------------------------
+    // -------------------------
+    // Input detection
+    // -------------------------
     private bool CheckInput()
     {
         switch (inputType)
@@ -108,23 +113,28 @@ public class TutorialSquare : MonoBehaviour
         return false;
     }
 
-    // ------------------------------------
-    // NEW: interrupt handler
-    // ------------------------------------
+    // -------------------------
+    // Handles speeding up time and playing audio
+    // -------------------------
     private void HandleInterrupt()
     {
         if (interruptRequested) return;
 
         interruptRequested = true;
-        StartCoroutine(SpeedUpTime());
 
-        if (primaryAudioSquare)
-            GetComponent<AudioSource>().Play();
+        // 🔥 Audio plays ONLY ONCE for this square
+        if (!audioPlayed && primaryAudioSquare && audioSrc != null)
+        {
+            audioSrc.Play();
+            audioPlayed = true;
+        }
+
+        StartCoroutine(SpeedUpTime());
     }
 
-    // ------------------------------
-    // Slow down & fade UI in
-    // ------------------------------
+    // -------------------------
+    // Slow down + fade UI in
+    // -------------------------
     private IEnumerator SlowDownTime()
     {
         float target = 0f;
@@ -132,10 +142,8 @@ public class TutorialSquare : MonoBehaviour
         float start = Time.timeScale;
         float t = 0;
 
-        // Fade in UI
         StartCoroutine(FadeCanvasGroup(tutorialUI, 0f, 1f, fadeDuration));
 
-        // Start pulsing
         pulseRoutine = StartCoroutine(PulseRoutine());
 
         while (t < 1)
@@ -151,19 +159,16 @@ public class TutorialSquare : MonoBehaviour
         waitingForResume = true;
     }
 
-    // ------------------------------
-    // Speed up & fade UI out
-    // ------------------------------
+    // -------------------------
+    // Speed up + fade UI out
+    // -------------------------
     private IEnumerator SpeedUpTime()
     {
-        // Stop pulsing
         if (pulseRoutine != null)
             StopCoroutine(pulseRoutine);
 
-        // Fade UI OUT smoothly
         yield return StartCoroutine(FadeCanvasGroup(tutorialUI, tutorialUI.alpha, 0f, fadeDuration));
 
-        // Smoothly reset scale to normal
         yield return StartCoroutine(SmoothResetScale());
 
         float target = 1f;
@@ -184,9 +189,9 @@ public class TutorialSquare : MonoBehaviour
         waitingForResume = false;
     }
 
-    // ------------------------------
-    // Smooth Reset Scale Coroutine
-    // ------------------------------
+    // -------------------------
+    // Smooth Reset Scale
+    // -------------------------
     private IEnumerator SmoothResetScale()
     {
         Vector3 start = pulseTarget.localScale;
@@ -204,9 +209,9 @@ public class TutorialSquare : MonoBehaviour
         pulseTarget.localScale = end;
     }
 
-    // ------------------------------
-    // CanvasGroup fade
-    // ------------------------------
+    // -------------------------
+    // CanvasGroup fading
+    // -------------------------
     private IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float duration)
     {
         float t = 0;
@@ -222,16 +227,15 @@ public class TutorialSquare : MonoBehaviour
         cg.alpha = end;
     }
 
-    // ------------------------------
-    // Pulsing UI effect
-    // ------------------------------
+    // -------------------------
+    // Pulsing UI animation
+    // -------------------------
     private IEnumerator PulseRoutine()
     {
         while (true)
         {
             float t = 0;
 
-            // Scale UP
             while (t < 1)
             {
                 t += Time.unscaledDeltaTime * pulseSpeed;
@@ -242,7 +246,6 @@ public class TutorialSquare : MonoBehaviour
 
             t = 0;
 
-            // Scale DOWN
             while (t < 1)
             {
                 t += Time.unscaledDeltaTime * pulseSpeed;
@@ -253,9 +256,9 @@ public class TutorialSquare : MonoBehaviour
         }
     }
 
-    // ------------------------------
-    // Ghost speed-up coroutine
-    // ------------------------------
+    // -------------------------
+    // Speed up ghost
+    // -------------------------
     private IEnumerator SpeedUpGhost(Movement ghost, float targetSpeed, float duration)
     {
         float start = ghost.speed;
