@@ -932,7 +932,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -283.5, y: 173.7}
+  m_AnchoredPosition: {x: -267.3, y: 173.7}
   m_SizeDelta: {x: 200, y: 28.1321}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &286943538
@@ -1422,7 +1422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -208.2, y: 176.9}
+  m_AnchoredPosition: {x: -192, y: 176.9}
   m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &478852472
@@ -2434,6 +2434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kart: {fileID: 2029404481}
+  uiController: {fileID: 1556704507}
   blockSpawnPoints:
   - {fileID: 668689817}
   - {fileID: 553189710}
@@ -3405,7 +3406,7 @@ GameObject:
   - component: {fileID: 1252792541}
   - component: {fileID: 1252792540}
   m_Layer: 5
-  m_Name: Laps
+  m_Name: RaceStatus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3427,8 +3428,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 320, y: 165}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1252792540
 MonoBehaviour:
@@ -3450,7 +3451,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Lap: 1/4'
+  m_text: 'Laps remaining: 3'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 92e30f5e062400740abbf6a35a2bb7e1, type: 2}
   m_sharedMaterial: {fileID: -3357802153965644115, guid: 92e30f5e062400740abbf6a35a2bb7e1, type: 2}
@@ -3484,8 +3485,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -4083,7 +4084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kart: {fileID: 2029404481}
   speedText: {fileID: 1833656708}
-  lapText: {fileID: 1252792540}
+  raceStatusText: {fileID: 1252792540}
   timeText: {fileID: 722469416}
   powerSlider: {fileID: 478852472}
   gameController: {fileID: 945265823}
