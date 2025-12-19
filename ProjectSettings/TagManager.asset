@@ -9,6 +9,8 @@ TagManager:
   - FxTemporaire
   - Fire
   - Environment
+  - ArcadeDoor
+  - ArcadeDoorknob
   layers:
   - Default
   - TransparentFX

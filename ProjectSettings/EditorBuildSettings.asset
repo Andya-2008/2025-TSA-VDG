@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StreetRacing.unity
     guid: e91c3862c12eb4ff5be2885033e11afd
+  - enabled: 1
+    path: Assets/Scenes/IntroSceneOutside.unity
+    guid: 765cf1df86f4e473b9d2196a82104e9d
+  - enabled: 1
+    path: Assets/Scenes/IntroSceneArcade.unity
+    guid: cc4ebec55e1eb413aa9e36486446d700
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_UseUCBPForAssetBundles: 0
