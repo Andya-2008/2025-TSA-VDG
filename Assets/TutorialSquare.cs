@@ -72,7 +72,7 @@ public class TutorialSquare : MonoBehaviour
             StartCoroutine(SlowDownTime());
         }
 
-        if (square == 3 && !gotPellets)
+        if (square == 3 && GameObject.Find("GameManager").GetComponent<GameManager>().HasRemainingPellets())
         {
             tutorial1Thing.SetActive(true);
             tutorial2Thing.SetActive(false);
