@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,7 @@ public class IntroSceneManager : MonoBehaviour
 {
     private bool isOutside = true;
     private bool isTouchingDoor = false;
+    [SerializeField] private LevelLoader levelLoader;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,7 +27,7 @@ public class IntroSceneManager : MonoBehaviour
                 isTouchingDoor = false;
 
                 // Load inside scene
-                SceneManager.LoadScene("IntroSceneArcade");
+                StartCoroutine(levelLoader.LoadInsideArcade());
             }
         }
 
