@@ -4,7 +4,8 @@ using UnityEngine;
 public enum TutorialInputType
 {
     Down,
-    Right
+    Right,
+    Left
 }
 
 public class TutorialSquare : MonoBehaviour
@@ -84,6 +85,10 @@ public class TutorialSquare : MonoBehaviour
             Movement g = GameObject.Find("Ghost_Blinky").GetComponent<Movement>();
             StartCoroutine(SpeedUpGhost(g, 8.4f, 1f));
         }
+        if (square == 6)
+        {
+            StartCoroutine(SlowDownTime());
+        }
     }
 
     private void Update()
@@ -108,6 +113,8 @@ public class TutorialSquare : MonoBehaviour
 
             case TutorialInputType.Right:
                 return Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
+            case TutorialInputType.Left:
+                return Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
         }
 
         return false;

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class SparkleCollision : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class SparkleCollision : MonoBehaviour
         if(collision.gameObject.name == "Player")
         {
             GameObject.Find("AnimationController").GetComponent<SceneAnimationController1>().GlitchChange();
+            GameObject.Find("Ghost_Blinky").GetComponent<Movement>().enabled = false;
         }
     }
 
