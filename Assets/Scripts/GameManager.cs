@@ -40,7 +40,12 @@ public class GameManager : MonoBehaviour
             foreach (GlitchFlickerController fC in FindObjectsByType<GlitchFlickerController>(FindObjectsSortMode.None))
             {
                 fC.CallGlitch(.5f);
-            }
+            }/*
+            foreach(LayerFlickerGlitch lF in FindObjectsByType<LayerFlickerGlitch>(FindObjectsSortMode.None))
+            {
+                Debug.Log("flickering");
+                lF.CallLayerGlitch(2f);
+            }*/
         }
     }
 

@@ -117,9 +117,36 @@ public class TutorialSquare : MonoBehaviour
     }
     private IEnumerator loadPinball()
     {
-        yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("Pinball");
+        // Optional cinematic delay
+        yield return new WaitForSecondsRealtime(1f);
 
+        // Cache current scene
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        // Begin loading new scene additively
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync("Pinball", LoadSceneMode.Single);
+        /*
+        // Prevent immediate activation
+        loadOp.allowSceneActivation = false;
+
+        // Wait until scene is almost ready
+        while (loadOp.progress < 0.9f)
+            yield return null;
+
+        // Activate scene (very fast)
+        loadOp.allowSceneActivation = true;
+
+        // Wait one frame to ensure activation completes
+        yield return null;
+
+        // Get the newly loaded scene
+        Scene pinballScene = SceneManager.GetSceneByName("Pinball");
+
+        // Set it as active
+        SceneManager.SetActiveScene(pinballScene);
+
+        // Unload old scene
+        SceneManager.UnloadSceneAsync(currentScene);*/
     }
     private void Update()
     {

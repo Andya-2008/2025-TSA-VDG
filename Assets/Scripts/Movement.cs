@@ -39,7 +39,6 @@ public class Movement : MonoBehaviour
         speedMultiplier = 1f;
         direction = initialDirection;
         nextDirection = Vector2.zero;
-        Debug.Log("Resetting position:" + name + " : " + startingPosition);
         transform.position = startingPosition;
         rb.isKinematic = false;
         switched = false;
