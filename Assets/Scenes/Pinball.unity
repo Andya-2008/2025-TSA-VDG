@@ -234,8 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c23356f494faf4703bf771f7ebc5708d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intensity: 3
-  shift: 0.5
+  intensity: 7
+  shift: 1
 --- !u!114 &11019323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,6 +645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flipperJoint: {fileID: 1924569593}
   isLeft: 1
+  canFlip: 1
 --- !u!233 &111894219
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -7695,6 +7696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flipperJoint: {fileID: 686194417}
   isLeft: 0
+  canFlip: 1
 --- !u!1 &449734303 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 715479367367538160, guid: e09a7563a12c8ac43ae4d9b67f14bca6, type: 3}
@@ -7843,8 +7845,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c23356f494faf4703bf771f7ebc5708d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intensity: 3
-  shift: 0.5
+  intensity: 7
+  shift: 1
 --- !u!114 &519420035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10048,6 +10050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flipperJoint: {fileID: 1081407982}
   isLeft: 1
+  canFlip: 1
 --- !u!1 &956112967
 GameObject:
   m_ObjectHideFlags: 0
@@ -10639,6 +10642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flipperJoint: {fileID: 1431199205}
   isLeft: 0
+  canFlip: 1
 --- !u!1 &1106936254
 GameObject:
   m_ObjectHideFlags: 0
@@ -10903,6 +10907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flipperJoint: {fileID: 319664335}
   isLeft: 0
+  canFlip: 1
 --- !u!4 &1193431826
 Transform:
   m_ObjectHideFlags: 0
@@ -11754,6 +11759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flipperJoint: {fileID: 838533824}
   isLeft: 1
+  canFlip: 1
 --- !u!1 &1431199203
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,6 +35,13 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+        if(!tutorial)
+        {
+            foreach (GlitchFlickerController fC in FindObjectsByType<GlitchFlickerController>(FindObjectsSortMode.None))
+            {
+                fC.CallGlitch(.5f);
+            }
+        }
     }
 
     private void OnDestroy()
@@ -52,6 +59,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        //DELETE DEV
+        /*if(Input.GetKeyDown(KeyCode.S))
+        {
+            GameObject.Find("Player").transform.position = this.transform.position;
+        }*/
         if (lives <= 0 && Input.GetKeyDown(KeyCode.Space))
         {
             NewGame();

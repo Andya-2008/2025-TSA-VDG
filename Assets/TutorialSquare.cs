@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum TutorialInputType
 {
@@ -57,7 +58,7 @@ public class TutorialSquare : MonoBehaviour
 
         if (square == 0)
         {
-            StartCoroutine(SlowDownTime());
+            StartCoroutine(SlowDownTime(1.5f));
         }
 
         if (square == 1)
@@ -70,7 +71,7 @@ public class TutorialSquare : MonoBehaviour
         {
             Movement g = GameObject.Find("Ghost_Blinky").GetComponent<Movement>();
             StartCoroutine(SpeedUpGhost(g, 7f, 1f));
-            StartCoroutine(SlowDownTime());
+            StartCoroutine(SlowDownTime(1.5f));
         }
 
         if (square == 3 && GameObject.Find("GameManager").GetComponent<GameManager>().HasRemainingPellets())
@@ -87,10 +88,39 @@ public class TutorialSquare : MonoBehaviour
         }
         if (square == 6)
         {
-            StartCoroutine(SlowDownTime());
+            StartCoroutine(SlowDownTime(.1f));
+            GameObject.Find("Flipper Left").GetComponent<Flipper>().canFlip = true;
+        }
+        if (square == 7)
+        {
+            StartCoroutine(SlowDownTime(.1f));
+            GameObject.Find("Flipper Right").GetComponent<Flipper>().canFlip = true;
+        }
+        if (square == 8)
+        {
+            GameObject.Find("Player").GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            GameObject.Find("Player").transform.position = transform.position;
+            GameObject.Find("CineCamera (1)").transform.position = transform.position;
+
+            GameObject.Find("Flipper Right").GetComponent<Flipper>().canFlip = true;
+            GameObject.Find("AnimationController")
+            .GetComponent<SceneAnimationController1>()
+            .GlitchChange();
+
+            GameObject.Find("CineCamera (1)")
+                .GetComponent<LayerFlickerGlitch>()
+                .CallLayerGlitch(1f);
+            GameObject.Find("CineCamera (1)").GetComponent<PacCameraFOV>().ZoomTo(16.6f);
+            GameObject.Find("CineCamera (1)").GetComponent<PacCameraFollow>().MoveToPoint(lockedCamTransform.position);
+            StartCoroutine(loadPinball());
         }
     }
+    private IEnumerator loadPinball()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("Pinball");
 
+    }
     private void Update()
     {
         if (!triggered) return;
@@ -142,10 +172,9 @@ public class TutorialSquare : MonoBehaviour
     // -------------------------
     // Slow down + fade UI in
     // -------------------------
-    private IEnumerator SlowDownTime()
+    private IEnumerator SlowDownTime(float duration)
     {
         float target = 0f;
-        float duration = 1f;
         float start = Time.timeScale;
         float t = 0;
 

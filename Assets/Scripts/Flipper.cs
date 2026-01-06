@@ -4,6 +4,7 @@ public class Flipper : MonoBehaviour
 {
     [SerializeField] HingeJoint2D flipperJoint;
     [SerializeField] bool isLeft;
+    [SerializeField] public bool canFlip = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,16 +14,25 @@ public class Flipper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.A) && isLeft)
+        if(Input.GetKey(KeyCode.A) && isLeft && canFlip)
         {
-            flipperJoint.GetComponent<Rigidbody2D>().WakeUp();
-            flipperJoint.GetComponent<Rigidbody2D>().AddTorque(1500 * Time.deltaTime * 100);
+            hitLeft();
         }
 
-        if (Input.GetKey(KeyCode.D) && !isLeft)
+        if (Input.GetKey(KeyCode.D) && !isLeft && canFlip)
         {
-            flipperJoint.GetComponent<Rigidbody2D>().WakeUp();
-            flipperJoint.GetComponent<Rigidbody2D>().AddTorque(-1500 * Time.deltaTime * 100);
+            hitRight();
         }
+    }
+
+    public void hitLeft()
+    {
+        flipperJoint.GetComponent<Rigidbody2D>().WakeUp();
+        flipperJoint.GetComponent<Rigidbody2D>().AddTorque(1500 * Time.deltaTime * 100);
+    }
+    public void hitRight()
+    {
+        flipperJoint.GetComponent<Rigidbody2D>().WakeUp();
+        flipperJoint.GetComponent<Rigidbody2D>().AddTorque(-1500 * Time.deltaTime * 100);
     }
 }
