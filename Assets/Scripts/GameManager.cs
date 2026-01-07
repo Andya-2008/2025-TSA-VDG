@@ -48,6 +48,10 @@ public class GameManager : MonoBehaviour
                 lF.CallLayerGlitch(2f);
             }*/
         }
+        else
+        {
+            MusicManager.Instance.PlayNewTrack(1);
+        }
     }
 
     private void OnDestroy()

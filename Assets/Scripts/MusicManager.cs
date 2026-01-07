@@ -31,6 +31,7 @@ public class MusicManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        PlayNewTrack(0);
     }
     private void Update()
     {
