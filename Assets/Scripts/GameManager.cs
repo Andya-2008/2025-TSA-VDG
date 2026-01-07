@@ -1,5 +1,6 @@
 using System.Data.Common;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 [DefaultExecutionOrder(-100)]
@@ -71,6 +72,8 @@ public class GameManager : MonoBehaviour
         }*/
         if (lives <= 0 && Input.GetKeyDown(KeyCode.Space))
         {
+            GameObject.Find("Unfade").GetComponent<PlayableDirector>().Play();
+            GetComponent<AudioSource>().Play();
             NewGame();
         }
     }
@@ -107,6 +110,7 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         gameOverText.enabled = true;
+        GameObject.Find("BlackFade").GetComponent<PlayableDirector>().Play();
 
         for (int i = 0; i < ghosts.Length; i++)
         {
@@ -141,6 +145,10 @@ public class GameManager : MonoBehaviour
         else
         {
             GameOver();
+        }
+        foreach(Ghost ghost in FindObjectsByType<Ghost>(FindObjectsSortMode.None))
+        {
+            ghost.GetComponent<GhostScatter>().enabled = true;
         }
     }
     public void BallDestroyed()
@@ -179,8 +187,9 @@ public class GameManager : MonoBehaviour
             if (!tutorial)
             {
                 pacman.gameObject.SetActive(false);
-                Invoke(nameof(NewRound), 3f);
-                successText.enabled = true;
+                //Invoke(nameof(NewRound), 3f);
+                //successText.enabled = true;
+                GameObject.Find("WhiteFade").GetComponent<PlayableDirector>().Play();
             }
 
             else

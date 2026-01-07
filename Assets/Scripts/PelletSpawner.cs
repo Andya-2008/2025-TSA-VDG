@@ -3,9 +3,10 @@ using UnityEngine;
 public class PelletSpawner : MonoBehaviour
 {
     [SerializeField] PowerPellet powerPellet;
-    [SerializeField] Transform spawnPos;
 
-    [SerializeField] float spawnTime;
+    [SerializeField] float maxSpawnTime = 20;
+    [SerializeField] float minSpawnTime = 5;
+    [SerializeField] float randTime;
 
     bool isPellet;
 
@@ -13,19 +14,21 @@ public class PelletSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        SpawnPellet();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isPellet && Time.time - startTime > spawnTime) SpawnPellet();
+        if (!isPellet && Time.time - startTime > randTime) SpawnPellet();
     }
 
     public void SpawnPellet()
     {
+        randTime = Random.Range(minSpawnTime, maxSpawnTime);
         startTime = Time.time;
-        Instantiate(powerPellet.gameObject, spawnPos);
+        GameObject newPellet = Instantiate(powerPellet.gameObject, transform);
+        newPellet.GetComponent<PowerPellet>().myParent = this;
         isPellet = true;
     }
 

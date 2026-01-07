@@ -3,10 +3,11 @@ using UnityEngine;
 public class PowerPellet : Pellet
 {
     public float duration = 8f;
+    public PelletSpawner myParent;
 
     protected override void Eat()
     {
-        GameObject.Find("PelletSpawner").GetComponent<PelletSpawner>().GrabbedPellet();
+        myParent.GrabbedPellet();
         GameManager.Instance.PowerPelletEaten(this);
     }
 
