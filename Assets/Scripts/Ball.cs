@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class Ball : MonoBehaviour
 {
@@ -13,6 +14,15 @@ public class Ball : MonoBehaviour
     void FixedUpdate()
     {
         GetComponent<Rigidbody2D>().linearVelocity = Vector3.ClampMagnitude(GetComponent<Rigidbody2D>().linearVelocity, maxSpeed);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collided with " + collision.gameObject.tag);
+        if(collision.gameObject.tag.Equals("Bouncy"))
+        {
+            Debug.Log("Bounce");
+            collision.gameObject.GetComponent<PlayableDirector>().Play();
+        }
     }
 }
     

@@ -152,7 +152,10 @@ public class GameManager : MonoBehaviour
         }
         foreach(Ghost ghost in FindObjectsByType<Ghost>(FindObjectsSortMode.None))
         {
-            ghost.GetComponent<GhostScatter>().enabled = true;
+            if (!tutorial)
+            {
+                ghost.GetComponent<GhostScatter>().enabled = true;
+            }
         }
     }
     public void BallDestroyed()

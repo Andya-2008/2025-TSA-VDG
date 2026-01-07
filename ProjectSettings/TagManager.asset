@@ -11,6 +11,7 @@ TagManager:
   - Environment
   - ArcadeDoor
   - ArcadeDoorknob
+  - Bouncy
   layers:
   - Default
   - TransparentFX
