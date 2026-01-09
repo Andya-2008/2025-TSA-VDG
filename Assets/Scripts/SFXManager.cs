@@ -77,7 +77,7 @@ public class SFXManager : MonoBehaviour
         ResetFadeIfNeeded(source);
 
         source.pitch = 1f;
-        source.volume = 1f;
+        //source.volume = 1f;
         source.Play();
 
         if (cutOffMs > 0)
@@ -114,7 +114,7 @@ public class SFXManager : MonoBehaviour
         ResetFadeIfNeeded(source);
 
         source.pitch = newPitch;
-        source.volume = 1f;
+        //source.volume = 1f;
         source.Play();
 
         if (cutOffMs > 0)

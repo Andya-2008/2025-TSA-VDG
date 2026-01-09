@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
         }
         if(!tutorial)
         {
+            Time.timeScale = 1;
             foreach (GlitchFlickerController fC in FindObjectsByType<GlitchFlickerController>(FindObjectsSortMode.None))
             {
                 fC.CallGlitch(.5f);
@@ -47,10 +48,13 @@ public class GameManager : MonoBehaviour
                 Debug.Log("flickering");
                 lF.CallLayerGlitch(2f);
             }*/
+            PlayerPrefs.SetInt("PacTutorial", 1);
         }
         else
         {
             MusicManager.Instance.PlayNewTrack(1);
+            if (PlayerPrefs.GetInt("PacTutorial") != 1)
+                GameObject.Find("SkipButton").SetActive(false);
         }
     }
 

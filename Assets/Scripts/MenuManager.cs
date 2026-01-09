@@ -2,10 +2,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] AudioSource PlaySFX;
+    int change = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,6 +22,7 @@ public class MenuManager : MonoBehaviour
 
     public void OnPressPlay()
     {
+        GameObject.Find("PlayButton").SetActive(false);
         //Load the 1st cutscene
         //SceneManager.LoadScene("PinballTutorial", LoadSceneMode.Single);
         GameObject.Find("TitleScreen").GetComponent<UIWalkIn>().StartWalking();
@@ -45,5 +48,23 @@ public class MenuManager : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         SceneManager.LoadScene("PinballTutorial", LoadSceneMode.Single);
+    }
+
+    public void ChangeSFX()
+    {
+        if (change == 0)
+        {
+            GameObject.Find("soundOff").GetComponent<Image>().enabled = true;
+            SFXManager.Instance.gameObject.SetActive(false);
+            MusicManager.Instance.gameObject.SetActive(false);
+            change = 1;
+        }
+        else if (change == 1)
+        {
+            GameObject.Find("soundOff").GetComponent<Image>().enabled = false;
+            SFXManager.Instance.gameObject.SetActive(true);
+            MusicManager.Instance.gameObject.SetActive(true);
+            change = 0;
+        }
     }
 }
