@@ -48,7 +48,7 @@ public class PauseManager : MonoBehaviour
     IEnumerator SlowTime()
     {
         isTransitioning = true;
-        SFXManager.Instance.PlaySFX(2);
+        GameObject.Find("GameManager").GetComponent<GameManager>().RecordStop();
         pauseGroup.blocksRaycasts = true;
         pauseGroup.interactable = true;
 
@@ -75,9 +75,9 @@ public class PauseManager : MonoBehaviour
     {
         isTransitioning = true;
 
-        SFXManager.Instance.PlaySFX(3);
         pauseGroup.blocksRaycasts = false;
         pauseGroup.interactable = false;
+        GameObject.Find("GameManager").GetComponent<GameManager>().RecordResume();
 
         while (Time.timeScale < 1f)
         {

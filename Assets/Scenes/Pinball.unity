@@ -18773,6 +18773,10 @@ PrefabInstance:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 1952484615}
+    - target: {fileID: 8373926266303571499, guid: e09a7563a12c8ac43ae4d9b67f14bca6, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

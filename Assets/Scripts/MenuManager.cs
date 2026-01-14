@@ -38,7 +38,7 @@ public class MenuManager : MonoBehaviour
 
     public IEnumerator DoorCreak()
     {
-        yield return new WaitForSeconds(3.25f);
+        yield return new WaitForSeconds(2f);
 
         foreach (UIFootstepBob bob in FindObjectsByType<UIFootstepBob>(FindObjectsSortMode.None))
         {
@@ -54,6 +54,7 @@ public class MenuManager : MonoBehaviour
     {
         if (change == 0)
         {
+            PlayerPrefs.SetInt("audio", 0);
             GameObject.Find("soundOff").GetComponent<Image>().enabled = true;
             SFXManager.Instance.gameObject.SetActive(false);
             MusicManager.Instance.gameObject.SetActive(false);
@@ -61,6 +62,7 @@ public class MenuManager : MonoBehaviour
         }
         else if (change == 1)
         {
+            PlayerPrefs.SetInt("audio", 1);
             GameObject.Find("soundOff").GetComponent<Image>().enabled = false;
             SFXManager.Instance.gameObject.SetActive(true);
             MusicManager.Instance.gameObject.SetActive(true);

@@ -1,4 +1,4 @@
-using System.Data.Common;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
@@ -18,13 +18,21 @@ public class GameManager : MonoBehaviour
 
     public bool tutorial;
 
-    [SerializeField] GameObject tutorial1Thing; 
-    [SerializeField] GameObject tutorial2Thing; 
+    [SerializeField] GameObject tutorial1Thing;
+    [SerializeField] GameObject tutorial2Thing;
 
     public int score { get; private set; } = 0;
     public int lives { get; private set; } = 3;
 
     private int ghostMultiplier = 1;
+
+    // 🎵 Audio slowdown settings
+    [Header("Record Stop Audio")]
+    [SerializeField] private float recordStopDuration = 1.2f;
+    [SerializeField] private float resumeDuration = 0.8f;
+
+    private AudioSource musicSource;
+    private Coroutine pitchRoutine;
 
     private void Awake()
     {
@@ -36,18 +44,22 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-        if(!tutorial)
+
+        // Find music source named "1"
+        GameObject musicObj = GameObject.Find("1");
+        if (musicObj != null)
+        {
+            musicSource = musicObj.GetComponent<AudioSource>();
+        }
+
+        if (!tutorial)
         {
             Time.timeScale = 1;
             foreach (GlitchFlickerController fC in FindObjectsByType<GlitchFlickerController>(FindObjectsSortMode.None))
             {
                 fC.CallGlitch(.5f);
-            }/*
-            foreach(LayerFlickerGlitch lF in FindObjectsByType<LayerFlickerGlitch>(FindObjectsSortMode.None))
-            {
-                Debug.Log("flickering");
-                lF.CallLayerGlitch(2f);
-            }*/
+            }
+
             PlayerPrefs.SetInt("PacTutorial", 1);
         }
         else
@@ -73,15 +85,13 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        //DELETE DEV
-        /*if(Input.GetKeyDown(KeyCode.S))
-        {
-            GameObject.Find("Player").transform.position = this.transform.position;
-        }*/
         if (lives <= 0 && Input.GetKeyDown(KeyCode.Space))
         {
+            RecordResume();
+
             GameObject.Find("Unfade").GetComponent<PlayableDirector>().Play();
             GetComponent<AudioSource>().Play();
+
             NewGame();
         }
     }
@@ -120,12 +130,12 @@ public class GameManager : MonoBehaviour
         gameOverText.enabled = true;
         GameObject.Find("BlackFade").GetComponent<PlayableDirector>().Play();
 
+        RecordStop(); // 🎵 EXPONENTIAL VINYL STOP
+
         for (int i = 0; i < ghosts.Length; i++)
         {
             ghosts[i].gameObject.SetActive(false);
         }
-
-        //pacman.gameObject.SetActive(false);
     }
 
     private void SetLives(int lives)
@@ -142,8 +152,8 @@ public class GameManager : MonoBehaviour
 
     public void PacmanEaten()
     {
+        SFXManager.Instance.PlaySFX(6);
         pacman.DeathSequence();
-
         SetLives(lives - 1);
 
         if (lives > 0 || tutorial)
@@ -154,7 +164,8 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
-        foreach(Ghost ghost in FindObjectsByType<Ghost>(FindObjectsSortMode.None))
+
+        foreach (Ghost ghost in FindObjectsByType<Ghost>(FindObjectsSortMode.None))
         {
             if (!tutorial)
             {
@@ -162,8 +173,10 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
     public void BallDestroyed()
     {
+        SFXManager.Instance.PlaySFX(6);
         GameObject.Find("SplitScreenManager").GetComponent<SplitScreenManager>().SwitchPacManBall(1, true);
 
         pacman.DeathSequence();
@@ -183,14 +196,12 @@ public class GameManager : MonoBehaviour
     {
         int points = ghost.points * ghostMultiplier;
         SetScore(score + points);
-
         ghostMultiplier++;
     }
 
     public void PelletEaten(Pellet pellet)
     {
         pellet.gameObject.SetActive(false);
-
         SetScore(score + pellet.points);
 
         if (!HasRemainingPellets())
@@ -198,16 +209,12 @@ public class GameManager : MonoBehaviour
             if (!tutorial)
             {
                 pacman.gameObject.SetActive(false);
-                //Invoke(nameof(NewRound), 3f);
-                //successText.enabled = true;
                 GameObject.Find("WhiteFade").GetComponent<PlayableDirector>().Play();
             }
-
             else
             {
                 tutorial1Thing.SetActive(false);
                 tutorial2Thing.SetActive(true);
-
                 GameObject.Find("CineCamera").GetComponent<PacCameraFollow>().ReturnToPlayer();
             }
         }
@@ -230,11 +237,8 @@ public class GameManager : MonoBehaviour
         foreach (Transform pellet in pellets)
         {
             if (pellet.gameObject.activeSelf)
-            {
                 return true;
-            }
         }
-
         return false;
     }
 
@@ -243,4 +247,66 @@ public class GameManager : MonoBehaviour
         ghostMultiplier = 1;
     }
 
+    // ============================
+    // 🎵 RECORD STOP AUDIO EFFECT
+    // ============================
+
+    public void RecordStop()
+    {
+        if (musicSource == null) return;
+
+        if (pitchRoutine != null)
+            StopCoroutine(pitchRoutine);
+
+        pitchRoutine = StartCoroutine(ExponentialPitchFade(0.01f, recordStopDuration, true));
+    }
+
+    public void RecordResume()
+    {
+        if (musicSource == null) return;
+
+        musicSource.volume = .5f; // restore volume BEFORE fade-in
+        musicSource.UnPause();
+
+        if (pitchRoutine != null)
+            StopCoroutine(pitchRoutine);
+
+        pitchRoutine = StartCoroutine(ExponentialPitchFade(1f, resumeDuration, false));
+    }
+
+    private IEnumerator ExponentialPitchFade(float targetPitch, float duration, bool pauseAtEnd)
+    {
+        float startPitch = musicSource.pitch;
+        float startVolume = musicSource.volume;
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = elapsed / duration;
+
+            // Exponential curve (heavy slowdown near end)
+            float curve = Mathf.Pow(t, 3.5f);
+
+            musicSource.pitch = Mathf.Lerp(startPitch, targetPitch, curve);
+
+            // 🔥 Fade volume ONLY near the very end
+            if (pauseAtEnd)
+            {
+                float volumeFade = Mathf.Clamp01((curve - 0.85f) / 0.15f);
+                musicSource.volume = Mathf.Lerp(startVolume, 0f, volumeFade);
+            }
+
+            yield return null;
+        }
+
+        musicSource.pitch = targetPitch;
+
+        if (pauseAtEnd)
+        {
+            musicSource.volume = 0f;   // ensure silence
+            musicSource.Pause();      // now safe
+        }
+    }
 }

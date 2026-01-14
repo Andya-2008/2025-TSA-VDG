@@ -25,30 +25,29 @@ public class TutorialSquare : MonoBehaviour
 
     [Header("Input Settings")]
     public TutorialInputType inputType;
-    public bool primaryAudioSquare;
 
     private Coroutine pulseRoutine;
     public bool triggered = false;
     private bool interruptRequested = false;
     private bool waitingForResume = false;
 
-    // 🔥 NEW: ensures audio plays only once
-    private bool audioPlayed = false;
 
     [SerializeField] GameObject tutorial1Thing;
     [SerializeField] GameObject tutorial2Thing;
 
     [SerializeField] Transform lockedCamTransform;
 
-    private AudioSource audioSrc;
-
     public bool gotPellets;
+
+    bool triggeredAudio;
+
+    private bool inputConsumed = false;
+
 
     private void Start()
     {
         tutorialUI.alpha = 0;
         pulseTarget.localScale = Vector3.one;
-        audioSrc = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -101,8 +100,6 @@ public class TutorialSquare : MonoBehaviour
             GameObject.Find("Player").GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             GameObject.Find("Player").transform.position = transform.position;
             GameObject.Find("CineCamera (1)").transform.position = transform.position;
-
-            GameObject.Find("Flipper Right").GetComponent<Flipper>().canFlip = true;
             GameObject.Find("AnimationController")
             .GetComponent<SceneAnimationController1>()
             .GlitchChange();
@@ -182,15 +179,17 @@ public class TutorialSquare : MonoBehaviour
     // -------------------------
     private void HandleInterrupt()
     {
-        if (interruptRequested) return;
+        // 🔒 hard stop: this square already completed
+        if (inputConsumed)
+            return;
 
+        inputConsumed = true;
         interruptRequested = true;
 
-        // 🔥 Audio plays ONLY ONCE for this square
-        if (!audioPlayed && primaryAudioSquare && audioSrc != null)
+        if (!triggeredAudio)
         {
-            audioSrc.Play();
-            audioPlayed = true;
+            triggeredAudio = true;
+            SFXManager.Instance.PlaySFX(7);
         }
 
         StartCoroutine(SpeedUpTime());
@@ -227,6 +226,15 @@ public class TutorialSquare : MonoBehaviour
     // -------------------------
     private IEnumerator SpeedUpTime()
     {
+        if(square == 7)
+        {
+            GameObject.Find("Flipper Right").GetComponent<Flipper>().hitLeft();
+        }
+
+        if (square == 6)
+        {
+            GameObject.Find("Flipper Left").GetComponent<Flipper>().hitLeft();
+        }
         if (pulseRoutine != null)
             StopCoroutine(pulseRoutine);
 

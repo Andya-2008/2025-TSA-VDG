@@ -74,10 +74,12 @@ public class SFXManager : MonoBehaviour
 
         AudioSource source = sfx[sfxIndex];
 
+        // 🔒 Prevent replay if already playing
+        if (source.isPlaying)
+            return;
+
         ResetFadeIfNeeded(source);
 
-        source.pitch = 1f;
-        //source.volume = 1f;
         source.Play();
 
         if (cutOffMs > 0)
