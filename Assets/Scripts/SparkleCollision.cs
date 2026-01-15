@@ -10,7 +10,7 @@ public class SparkleCollision : MonoBehaviour
     [SerializeField] PlayableDirector parentAnim;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (triggered) return;
+        if (triggered || collision.gameObject.tag != "Pinball Ball") return;
         //if (!collision.CompareTag("Player")) return;
 
         triggered = true;

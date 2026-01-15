@@ -2,37 +2,41 @@ using UnityEngine;
 
 public class Flipper : MonoBehaviour
 {
-    [SerializeField] HingeJoint2D flipperJoint;
-    [SerializeField] bool isLeft;
+    [SerializeField] private HingeJoint2D joint;
+    [SerializeField] private bool isLeft;
     [SerializeField] public bool canFlip = true;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    [Header("Motor Settings")]
+    public float motorSpeed = 800f;
+    public float motorTorque = 1500f;
+
     void Update()
     {
-        if(Input.GetKey(KeyCode.A) && isLeft && canFlip)
-        {
-            hitLeft();
-        }
+        if (!canFlip) return;
 
-        if (Input.GetKey(KeyCode.D) && !isLeft && canFlip)
-        {
-            hitRight();
-        }
+        if (isLeft && Input.GetKeyDown(KeyCode.A))
+            Flip();
+
+        if (!isLeft && Input.GetKeyDown(KeyCode.D))
+            Flip();
+
+        joint = GetComponent<HingeJoint2D>();
     }
 
-    public void hitLeft()
+    public void Flip()
     {
-        flipperJoint.GetComponent<Rigidbody2D>().WakeUp();
-        flipperJoint.GetComponent<Rigidbody2D>().AddTorque(1500 * Time.deltaTime * 100);
+        joint.GetComponent<Rigidbody2D>().WakeUp();
+
+        JointMotor2D motor = joint.motor;
+        motor.maxMotorTorque = motorTorque;
+        motor.motorSpeed = isLeft ? motorSpeed : -motorSpeed;
+
+        joint.motor = motor;
+        joint.useMotor = true;
     }
-    public void hitRight()
+
+    public void Release()
     {
-        flipperJoint.GetComponent<Rigidbody2D>().WakeUp();
-        flipperJoint.GetComponent<Rigidbody2D>().AddTorque(-1500 * Time.deltaTime * 100);
+        joint.useMotor = false;
     }
 }

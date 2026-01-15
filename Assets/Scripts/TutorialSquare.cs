@@ -228,12 +228,14 @@ public class TutorialSquare : MonoBehaviour
     {
         if(square == 7)
         {
-            GameObject.Find("Flipper Right").GetComponent<Flipper>().hitLeft();
+            GameObject.Find("Flipper Right").GetComponent<Flipper>().Flip();
+
         }
 
         if (square == 6)
         {
-            GameObject.Find("Flipper Left").GetComponent<Flipper>().hitLeft();
+            GameObject.Find("Flipper Left").GetComponent<Flipper>().Flip();
+
         }
         if (pulseRoutine != null)
             StopCoroutine(pulseRoutine);

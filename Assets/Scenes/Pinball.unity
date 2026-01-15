@@ -664,9 +664,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6b3597468afff40ab98ad9bd14bc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flipperJoint: {fileID: 1924569593}
+  joint: {fileID: 1924569593}
   isLeft: 1
   canFlip: 1
+  motorSpeed: 800
+  motorTorque: 1500
 --- !u!233 &111894219
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -7746,9 +7748,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6b3597468afff40ab98ad9bd14bc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flipperJoint: {fileID: 686194417}
+  joint: {fileID: 686194417}
   isLeft: 0
   canFlip: 1
+  motorSpeed: 800
+  motorTorque: 1500
 --- !u!1 &449734303 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 715479367367538160, guid: e09a7563a12c8ac43ae4d9b67f14bca6, type: 3}
@@ -10359,9 +10363,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6b3597468afff40ab98ad9bd14bc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flipperJoint: {fileID: 1081407982}
+  joint: {fileID: 1081407982}
   isLeft: 1
   canFlip: 1
+  motorSpeed: 800
+  motorTorque: 1500
 --- !u!1 &956112967
 GameObject:
   m_ObjectHideFlags: 0
@@ -10952,9 +10958,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6b3597468afff40ab98ad9bd14bc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flipperJoint: {fileID: 1431199205}
+  joint: {fileID: 1431199205}
   isLeft: 0
   canFlip: 1
+  motorSpeed: 800
+  motorTorque: 1500
 --- !u!1 &1106936254
 GameObject:
   m_ObjectHideFlags: 0
@@ -11319,9 +11327,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6b3597468afff40ab98ad9bd14bc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flipperJoint: {fileID: 319664335}
+  joint: {fileID: 319664335}
   isLeft: 0
   canFlip: 1
+  motorSpeed: 800
+  motorTorque: 1500
 --- !u!4 &1193431826
 Transform:
   m_ObjectHideFlags: 0
@@ -12277,9 +12287,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6b3597468afff40ab98ad9bd14bc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flipperJoint: {fileID: 838533824}
+  joint: {fileID: 838533824}
   isLeft: 1
   canFlip: 1
+  motorSpeed: 800
+  motorTorque: 1500
 --- !u!1 &1431199203
 GameObject:
   m_ObjectHideFlags: 0
@@ -17619,6 +17631,8 @@ MonoBehaviour:
   tutorial: 0
   tutorial1Thing: {fileID: 0}
   tutorial2Thing: {fileID: 0}
+  recordStopDuration: 1.2
+  resumeDuration: 0.8
 --- !u!4 &1906821900
 Transform:
   m_ObjectHideFlags: 0
