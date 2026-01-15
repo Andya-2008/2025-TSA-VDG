@@ -85,15 +85,9 @@ public class TutorialSquare : MonoBehaviour
             Movement g = GameObject.Find("Ghost_Blinky").GetComponent<Movement>();
             StartCoroutine(SpeedUpGhost(g, 8.4f, 1f));
         }
-        if (square == 6)
+        if (square == 6 || square == 7)
         {
             StartCoroutine(SlowDownTime(.1f));
-            GameObject.Find("Flipper Left").GetComponent<Flipper>().canFlip = true;
-        }
-        if (square == 7)
-        {
-            StartCoroutine(SlowDownTime(.1f));
-            GameObject.Find("Flipper Right").GetComponent<Flipper>().canFlip = true;
         }
         if (square == 8)
         {
@@ -179,9 +173,6 @@ public class TutorialSquare : MonoBehaviour
     // -------------------------
     private void HandleInterrupt()
     {
-        // 🔒 hard stop: this square already completed
-        if (inputConsumed)
-            return;
 
         inputConsumed = true;
         interruptRequested = true;
@@ -190,6 +181,21 @@ public class TutorialSquare : MonoBehaviour
         {
             triggeredAudio = true;
             SFXManager.Instance.PlaySFX(7);
+        }
+
+        // 🔥 FLIP ON INPUT, NOT ON TRIGGER
+        if (square == 6)
+        {
+            GameObject.Find("Flipper Left")
+                .GetComponent<Flipper>()
+                .ForceFlip();
+        }
+
+        if (square == 7)
+        {
+            GameObject.Find("Flipper Right")
+                .GetComponent<Flipper>()
+                .ForceFlip();
         }
 
         StartCoroutine(SpeedUpTime());
@@ -226,17 +232,6 @@ public class TutorialSquare : MonoBehaviour
     // -------------------------
     private IEnumerator SpeedUpTime()
     {
-        if(square == 7)
-        {
-            GameObject.Find("Flipper Right").GetComponent<Flipper>().Flip();
-
-        }
-
-        if (square == 6)
-        {
-            GameObject.Find("Flipper Left").GetComponent<Flipper>().Flip();
-
-        }
         if (pulseRoutine != null)
             StopCoroutine(pulseRoutine);
 

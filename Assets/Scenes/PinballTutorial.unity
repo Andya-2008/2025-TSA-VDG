@@ -6129,7 +6129,6 @@ MonoBehaviour:
   pulseScaleMax: 1.9
   pulseSpeed: 2
   inputType: 1
-  primaryAudioSquare: 1
   triggered: 0
   tutorial1Thing: {fileID: 0}
   tutorial2Thing: {fileID: 0}
@@ -6160,8 +6159,6 @@ GameObject:
   m_Component:
   - component: {fileID: 712972192}
   - component: {fileID: 712972195}
-  - component: {fileID: 712972194}
-  - component: {fileID: 712972193}
   m_Layer: 7
   m_Name: Flipper Left
   m_TagString: Untagged
@@ -6186,59 +6183,6 @@ Transform:
   - {fileID: 1175622486}
   m_Father: {fileID: 649562585}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -32.02}
---- !u!233 &712972193
-HingeJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 712972191}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 30.599442, y: -72.4246}
-  m_UseConnectedAnchor: 1
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 359
---- !u!50 &712972194
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 712972191}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &712972195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6251,9 +6195,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6b3597468afff40ab98ad9bd14bc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flipperJoint: {fileID: 635066379}
+  joint: {fileID: 635066379}
   isLeft: 1
   canFlip: 0
+  flipTorque: 1500
+  tutorialFlipDuration: 0.08
 --- !u!1 &724316289
 GameObject:
   m_ObjectHideFlags: 0
@@ -6424,8 +6370,6 @@ GameObject:
   m_Component:
   - component: {fileID: 732201421}
   - component: {fileID: 732201424}
-  - component: {fileID: 732201423}
-  - component: {fileID: 732201422}
   m_Layer: 7
   m_Name: Flipper Right
   m_TagString: Untagged
@@ -6450,59 +6394,6 @@ Transform:
   - {fileID: 1006289954}
   m_Father: {fileID: 649562585}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -149.06}
---- !u!233 &732201422
-HingeJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732201420}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 38.560562, y: -72.4246}
-  m_UseConnectedAnchor: 1
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 359
---- !u!50 &732201423
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732201420}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &732201424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6515,9 +6406,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6b3597468afff40ab98ad9bd14bc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flipperJoint: {fileID: 835135335}
+  joint: {fileID: 835135335}
   isLeft: 0
   canFlip: 0
+  flipTorque: 1500
+  tutorialFlipDuration: 0.08
 --- !u!1 &743691984
 GameObject:
   m_ObjectHideFlags: 0
@@ -6897,7 +6790,6 @@ MonoBehaviour:
   pulseScaleMax: 1.9
   pulseSpeed: 2
   inputType: 1
-  primaryAudioSquare: 1
   triggered: 0
   tutorial1Thing: {fileID: 1476445253}
   tutorial2Thing: {fileID: 554585805}
@@ -8455,7 +8347,6 @@ MonoBehaviour:
   pulseScaleMax: 1.9
   pulseSpeed: 2
   inputType: 0
-  primaryAudioSquare: 1
   triggered: 0
   tutorial1Thing: {fileID: 0}
   tutorial2Thing: {fileID: 0}
@@ -8857,7 +8748,6 @@ MonoBehaviour:
   pulseScaleMax: 1.9
   pulseSpeed: 2
   inputType: 1
-  primaryAudioSquare: 0
   triggered: 0
   tutorial1Thing: {fileID: 1476445253}
   tutorial2Thing: {fileID: 554585805}
@@ -9270,7 +9160,6 @@ MonoBehaviour:
   pulseScaleMax: 1.9
   pulseSpeed: 2
   inputType: 1
-  primaryAudioSquare: 1
   triggered: 0
   tutorial1Thing: {fileID: 1476445253}
   tutorial2Thing: {fileID: 554585805}
@@ -10171,7 +10060,6 @@ MonoBehaviour:
   pulseScaleMax: 1.9
   pulseSpeed: 2
   inputType: 0
-  primaryAudioSquare: 0
   triggered: 0
   tutorial1Thing: {fileID: 0}
   tutorial2Thing: {fileID: 0}
@@ -10897,7 +10785,6 @@ MonoBehaviour:
   pulseScaleMax: 1.9
   pulseSpeed: 2
   inputType: 2
-  primaryAudioSquare: 1
   triggered: 0
   tutorial1Thing: {fileID: 1476445253}
   tutorial2Thing: {fileID: 554585805}
@@ -11138,7 +11025,6 @@ MonoBehaviour:
   pulseScaleMax: 1.9
   pulseSpeed: 2
   inputType: 1
-  primaryAudioSquare: 0
   triggered: 0
   tutorial1Thing: {fileID: 0}
   tutorial2Thing: {fileID: 0}
