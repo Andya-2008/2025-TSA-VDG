@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 6dcaa25e04e8c4742bc7b945c8fca0fe
+guid: f067e778d93e341518b477ce17be04cb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7400408566007482265
-    second: startscreen_0
+      213: 915947050951674568
+    second: Arcade room back beams_0
+  - first:
+      213: -8465778788735875356
+    second: Arcade room back beams_1
+  - first:
+      213: -2088879734408962938
+    second: Arcade room back beams_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,33 +103,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -139,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: startscreen_0
+      name: Arcade room back beams_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 3300
-        height: 2550
+        x: 382
+        y: 992
+        width: 272
+        height: 864
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +134,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 768bd564e977c4990800000000000000
-      internalID: -7400408566007482265
+      spriteID: 8ca8a0d6df816bc00800000000000000
+      internalID: 915947050951674568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade room back beams_1
+      rect:
+        serializedVersion: 2
+        x: 1510
+        y: 977
+        width: 272
+        height: 879
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e68c569b03838a80800000000000000
+      internalID: -8465778788735875356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade room back beams_2
+      rect:
+        serializedVersion: 2
+        x: 2689
+        y: 992
+        width: 272
+        height: 864
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68c9a0ce2fec203e0800000000000000
+      internalID: -2088879734408962938
       vertices: []
       indices: 
       edges: []
@@ -173,8 +197,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      startscreen_0: -7400408566007482265
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

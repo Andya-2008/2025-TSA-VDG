@@ -47,7 +47,7 @@ public class MenuManager : MonoBehaviour
         SFXManager.Instance.PlaySFX(5, 1500f, 500f);
         yield return new WaitForSeconds(2);
 
-        SceneManager.LoadScene("PinballTutorial", LoadSceneMode.Single);
+        SceneManager.LoadScene("IntroSceneArcade", LoadSceneMode.Single);
     }
 
     public void ChangeSFX()
