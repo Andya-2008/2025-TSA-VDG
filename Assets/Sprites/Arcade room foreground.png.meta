@@ -1,10 +1,25 @@
 fileFormatVersion: 2
-guid: 6dcaa25e04e8c4742bc7b945c8fca0fe
+guid: 80a382fc260094a049e9f86aeaef665b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7400408566007482265
-    second: startscreen_0
+      213: -3938348780701778855
+    second: Arcade room foreground_0
+  - first:
+      213: 700672577974347467
+    second: Arcade room foreground_1
+  - first:
+      213: 7149812107221664890
+    second: Arcade room foreground_2
+  - first:
+      213: -7695628145767210440
+    second: Arcade room foreground_3
+  - first:
+      213: -3927612689591505236
+    second: Arcade room foreground_4
+  - first:
+      213: 8919686108752241145
+    second: Arcade room foreground_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,33 +112,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -139,23 +128,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: startscreen_0
+      name: Arcade room foreground_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 1238
         width: 3300
-        height: 2550
+        height: 618
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 768bd564e977c4990800000000000000
-      internalID: -7400408566007482265
+      spriteID: 95c7da476ac2859c0800000000000000
+      internalID: -3938348780701778855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade room foreground_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 594
+        height: 1068
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caee49571115e79c0800000000000000
+      internalID: -3927612689591505236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arcade room foreground_5
+      rect:
+        serializedVersion: 2
+        x: 786
+        y: 0
+        width: 2514
+        height: 894
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f1e924e14719cb70800000000000000
+      internalID: 8919686108752241145
       vertices: []
       indices: 
       edges: []
@@ -164,7 +197,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 852f34f606dcc40d5963f17fcc6ae872
     internalID: 0
     vertices: []
     indices: 
@@ -174,7 +207,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      startscreen_0: -7400408566007482265
+      Arcade room foreground_0: -3938348780701778855
+      Arcade room foreground_4: -3927612689591505236
+      Arcade room foreground_5: 8919686108752241145
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
