@@ -6198,8 +6198,11 @@ MonoBehaviour:
   joint: {fileID: 635066379}
   isLeft: 1
   canFlip: 0
-  flipTorque: 1500
+  gameplayTorque: 1500
+  tutorialTorque: 1100
   tutorialFlipDuration: 0.08
+  maxAngularVelocity: 1200
+  angularDamping: 3
 --- !u!1 &724316289
 GameObject:
   m_ObjectHideFlags: 0
@@ -6230,7 +6233,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 61e1491a10b624d4ba8498f0390b38f6, type: 3}
   m_Resource: {fileID: 8300000, guid: 61e1491a10b624d4ba8498f0390b38f6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6409,8 +6412,11 @@ MonoBehaviour:
   joint: {fileID: 835135335}
   isLeft: 0
   canFlip: 0
-  flipTorque: 1500
+  gameplayTorque: 1500
+  tutorialTorque: 1100
   tutorialFlipDuration: 0.08
+  maxAngularVelocity: 1200
+  angularDamping: 3
 --- !u!1 &743691984
 GameObject:
   m_ObjectHideFlags: 0
@@ -8436,7 +8442,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 8c2b730d299a9c64ea5656f459893049, type: 3}
   m_Resource: {fileID: 8300000, guid: 8c2b730d299a9c64ea5656f459893049, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -8799,8 +8805,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paused: 0
   slowSpeed: 0.01
-  pauseGroup: {fileID: 0}
+  pauseGroupSerial: {fileID: 0}
+  firstCanvaspauseGroupSerial: {fileID: 0}
   maxBlur: 16
+  tutorial: 1
 --- !u!4 &1354018589
 Transform:
   m_ObjectHideFlags: 0
