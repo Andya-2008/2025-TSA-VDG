@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] ArcadeSceneManager arcadeSceneManager;
     private int arcadeMachineNumber = 0;
-
+    public bool canMove = true;
     void Start()
     {
         // Move player from x pos -9.5 to x pos 2.5 over 1 second
@@ -15,23 +15,25 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(arcadeMachineNumber);
 
-        // Sidescroller 2d player movement
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        if (canMove)
         {
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
-        }
+            // Sidescroller 2d player movement
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            {
+                transform.Translate(Vector3.right * speed * Time.deltaTime);
+            }
 
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-        {
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
-        }
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            {
+                transform.Translate(Vector3.left * speed * Time.deltaTime);
+            }
 
-        if (Input.GetKeyDown(KeyCode.Return) && arcadeMachineNumber == 1)
-        {
-            // Load first arcade game
-            arcadeSceneManager.LoadFirstArcadeGame();
+            if (Input.GetKeyDown(KeyCode.Return) && arcadeMachineNumber == 1)
+            {
+                // Load first arcade game
+                arcadeSceneManager.LoadFirstArcadeGame();
+            }
         }
     }
 

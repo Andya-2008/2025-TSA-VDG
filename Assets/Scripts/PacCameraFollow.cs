@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class PacCameraFollow : MonoBehaviour
@@ -10,7 +10,7 @@ public class PacCameraFollow : MonoBehaviour
     [Header("Cinematic Settings")]
     public float cinematicMoveSpeed = 3f;
 
-    private bool followingPlayer = true;
+    public bool followingPlayer = true;
     private Coroutine camRoutine;
 
     private void Start()
@@ -67,15 +67,16 @@ public class PacCameraFollow : MonoBehaviour
         Vector3 start = transform.position;
         float t = 0f;
 
-        while (Vector3.Distance(transform.position, destination) > 0.01f)
+        while (t < 1f)
         {
             t += Time.unscaledDeltaTime * cinematicMoveSpeed;
+            t = Mathf.Clamp01(t);
+
             transform.position = Vector3.Lerp(start, destination, t);
             yield return null;
         }
 
         transform.position = destination;
-
         onComplete?.Invoke();
     }
 }

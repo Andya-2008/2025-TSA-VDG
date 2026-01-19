@@ -25,6 +25,7 @@ public class LevelLoader : MonoBehaviour
 
     public IEnumerator LoadArcadeGame(int levelIndex)
     {
+        Player.GetComponent<PlayerMovement>().canMove = false;
         Player.GetComponent<PlayableDirector>().Play();
         SFXManager.Instance.PlaySFX(8);
         GameObject.Find("GlowThingy").GetComponent<ParticleSystem>().Play();

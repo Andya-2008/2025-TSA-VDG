@@ -172,7 +172,7 @@ public class SplitScreenManager : MonoBehaviour
         }
         if(SFXManager.Instance)
         SFXManager.Instance.PlaySFX(1);
-        
+        if(!tutorial)
         crossEffect.Play();
         var rb = ball.GetComponent<Rigidbody2D>();
         var col = ball.GetComponent<CircleCollider2D>();
@@ -215,6 +215,8 @@ public class SplitScreenManager : MonoBehaviour
             if (pac) pac.enabled = false;
             if (move) move.enabled = false;
             if (pin) pin.enabled = true;
+            if (!tutorial)
+                crossEffect.Play();
 
             ball.gameObject.layer = 7;
             if (col)

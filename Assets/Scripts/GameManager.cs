@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
@@ -34,6 +35,10 @@ public class GameManager : MonoBehaviour
     private AudioSource musicSource;
     private Coroutine pitchRoutine;
 
+    [SerializeField] PlayableDirector TitleText;
+
+    
+
     private void Awake()
     {
         if (Instance != null)
@@ -64,10 +69,22 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            MusicManager.Instance.PlayNewTrack(1);
             if (PlayerPrefs.GetInt("PacTutorial") != 1)
                 GameObject.Find("SkipButton").SetActive(false);
+            StartCoroutine(TitleTextPlay());
         }
+    }
+    public IEnumerator TitleTextPlay()
+    {
+        MusicManager.Instance.PlayNewTrack(3);
+        yield return new WaitForSeconds(2);
+        TitleText.Play();
+        GameObject.Find("CineCamera").GetComponent<PacCameraFollow>().ReturnToPlayer();
+        MusicManager.Instance.PlayNewTrack(1);
+        yield return new WaitForSeconds(2.5f);
+        GameObject.Find("Player").GetComponent<Movement>().canMove = true;
+        GameObject.Find("Ghost_Blinky").GetComponent<Movement>().canMove = true;
+
     }
 
     private void OnDestroy()

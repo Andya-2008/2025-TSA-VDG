@@ -17694,6 +17694,7 @@ MonoBehaviour:
   tutorial2Thing: {fileID: 0}
   recordStopDuration: 1.2
   resumeDuration: 0.8
+  TitleText: {fileID: 0}
 --- !u!4 &1906821900
 Transform:
   m_ObjectHideFlags: 0

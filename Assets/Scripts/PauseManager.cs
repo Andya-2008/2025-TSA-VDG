@@ -41,6 +41,7 @@ public class PauseManager : MonoBehaviour
                 Pause(true);
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
+
                     initPause = true;
                     Resume(true);
                 }

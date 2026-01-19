@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour
     public bool switched;
     public bool hasMoved;
 
+    public bool canMove = true;
+
     public Rigidbody2D rb { get; private set; }
     public Vector2 direction { get; private set; }
     public Vector2 nextDirection { get; private set; }
@@ -56,10 +58,13 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 position = rb.position;
-        Vector2 translation = speed * speedMultiplier * Time.fixedDeltaTime * direction;
+        if (canMove)
+        {
+            Vector2 position = rb.position;
+            Vector2 translation = speed * speedMultiplier * Time.fixedDeltaTime * direction;
 
-        rb.MovePosition(position + translation);
+            rb.MovePosition(position + translation);
+        }
     }
 
     public void SetDirection(Vector2 direction, bool forced = false)
