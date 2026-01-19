@@ -15,16 +15,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
         if (canMove)
         {
             // Sidescroller 2d player movement
-            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && transform.position.x < 7.5f)
             {
                 transform.Translate(Vector3.right * speed * Time.deltaTime);
             }
 
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && transform.position.x > -7.5f)
             {
                 transform.Translate(Vector3.left * speed * Time.deltaTime);
             }
