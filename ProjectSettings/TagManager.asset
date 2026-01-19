@@ -12,6 +12,9 @@ TagManager:
   - ArcadeDoor
   - ArcadeDoorknob
   - Bouncy
+  - FirstArcadeMachine
+  - SecondArcadeMachine
+  - ThirdArcadeMachine
   layers:
   - Default
   - TransparentFX
