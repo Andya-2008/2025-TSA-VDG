@@ -15,7 +15,6 @@ public class LevelLoader : MonoBehaviour
 
     public void Start()
     {
-        MusicManager.Instance.PlayNewTrack(2);
     }
     // Update is called once per frame
     void Update()

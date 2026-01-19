@@ -11,6 +11,11 @@ public class ArcadeSceneManager : MonoBehaviour
     [SerializeField] private LevelLoader levelLoader;
     [SerializeField] private GameObject instructionText;
 
+    public void Start()
+    {
+
+        MusicManager.Instance.PlayNewTrack(2);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -47,6 +52,7 @@ public class ArcadeSceneManager : MonoBehaviour
     public void LoadFirstArcadeGame()
     {
         Debug.Log("Loading first arcade game scene...");
+        instructionText.GetComponent<TextMeshProUGUI>().enabled = false;
         StartCoroutine(levelLoader.LoadArcadeGame(1));
     }
 }
