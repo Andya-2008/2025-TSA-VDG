@@ -7,6 +7,7 @@ public class ArcadeSceneManager : MonoBehaviour
     [SerializeField] private GameObject firstArcadeMachine;
     // [SerializeField] private GameObject secondArcadeMachine;
     // [SerializeField] private GameObject thirdArcadeMachine;
+    [SerializeField] private LevelLoader levelLoader;
 
     // Update is called once per frame
     void Update()
@@ -40,6 +41,6 @@ public class ArcadeSceneManager : MonoBehaviour
     public void LoadFirstArcadeGame()
     {
         Debug.Log("Loading first arcade game scene...");
-        SceneManager.LoadScene("PinballTutorial");
+        StartCoroutine(levelLoader.LoadArcadeGame(1));
     }
 }

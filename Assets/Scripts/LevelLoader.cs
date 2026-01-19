@@ -13,12 +13,13 @@ public class LevelLoader : MonoBehaviour
         
     }
 
-    public IEnumerator LoadInsideArcade()
+    public IEnumerator LoadArcadeGame(int levelIndex)
     {
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTime);
 
-        SceneManager.LoadScene("IntroSceneArcade");
+        if (levelIndex == 1)
+            SceneManager.LoadScene("PinballTutorial");
     }
 }

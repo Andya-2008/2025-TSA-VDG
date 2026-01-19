@@ -662,6 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 33232070}
   firstArcadeMachine: {fileID: 1124558902}
+  levelLoader: {fileID: 1464898877}
 --- !u!4 &1098871662
 Transform:
   m_ObjectHideFlags: 0
@@ -1224,6 +1225,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.4559641, y: 5.4912434}
   m_EdgeRadius: 0
+--- !u!114 &1464898877 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7035907049361090576, guid: 1cddb2278774b4db7a1bef9205785e78, type: 3}
+  m_PrefabInstance: {fileID: 1501985227}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63bf12cb63a104e53b3a0d8e64fc007c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1501985227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1238,7 +1250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6857225283886596563, guid: 1cddb2278774b4db7a1bef9205785e78, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7615563171202135421, guid: 1cddb2278774b4db7a1bef9205785e78, type: 3}
       propertyPath: m_LocalPosition.x
