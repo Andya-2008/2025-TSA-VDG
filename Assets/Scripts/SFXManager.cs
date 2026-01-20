@@ -19,14 +19,15 @@ public class SFXManager : MonoBehaviour
     [SerializeField] private List<AudioSource> sfx = new List<AudioSource>();
 
     [Header("Combo Settings")]
-    public float pitchStep = 0.1f;      // pitch increase per combo
-    public float maxPitch = 2.0f;       // clamp max pitch
-    public float comboResetTime = 1.0f; // seconds before combo resets
+    public float pitchStep = 0.1f;
+    public float maxPitch = 2.0f;
+    public float comboResetTime = 1.0f;
 
     private float comboTimer = 0f;
     private int comboCount = 0;
 
-    // Track fade coroutines per AudioSource (prevents conflicts)
+    private bool sfxMuted = false;
+
     private Dictionary<AudioSource, Coroutine> fadeRoutines =
         new Dictionary<AudioSource, Coroutine>();
 
@@ -45,7 +46,6 @@ public class SFXManager : MonoBehaviour
 
     void Update()
     {
-        // Reset combo if timer expires
         if (comboCount > 0)
         {
             comboTimer -= Time.deltaTime;
@@ -55,31 +55,50 @@ public class SFXManager : MonoBehaviour
     }
 
     /* ---------------------------------------------------------
+     * PUBLIC MUTE CONTROL
+     * --------------------------------------------------------- */
+
+    public void TurnOffSFX(bool mute)
+    {
+        sfxMuted = mute;
+
+        if (sfxMuted)
+        {
+            foreach (AudioSource source in sfx)
+            {
+                if (source == null) continue;
+                source.Stop();
+            }
+
+            foreach (var routine in fadeRoutines.Values)
+            {
+                StopCoroutine(routine);
+            }
+            fadeRoutines.Clear();
+        }
+    }
+
+    public bool IsSFXMuted()
+    {
+        return sfxMuted;
+    }
+
+    /* ---------------------------------------------------------
      * NORMAL SFX
      * --------------------------------------------------------- */
 
-    /// <summary>
-    /// Plays an SFX with optional cutoff + fade.
-    /// </summary>
-    /// <param name="sfxIndex">Index in the SFX list</param>
-    /// <param name="cutOffMs">
-    /// Time (ms) before fade begins. Use -1 for no cutoff.
-    /// </param>
-    /// <param name="fadeOutMs">
-    /// Fade duration in ms (only used if cutoff is enabled)
-    /// </param>
     public void PlaySFX(int sfxIndex, float cutOffMs = -1f, float fadeOutMs = 100f)
     {
+        if (sfxMuted) return;
         if (!IsValidIndex(sfxIndex)) return;
 
         AudioSource source = sfx[sfxIndex];
 
-        // 🔒 Prevent replay if already playing
         if (source.isPlaying)
             return;
 
         ResetFadeIfNeeded(source);
-
+        source.pitch = 1f;
         source.Play();
 
         if (cutOffMs > 0)
@@ -98,11 +117,9 @@ public class SFXManager : MonoBehaviour
      * COMBO SFX
      * --------------------------------------------------------- */
 
-    /// <summary>
-    /// Plays an SFX with combo pitch scaling and optional cutoff.
-    /// </summary>
     public void PlayComboSFX(int sfxIndex, float cutOffMs = -1f, float fadeOutMs = 80f)
     {
+        if (sfxMuted) return;
         if (!IsValidIndex(sfxIndex)) return;
 
         comboTimer = comboResetTime;
@@ -114,9 +131,7 @@ public class SFXManager : MonoBehaviour
         AudioSource source = sfx[sfxIndex];
 
         ResetFadeIfNeeded(source);
-
         source.pitch = newPitch;
-        //source.volume = 1f;
         source.Play();
 
         if (cutOffMs > 0)

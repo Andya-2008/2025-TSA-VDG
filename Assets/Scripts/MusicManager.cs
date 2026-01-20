@@ -5,7 +5,6 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     private static MusicManager _instance;
-
     public static MusicManager Instance
     {
         get
@@ -18,6 +17,8 @@ public class MusicManager : MonoBehaviour
 
     [SerializeField] private List<AudioSource> music = new List<AudioSource>();
     [SerializeField] private float fadeTime = 1.5f;
+
+    private bool musicMuted = false;
     bool testSwitch;
 
     private void Awake()
@@ -30,88 +31,115 @@ public class MusicManager : MonoBehaviour
         else if (_instance != this)
         {
             Destroy(gameObject);
+            return;
         }
+
         PlayNewTrack(0);
     }
+
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             TestAudioSwitch();
         }
     }
 
-    // ---------------------------------------------------------
-    // NORMAL CROSSFADE (used inside same level)
-    // ---------------------------------------------------------
-    public void SwitchTracks(int musicIndex)
-    {
-        for (int i = 0; i < music.Count; i++)
-        {
-            if (i == musicIndex)
-            {
-                // Fade IN the desired song
-                if (!music[i].isPlaying)
-                {
-                    Debug.Log("New music playing");
-                    music[i].Play();
-                }
+    /* ---------------------------------------------------------
+     * PUBLIC MUTE CONTROL
+     * --------------------------------------------------------- */
 
-                StartCoroutine(FadeMusic(music[i], 1)); // fade in
-            }
-            else
+    public void TurnOffMusic(bool mute)
+    {
+        musicMuted = mute;
+
+        if (musicMuted)
+        {
+            StopAllCoroutines();
+
+            foreach (AudioSource track in music)
             {
-                // Fade OUT the rest
-                StartCoroutine(FadeMusic(music[i], 0)); // fade out
+                if (track == null) continue;
+                track.Stop();
+                track.volume = 0f;
             }
         }
     }
 
-    // ---------------------------------------------------------
-    // LEVEL MUSIC: Fade out EVERYTHING, start new track fresh
-    // ---------------------------------------------------------
+    public bool IsMusicMuted()
+    {
+        return musicMuted;
+    }
+
+    /* ---------------------------------------------------------
+     * NORMAL CROSSFADE
+     * --------------------------------------------------------- */
+
+    public void SwitchTracks(int musicIndex)
+    {
+        if (musicMuted) return;
+
+        for (int i = 0; i < music.Count; i++)
+        {
+            if (i == musicIndex)
+            {
+                if (!music[i].isPlaying)
+                    music[i].Play();
+
+                StartCoroutine(FadeMusic(music[i], 1));
+            }
+            else
+            {
+                StartCoroutine(FadeMusic(music[i], 0));
+            }
+        }
+    }
+
+    /* ---------------------------------------------------------
+     * LEVEL MUSIC
+     * --------------------------------------------------------- */
+
     public void PlayNewTrack(int musicIndex)
     {
+        if (musicMuted) return;
+
         for (int i = 0; i < music.Count; i++)
         {
             if (i != musicIndex)
-            {
                 StartCoroutine(FadeOutAndStop(music[i]));
-            }
         }
 
-        // Start new track at volume 0 and fade in
         AudioSource newTrack = music[musicIndex];
         newTrack.Stop();
         newTrack.volume = 0f;
         newTrack.Play();
 
-        StartCoroutine(FadeMusic(newTrack, 1)); // fade in new level music
+        StartCoroutine(FadeMusic(newTrack, 1));
     }
 
-    // ---------------------------------------------------------
-    // Fade IN or OUT a single track (does NOT stop audio)
-    // ---------------------------------------------------------
+    /* ---------------------------------------------------------
+     * FADES
+     * --------------------------------------------------------- */
+
     public IEnumerator FadeMusic(AudioSource audio, int fadeDirection)
     {
         float startVol = audio.volume;
-        float targetVol = (fadeDirection == 1) ? audio.GetComponent<Audio>().volume : 0f;
+        float targetVol = fadeDirection == 1
+            ? audio.GetComponent<Audio>().volume
+            : 0f;
+
         float timer = 0f;
 
         while (timer < fadeTime)
         {
             timer += Time.deltaTime;
-            float t = timer / fadeTime;
-            audio.volume = Mathf.Lerp(startVol, targetVol, t);
+            audio.volume = Mathf.Lerp(startVol, targetVol, timer / fadeTime);
             yield return null;
         }
 
         audio.volume = targetVol;
     }
 
-    // ---------------------------------------------------------
-    // Fade out fully THEN stop audio
-    // ---------------------------------------------------------
     public IEnumerator FadeOutAndStop(AudioSource audio)
     {
         float startVol = audio.volume;
@@ -120,8 +148,7 @@ public class MusicManager : MonoBehaviour
         while (timer < fadeTime)
         {
             timer += Time.deltaTime;
-            float t = timer / fadeTime;
-            audio.volume = Mathf.Lerp(startVol, 0f, t);
+            audio.volume = Mathf.Lerp(startVol, 0f, timer / fadeTime);
             yield return null;
         }
 
@@ -131,7 +158,7 @@ public class MusicManager : MonoBehaviour
 
     void TestAudioSwitch()
     {
-        if(testSwitch)
+        if (testSwitch)
         {
             SwitchTracks(0);
             testSwitch = false;

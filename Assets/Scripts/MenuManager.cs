@@ -35,6 +35,7 @@ public class MenuManager : MonoBehaviour
         {
             bob.enabled = true;
         }
+        if(SFXManager.Instance)
         SFXManager.Instance.PlaySFX(4, 2500f, 500f);
         StartCoroutine(DoorCreak());
     }
@@ -47,7 +48,8 @@ public class MenuManager : MonoBehaviour
         {
             bob.enabled = false;
         }
-        SFXManager.Instance.PlaySFX(5, 1500f, 500f);
+        if (SFXManager.Instance)
+            SFXManager.Instance.PlaySFX(5, 1500f, 500f);
         yield return new WaitForSeconds(2);
 
         SceneManager.LoadScene("IntroSceneArcade", LoadSceneMode.Single);
@@ -59,16 +61,16 @@ public class MenuManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("audio", 0);
             GameObject.Find("soundOff").GetComponent<Image>().enabled = true;
-            SFXManager.Instance.gameObject.SetActive(false);
-            MusicManager.Instance.gameObject.SetActive(false);
+            SFXManager.Instance.TurnOffSFX(true);
+            MusicManager.Instance.TurnOffMusic(true);
             change = 1;
         }
         else if (change == 1)
         {
             PlayerPrefs.SetInt("audio", 1);
             GameObject.Find("soundOff").GetComponent<Image>().enabled = false;
-            SFXManager.Instance.gameObject.SetActive(true);
-            MusicManager.Instance.gameObject.SetActive(true);
+            SFXManager.Instance.TurnOffSFX(false);
+            MusicManager.Instance.TurnOffMusic(false);
             change = 0;
         }
     }

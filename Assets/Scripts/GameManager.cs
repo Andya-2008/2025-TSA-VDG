@@ -76,11 +76,13 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator TitleTextPlay()
     {
+        if(MusicManager.Instance)
         MusicManager.Instance.PlayNewTrack(3);
         yield return new WaitForSeconds(2);
         TitleText.Play();
         GameObject.Find("CineCamera").GetComponent<PacCameraFollow>().ReturnToPlayer();
-        MusicManager.Instance.PlayNewTrack(1);
+        if (MusicManager.Instance)
+            MusicManager.Instance.PlayNewTrack(1);
         yield return new WaitForSeconds(2.5f);
         GameObject.Find("Player").GetComponent<Movement>().canMove = true;
         GameObject.Find("Ghost_Blinky").GetComponent<Movement>().canMove = true;
@@ -169,7 +171,8 @@ public class GameManager : MonoBehaviour
 
     public void PacmanEaten()
     {
-        SFXManager.Instance.PlaySFX(6);
+        if (SFXManager.Instance)
+            SFXManager.Instance.PlaySFX(6);
         pacman.DeathSequence();
         SetLives(lives - 1);
 
@@ -193,7 +196,9 @@ public class GameManager : MonoBehaviour
 
     public void BallDestroyed()
     {
-        SFXManager.Instance.PlaySFX(6);
+
+        if (SFXManager.Instance)
+            SFXManager.Instance.PlaySFX(6);
         GameObject.Find("SplitScreenManager").GetComponent<SplitScreenManager>().SwitchPacManBall(1, true);
 
         pacman.DeathSequence();

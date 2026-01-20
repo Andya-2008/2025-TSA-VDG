@@ -180,7 +180,9 @@ public class TutorialSquare : MonoBehaviour
         if (!triggeredAudio)
         {
             triggeredAudio = true;
-            SFXManager.Instance.PlaySFX(7);
+
+            if (SFXManager.Instance)
+                SFXManager.Instance.PlaySFX(7);
         }
 
         // 🔥 FLIP ON INPUT, NOT ON TRIGGER

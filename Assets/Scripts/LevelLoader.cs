@@ -26,7 +26,9 @@ public class LevelLoader : MonoBehaviour
     {
         Player.GetComponent<PlayerMovement>().canMove = false;
         Player.GetComponent<PlayableDirector>().Play();
-        SFXManager.Instance.PlaySFX(8);
+
+        if (SFXManager.Instance)
+            SFXManager.Instance.PlaySFX(8);
         GameObject.Find("GlowThingy").GetComponent<ParticleSystem>().Play();
 
         Vector3 startPos = Player.transform.position;

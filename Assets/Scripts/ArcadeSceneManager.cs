@@ -14,7 +14,8 @@ public class ArcadeSceneManager : MonoBehaviour
     public void Start()
     {
 
-        MusicManager.Instance.PlayNewTrack(2);
+        if (MusicManager.Instance)
+            MusicManager.Instance.PlayNewTrack(2);
     }
     // Update is called once per frame
     void Update()
