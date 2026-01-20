@@ -30,7 +30,11 @@ public class SceneAnimationController1 : MonoBehaviour
         {
             fC.CallGlitch(1f);
         }
-        bigGlitch.Play();
+
+        if (PlayerPrefs.GetInt("audio") == 1)
+        {
+            bigGlitch.Play();
+        }
         //GameObject.Find("Ghost_Blinky").GetComponent<Ghost>().DeactivateInTutorial();
     }
 }

@@ -21,31 +21,38 @@ public class AudioDistanceFade : MonoBehaviour
 
     void Update()
     {
-        if (!hasTriggered)
+        if (PlayerPrefs.GetInt("audio") == 1)
         {
-            if (target == null) return;
-
-            // Distance between object and player/camera
-            float dist = Vector3.Distance(transform.position, target.position);
-
-            // If closer than minDistance → full volume
-            if (dist <= minDistance)
+            if (!hasTriggered)
             {
-                audioSource.volume = 1f;
-                return;
+                if (target == null) return;
+
+                // Distance between object and player/camera
+                float dist = Vector3.Distance(transform.position, target.position);
+
+                // If closer than minDistance → full volume
+                if (dist <= minDistance)
+                {
+                    audioSource.volume = 1f;
+                    return;
+                }
+
+                // If farther than maxDistance → silent
+                if (dist >= maxDistance)
+                {
+                    audioSource.volume = 0f;
+                    return;
+                }
+
+                // Otherwise fade linearly between 1 → 0
+                float t = (dist - minDistance) / (maxDistance - minDistance);
+
+                audioSource.volume = 1f - t;
             }
-
-            // If farther than maxDistance → silent
-            if (dist >= maxDistance)
-            {
-                audioSource.volume = 0f;
-                return;
-            }
-
-            // Otherwise fade linearly between 1 → 0
-            float t = (dist - minDistance) / (maxDistance - minDistance);
-
-            audioSource.volume = 1f - t;
+        }
+        else
+        {
+            audioSource.volume = 0;
         }
     }
 }
