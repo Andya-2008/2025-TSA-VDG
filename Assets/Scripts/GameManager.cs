@@ -2,6 +2,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [DefaultExecutionOrder(-100)]
@@ -104,6 +105,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        //DEV
+        if(Input.GetKeyDown(KeyCode.Backspace))
+        {
+            pacman.gameObject.SetActive(false);
+            GameObject.Find("WhiteFade").GetComponent<PlayableDirector>().Play();
+            PlayerPrefs.SetInt("level", 2);
+            StartCoroutine(BackToArcade());
+        }
         if (lives <= 0 && Input.GetKeyDown(KeyCode.Space))
         {
             RecordResume();
@@ -114,7 +123,11 @@ public class GameManager : MonoBehaviour
             NewGame();
         }
     }
-
+    public IEnumerator BackToArcade()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(1);
+    }
     private void NewGame()
     {
         SetScore(0);
@@ -232,6 +245,8 @@ public class GameManager : MonoBehaviour
             {
                 pacman.gameObject.SetActive(false);
                 GameObject.Find("WhiteFade").GetComponent<PlayableDirector>().Play();
+                PlayerPrefs.SetInt("level", 2);
+                StartCoroutine(BackToArcade());
             }
             else
             {

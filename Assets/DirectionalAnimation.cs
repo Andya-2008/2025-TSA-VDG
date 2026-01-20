@@ -1,57 +1,81 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-[RequireComponent(typeof(AnimatedSprite))]
-[RequireComponent(typeof(SpriteRenderer))]
 public class DirectionalAnimation : MonoBehaviour
 {
+    [Header("Sprite Sets")]
     public Sprite[] upSprites;
     public Sprite[] downSprites;
-    public Sprite[] sideSprites; // used for both left & right
+    public Sprite[] sideSprites;
+
+    [Header("Rotations (Z degrees)")]
+    public float rightRotation = 0f;
+    public float leftRotation = 180f;
+    public float upRotation = -90f;
+    public float downRotation = 90f;
+
+    [Header("Custom Scale")]
+    public Vector3 sideScale = Vector3.one;
+    public Vector3 upScale = Vector3.one;
+    public Vector3 downScale = Vector3.one;
 
     private AnimatedSprite animatedSprite;
     private SpriteRenderer spriteRenderer;
     private Movement movement;
+    private Transform visual;
 
     private enum AnimState { Up, Down, Side }
     private AnimState currentState;
 
     private void Awake()
     {
+        visual = transform; // visual child
         animatedSprite = GetComponent<AnimatedSprite>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        movement = GameObject.Find("Player").GetComponent<Movement>();
+        movement = GetComponentInParent<Movement>();
     }
 
     private void Update()
     {
         Vector2 dir = movement.direction;
+        if (dir == Vector2.zero) return;
 
-        if (dir == Vector2.zero)
-            return;
-
-        // Vertical
         if (Mathf.Abs(dir.y) > Mathf.Abs(dir.x))
         {
+            // Vertical movement
             if (dir.y > 0)
-                SetAnimation(AnimState.Up, upSprites, false);
+                SetAnim(AnimState.Up, upSprites, upRotation, upScale, false);
             else
-                SetAnimation(AnimState.Down, downSprites, false);
+                SetAnim(AnimState.Down, downSprites, downRotation, downScale, false);
         }
-        // Horizontal
         else
         {
-            bool flip = dir.x < 0;
-            SetAnimation(AnimState.Side, sideSprites, flip);
+            // Horizontal movement (LEFT vs RIGHT rotation)
+            if (dir.x > 0)
+                SetAnim(AnimState.Side, sideSprites, rightRotation, sideScale, false);
+            else
+                SetAnim(AnimState.Side, sideSprites, leftRotation, sideScale, true);
         }
     }
 
-    private void SetAnimation(AnimState state, Sprite[] sprites, bool flipX)
+    private void SetAnim(
+        AnimState state,
+        Sprite[] sprites,
+        float rotation,
+        Vector3 scale,
+        bool flipX
+    )
     {
-        if (currentState == state && spriteRenderer.flipX == flipX)
+        if (currentState == state &&
+            animatedSprite.sprites == sprites &&
+            spriteRenderer.flipX == flipX &&
+            Mathf.Approximately(visual.localEulerAngles.z, rotation))
             return;
 
         currentState = state;
+
         spriteRenderer.flipX = flipX;
+        visual.localRotation = Quaternion.Euler(0f, 0f, rotation);
+        visual.localScale = scale;
 
         animatedSprite.sprites = sprites;
         animatedSprite.Restart();
