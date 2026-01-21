@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PauseManager : MonoBehaviour
     [SerializeField] CanvasGroup pauseGroupSerial;
     [SerializeField] CanvasGroup firstCanvaspauseGroupSerial;
     [SerializeField] float maxBlur = 16f;
+    int change = 0;
 
     private bool isTransitioning = false;
 
@@ -23,6 +25,7 @@ public class PauseManager : MonoBehaviour
     {
         if (pauseGroupSerial != null)
             pauseGroupSerial.alpha = 0f;
+            pauseGroupSerial.interactable = false;
     }
 
     void Update()
@@ -75,6 +78,7 @@ public class PauseManager : MonoBehaviour
         if (!firstCanvas)
         {
             pauseGroup = pauseGroupSerial;
+            pauseGroupSerial.interactable = true;
         }
         else
         {
@@ -106,11 +110,11 @@ public class PauseManager : MonoBehaviour
 
     IEnumerator SpeedTime(bool firstCanvas = false)
     {
-
         CanvasGroup pauseGroup;
         if (!firstCanvas)
         {
             pauseGroup = pauseGroupSerial;
+            pauseGroupSerial.interactable = false;
         }
         else
         {
@@ -138,5 +142,25 @@ public class PauseManager : MonoBehaviour
         pauseGroup.alpha = 0f;
 
         isTransitioning = false;   // ✔ animation done
+    }
+
+    public void ChangeSFX()
+    {
+        if (change == 0)
+        {
+            PlayerPrefs.SetInt("audio", 0);
+            GameObject.Find("soundOff").GetComponent<Image>().enabled = true;
+            SFXManager.Instance.TurnOffSFX(true);
+            MusicManager.Instance.TurnOffMusic(true);
+            change = 1;
+        }
+        else if (change == 1)
+        {
+            PlayerPrefs.SetInt("audio", 1);
+            GameObject.Find("soundOff").GetComponent<Image>().enabled = false;
+            SFXManager.Instance.TurnOffSFX(false);
+            MusicManager.Instance.TurnOffMusic(false);
+            change = 0;
+        }
     }
 }
