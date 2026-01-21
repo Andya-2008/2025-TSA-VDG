@@ -118,7 +118,8 @@ public class GameManager : MonoBehaviour
             RecordResume();
 
             GameObject.Find("Unfade").GetComponent<PlayableDirector>().Play();
-            GetComponent<AudioSource>().Play();
+            if(SFXManager.Instance)
+            SFXManager.Instance.PlaySFX(7);
 
             NewGame();
         }

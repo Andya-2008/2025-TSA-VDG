@@ -26,9 +26,13 @@ public class DirectionalAnimation : MonoBehaviour
     private enum AnimState { Up, Down, Side }
     private AnimState currentState;
 
+    // 🔑 Track applied values ourselves
+    private float currentRotation;
+    private bool currentFlip;
+
     private void Awake()
     {
-        visual = transform; // visual child
+        visual = transform;
         animatedSprite = GetComponent<AnimatedSprite>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         movement = GetComponentInParent<Movement>();
@@ -41,7 +45,6 @@ public class DirectionalAnimation : MonoBehaviour
 
         if (Mathf.Abs(dir.y) > Mathf.Abs(dir.x))
         {
-            // Vertical movement
             if (dir.y > 0)
                 SetAnim(AnimState.Up, upSprites, upRotation, upScale, false);
             else
@@ -49,7 +52,6 @@ public class DirectionalAnimation : MonoBehaviour
         }
         else
         {
-            // Horizontal movement (LEFT vs RIGHT rotation)
             if (dir.x > 0)
                 SetAnim(AnimState.Side, sideSprites, rightRotation, sideScale, false);
             else
@@ -67,11 +69,13 @@ public class DirectionalAnimation : MonoBehaviour
     {
         if (currentState == state &&
             animatedSprite.sprites == sprites &&
-            spriteRenderer.flipX == flipX &&
-            Mathf.Approximately(visual.localEulerAngles.z, rotation))
+            currentRotation == rotation &&
+            currentFlip == flipX)
             return;
 
         currentState = state;
+        currentRotation = rotation;
+        currentFlip = flipX;
 
         spriteRenderer.flipX = flipX;
         visual.localRotation = Quaternion.Euler(0f, 0f, rotation);
