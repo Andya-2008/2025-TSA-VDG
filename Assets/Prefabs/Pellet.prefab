@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207839085850363016}
   - component: {fileID: 6620915266061051031}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Pellet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 8402461120952219743}
   - component: {fileID: 7764147147105588042}
   - component: {fileID: 6089054482580266407}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Pellet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

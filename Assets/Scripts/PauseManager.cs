@@ -41,8 +41,6 @@ public class PauseManager : MonoBehaviour
                 Pause(true);
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-
-                    initPause = true;
                     Resume(true);
                 }
             }
@@ -60,6 +58,8 @@ public class PauseManager : MonoBehaviour
     {
         if (!paused || isTransitioning) return;  // ⛔ block mid-animation
         paused = false;
+
+        initPause = true;
         StartCoroutine(SpeedTime(firstCanvas));
     }
 
