@@ -515,6 +515,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &309383689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 309383690}
+  m_Layer: 0
+  m_Name: MachineTransPos2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &309383690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309383689}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.1, z: 0}
+  m_LocalScale: {x: 1.42, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1284722838}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &313636776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1821,6 +1852,7 @@ Transform:
   - {fileID: 2124069216}
   - {fileID: 679779431}
   - {fileID: 111421286}
+  - {fileID: 309383690}
   - {fileID: 455130577}
   - {fileID: 1254265290}
   - {fileID: 450819591}
@@ -2010,7 +2042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6857225283886596563, guid: 1cddb2278774b4db7a1bef9205785e78, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7035907049361090576, guid: 1cddb2278774b4db7a1bef9205785e78, type: 3}
       propertyPath: Player
@@ -2020,6 +2052,18 @@ PrefabInstance:
       propertyPath: lerpTrans
       value: 
       objectReference: {fileID: 679779431}
+    - target: {fileID: 7035907049361090576, guid: 1cddb2278774b4db7a1bef9205785e78, type: 3}
+      propertyPath: lerpTrans.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7035907049361090576, guid: 1cddb2278774b4db7a1bef9205785e78, type: 3}
+      propertyPath: 'lerpTrans.Array.data[0]'
+      value: 
+      objectReference: {fileID: 679779431}
+    - target: {fileID: 7035907049361090576, guid: 1cddb2278774b4db7a1bef9205785e78, type: 3}
+      propertyPath: 'lerpTrans.Array.data[1]'
+      value: 
+      objectReference: {fileID: 309383690}
     - target: {fileID: 7615563171202135421, guid: 1cddb2278774b4db7a1bef9205785e78, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

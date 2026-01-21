@@ -10,7 +10,7 @@ public class LevelLoader : MonoBehaviour
     public float firstTTime = 4f;
 
     [SerializeField] GameObject Player;
-    [SerializeField] Transform lerpTrans;
+    [SerializeField] Transform[] lerpTrans;
 
 
     public void Start()
@@ -35,22 +35,46 @@ public class LevelLoader : MonoBehaviour
         float elapsed = 0f;
         float duration = 1f;
 
-        while (elapsed < duration)
+        if (PlayerPrefs.GetInt("level") == 1)
         {
-            elapsed += Time.deltaTime;
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
 
-            float newX = Mathf.Lerp(startPos.x, lerpTrans.position.x, elapsed / duration);
-            Player.transform.position = new Vector3(newX, startPos.y, startPos.z);
+                float newX = Mathf.Lerp(startPos.x, lerpTrans[0].position.x, elapsed / duration);
+                Player.transform.position = new Vector3(newX, startPos.y, startPos.z);
 
-            yield return null;
+                yield return null;
+            }
+
+            // Snap exactly to target X at the end
+            Player.transform.position = new Vector3(
+                lerpTrans[0].position.x,
+                startPos.y,
+                startPos.z
+            );
         }
 
-        // Snap exactly to target X at the end
-        Player.transform.position = new Vector3(
-            lerpTrans.position.x,
-            startPos.y,
-            startPos.z
-        );
+        else if (PlayerPrefs.GetInt("level") == 2)
+        {
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+
+                float newX = Mathf.Lerp(startPos.x, lerpTrans[1].position.x, elapsed / duration);
+                Player.transform.position = new Vector3(newX, startPos.y, startPos.z);
+
+                yield return null;
+            }
+
+            // Snap exactly to target X at the end
+            Player.transform.position = new Vector3(
+                lerpTrans[1].position.x,
+                startPos.y,
+                startPos.z
+            );
+        }
+        
 
         yield return new WaitForSeconds(firstTTime);
         
@@ -60,5 +84,7 @@ public class LevelLoader : MonoBehaviour
 
         if (levelIndex == 1)
             SceneManager.LoadScene("PinballTutorial");
+        else if (levelIndex == 2)
+            SceneManager.LoadScene("Pinball2");
     }
 }

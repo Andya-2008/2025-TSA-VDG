@@ -45,10 +45,19 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("isWalking", false);
             }
 
-            if (Input.GetKeyDown(KeyCode.Return) && arcadeMachineNumber == 1)
+            if (Input.GetKeyDown(KeyCode.Return))
             {
-                // Load first arcade game
-                arcadeSceneManager.LoadFirstArcadeGame();
+                if (arcadeMachineNumber == 1)
+                {
+                    // Load first arcade game
+                    arcadeSceneManager.LoadFirstArcadeGame();
+                }
+
+                else if (arcadeMachineNumber == 2)
+                {
+                    arcadeSceneManager.LoadSecondArcadeGame();
+                }
+                
             }
         }
     }

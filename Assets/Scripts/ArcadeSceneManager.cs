@@ -38,6 +38,13 @@ public class ArcadeSceneManager : MonoBehaviour
         StartCoroutine(levelLoader.LoadArcadeGame(1));
     }
 
+    public void LoadSecondArcadeGame()
+    {
+        Debug.Log("Loading second arcade game scene...");
+        instructionText.GetComponent<TextMeshProUGUI>().enabled = false;
+        StartCoroutine(levelLoader.LoadArcadeGame(2));
+    }
+
     public void resetArcadeMachineStates()
     {
         foreach (ArcadeMachine machine in arcadeMachines)
