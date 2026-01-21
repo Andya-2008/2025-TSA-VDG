@@ -132,7 +132,6 @@ GameObject:
   - component: {fileID: 33232068}
   - component: {fileID: 33232070}
   - component: {fileID: 33232072}
-  - component: {fileID: 33232071}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -244,28 +243,6 @@ MonoBehaviour:
   speed: 7.5
   arcadeSceneManager: {fileID: 1098871661}
   canMove: 1
---- !u!95 &33232071
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 33232065}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 47cd0aba568504615855dd29e6d7bd08, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!320 &33232072
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -282,7 +259,7 @@ PlayableDirector:
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: -1434604873348821201, guid: 1ade33729121da34896f71841ea8c6df, type: 2}
-    value: {fileID: 33232071}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &61766912 stripped
@@ -2251,6 +2228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1792771828}
   - component: {fileID: 1792771829}
+  - component: {fileID: 1792771830}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -2329,6 +2307,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1792771830
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792771827}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 47cd0aba568504615855dd29e6d7bd08, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1837183830
 GameObject:
   m_ObjectHideFlags: 0
@@ -2680,6 +2680,10 @@ PrefabInstance:
     - target: {fileID: 9027514048236820045, guid: ac891dff8b61d394a8b473b7c95e6447, type: 3}
       propertyPath: m_Name
       value: CFXR Electrified 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027514048236820045, guid: ac891dff8b61d394a8b473b7c95e6447, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9027514048236820043, guid: ac891dff8b61d394a8b473b7c95e6447, type: 3}

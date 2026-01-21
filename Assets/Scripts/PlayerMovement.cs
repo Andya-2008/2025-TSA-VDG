@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         
         // Move player from x pos -9.5 to x pos 2.5 over 1 second
         StartCoroutine(MovePlayer());
