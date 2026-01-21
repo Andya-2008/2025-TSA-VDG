@@ -13,7 +13,6 @@ public class ArcadeSceneManager : MonoBehaviour
     public void Start()
     {
         resetArcadeMachineStates();
-        PlayerPrefs.SetInt("level", 1);
 
         if (MusicManager.Instance)
             MusicManager.Instance.PlayNewTrack(2);
