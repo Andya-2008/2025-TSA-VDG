@@ -2517,7 +2517,6 @@ MonoBehaviour:
   - {fileID: 1359491397}
   - {fileID: 764241473}
   - {fileID: 110220020}
-  - {fileID: 0}
   pitchStep: 0.1
   maxPitch: 2
   comboResetTime: 1

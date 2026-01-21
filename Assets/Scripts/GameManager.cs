@@ -291,6 +291,7 @@ public class GameManager : MonoBehaviour
 
     public void RecordStop()
     {
+        if (PlayerPrefs.GetInt("audio") != 1) return;
         if (musicSource == null) return;
 
         if (pitchRoutine != null)
@@ -301,6 +302,7 @@ public class GameManager : MonoBehaviour
 
     public void RecordResume()
     {
+        if (PlayerPrefs.GetInt("audio") != 1) return;
         if (musicSource == null) return;
 
         musicSource.volume = .5f; // restore volume BEFORE fade-in

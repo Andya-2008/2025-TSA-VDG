@@ -26,6 +26,10 @@ public class PauseManager : MonoBehaviour
         if (pauseGroupSerial != null)
             pauseGroupSerial.alpha = 0f;
             pauseGroupSerial.interactable = false;
+        if (PlayerPrefs.GetInt("audio") == 0)
+        {
+            GameObject.Find("soundOff").GetComponent<Image>().enabled = true;
+        }
     }
 
     void Update()
@@ -150,16 +154,20 @@ public class PauseManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("audio", 0);
             GameObject.Find("soundOff").GetComponent<Image>().enabled = true;
-            SFXManager.Instance.TurnOffSFX(true);
-            MusicManager.Instance.TurnOffMusic(true);
+            if (SFXManager.Instance)
+                SFXManager.Instance.TurnOffSFX(true);
+            if (MusicManager.Instance)
+                MusicManager.Instance.TurnOffMusic(true);
             change = 1;
         }
         else if (change == 1)
         {
             PlayerPrefs.SetInt("audio", 1);
             GameObject.Find("soundOff").GetComponent<Image>().enabled = false;
-            SFXManager.Instance.TurnOffSFX(false);
-            MusicManager.Instance.TurnOffMusic(false);
+            if (SFXManager.Instance)
+                SFXManager.Instance.TurnOffSFX(false);
+            if (MusicManager.Instance)
+                MusicManager.Instance.TurnOffMusic(false);
             change = 0;
         }
     }

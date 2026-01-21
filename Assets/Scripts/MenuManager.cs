@@ -61,7 +61,9 @@ public class MenuManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("audio", 0);
             GameObject.Find("soundOff").GetComponent<Image>().enabled = true;
+            if(SFXManager.Instance)
             SFXManager.Instance.TurnOffSFX(true);
+            if(MusicManager.Instance)
             MusicManager.Instance.TurnOffMusic(true);
             change = 1;
         }
@@ -69,8 +71,10 @@ public class MenuManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("audio", 1);
             GameObject.Find("soundOff").GetComponent<Image>().enabled = false;
-            SFXManager.Instance.TurnOffSFX(false);
-            MusicManager.Instance.TurnOffMusic(false);
+            if (SFXManager.Instance)
+                SFXManager.Instance.TurnOffSFX(false);
+            if (MusicManager.Instance)
+                MusicManager.Instance.TurnOffMusic(false);
             change = 0;
         }
     }

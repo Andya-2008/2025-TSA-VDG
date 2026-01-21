@@ -19,6 +19,8 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private float fadeTime = 1.5f;
 
     private bool musicMuted = false;
+    private HashSet<AudioSource> pausedTracks = new HashSet<AudioSource>();
+
     bool testSwitch;
 
     private void Awake()
@@ -46,23 +48,42 @@ public class MusicManager : MonoBehaviour
     }
 
     /* ---------------------------------------------------------
-     * PUBLIC MUTE CONTROL
+     * PUBLIC MUTE CONTROL (PAUSE / RESUME)
      * --------------------------------------------------------- */
 
     public void TurnOffMusic(bool mute)
     {
+        if (musicMuted == mute) return;
+
         musicMuted = mute;
+        StopAllCoroutines();
 
         if (musicMuted)
         {
-            StopAllCoroutines();
+            pausedTracks.Clear();
 
             foreach (AudioSource track in music)
             {
                 if (track == null) continue;
-                track.Stop();
-                track.volume = 0f;
+
+                if (track.isPlaying)
+                {
+                    pausedTracks.Add(track);
+                    track.Pause();
+                }
             }
+        }
+        else
+        {
+            foreach (AudioSource track in pausedTracks)
+            {
+                if (track == null) continue;
+
+                track.UnPause();
+                StartCoroutine(FadeMusic(track, 1));
+            }
+
+            pausedTracks.Clear();
         }
     }
 
@@ -81,6 +102,8 @@ public class MusicManager : MonoBehaviour
 
         for (int i = 0; i < music.Count; i++)
         {
+            if (music[i] == null) continue;
+
             if (i == musicIndex)
             {
                 if (!music[i].isPlaying)
@@ -101,11 +124,10 @@ public class MusicManager : MonoBehaviour
 
     public void PlayNewTrack(int musicIndex)
     {
-        if (musicMuted) return;
 
         for (int i = 0; i < music.Count; i++)
         {
-            if (i != musicIndex)
+            if (i != musicIndex && music[i] != null)
                 StartCoroutine(FadeOutAndStop(music[i]));
         }
 
@@ -114,7 +136,8 @@ public class MusicManager : MonoBehaviour
         newTrack.volume = 0f;
         newTrack.Play();
 
-        StartCoroutine(FadeMusic(newTrack, 1));
+        if (musicMuted) { newTrack.Pause(); newTrack.volume = 1; }
+        else { StartCoroutine(FadeMusic(newTrack, 1)); }
     }
 
     /* ---------------------------------------------------------
@@ -123,10 +146,10 @@ public class MusicManager : MonoBehaviour
 
     public IEnumerator FadeMusic(AudioSource audio, int fadeDirection)
     {
+        if (audio == null) yield break;
+
         float startVol = audio.volume;
-        float targetVol = fadeDirection == 1
-            ? audio.GetComponent<Audio>().volume
-            : 0f;
+        float targetVol = fadeDirection == 1 ? 1f : 0f;
 
         float timer = 0f;
 
@@ -142,6 +165,8 @@ public class MusicManager : MonoBehaviour
 
     public IEnumerator FadeOutAndStop(AudioSource audio)
     {
+        if (audio == null) yield break;
+
         float startVol = audio.volume;
         float timer = 0f;
 
