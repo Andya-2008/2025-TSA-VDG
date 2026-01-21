@@ -63,6 +63,12 @@ public class PauseManager : MonoBehaviour
         StartCoroutine(SpeedTime(firstCanvas));
     }
 
+    public void ReturnToArcade()
+    {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("IntroSceneArcade");
+    }
+
     IEnumerator SlowTime(bool firstCanvas = false)
     {
         CanvasGroup pauseGroup;
