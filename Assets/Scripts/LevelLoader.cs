@@ -35,7 +35,7 @@ public class LevelLoader : MonoBehaviour
         float elapsed = 0f;
         float duration = 1f;
 
-        if (PlayerPrefs.GetInt("level") == 1)
+        if (levelIndex == 1)
         {
             while (elapsed < duration)
             {
@@ -55,7 +55,7 @@ public class LevelLoader : MonoBehaviour
             );
         }
 
-        else if (PlayerPrefs.GetInt("level") == 2)
+        else if (levelIndex == 2)
         {
             while (elapsed < duration)
             {
