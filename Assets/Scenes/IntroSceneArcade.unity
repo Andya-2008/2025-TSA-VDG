@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 33232068}
   - component: {fileID: 33232070}
   - component: {fileID: 33232072}
+  - component: {fileID: 33232071}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -147,10 +148,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33232065}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12, y: 0.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1792771828}
   m_Father: {fileID: 0}
@@ -242,7 +243,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7.5
   arcadeSceneManager: {fileID: 1098871661}
+  animator: {fileID: 1792771830}
   canMove: 1
+--- !u!95 &33232071
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33232065}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!320 &33232072
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -252,14 +276,14 @@ PlayableDirector:
   m_GameObject: {fileID: 33232065}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 1ade33729121da34896f71841ea8c6df, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 56e35f1c8f16c3d48bf9b868ef62a2a5, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
-  - key: {fileID: -1434604873348821201, guid: 1ade33729121da34896f71841ea8c6df, type: 2}
-    value: {fileID: 0}
+  - key: {fileID: -8154792373076343275, guid: 56e35f1c8f16c3d48bf9b868ef62a2a5, type: 2}
+    value: {fileID: 33232071}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &61766912 stripped

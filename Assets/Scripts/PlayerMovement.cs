@@ -5,15 +5,13 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] ArcadeSceneManager arcadeSceneManager;
-    private Animator animator;
+    public Animator animator;
     private int arcadeMachineNumber = 0;
     public bool canMove = true;
     private bool runningCR = false;
 
     void Start()
     {
-        animator = GetComponentInChildren<Animator>();
-        
         // Move player from x pos -9.5 to x pos 2.5 over 1 second
         StartCoroutine(MovePlayer());
 
