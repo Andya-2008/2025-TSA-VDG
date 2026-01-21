@@ -5,14 +5,15 @@ using UnityEngine.SceneManagement;
 public class ArcadeSceneManager : MonoBehaviour
 {
     [SerializeField] private PlayerMovement player;
-    [SerializeField] private GameObject firstArcadeMachine;
-    // [SerializeField] private GameObject secondArcadeMachine;
-    // [SerializeField] private GameObject thirdArcadeMachine;
     [SerializeField] private LevelLoader levelLoader;
     [SerializeField] private GameObject instructionText;
+    [SerializeField] private ArcadeMachine[] arcadeMachines;
+    [SerializeField] private GameObject controlsText;
 
     public void Start()
     {
+        resetArcadeMachineStates();
+        PlayerPrefs.SetInt("level", 1);
 
         if (MusicManager.Instance)
             MusicManager.Instance.PlayNewTrack(2);
@@ -20,33 +21,14 @@ public class ArcadeSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.getArcadeMachineNumber() == 1)
+        if (PlayerPrefs.GetInt("level") == 1)
         {
-            firstArcadeMachine.GetComponent<SpriteRenderer>().enabled = true;
-            // secondArcadeMachine.GetComponent<SpriteRenderer>().enabled = false;
-            // thirdArcadeMachine.GetComponent<SpriteRenderer>().enabled = false;
-            instructionText.SetActive(true);
+            controlsText.SetActive(true);
         }
-        else if (player.getArcadeMachineNumber() == 2)
-        {
-            firstArcadeMachine.GetComponent<SpriteRenderer>().enabled = false;
-            // secondArcadeMachine.GetComponent<SpriteRenderer>().enabled = true;
-            // thirdArcadeMachine.GetComponent<SpriteRenderer>().enabled = false;
-            instructionText.SetActive(false);
-        }
-        else if (player.getArcadeMachineNumber() == 3)
-        {
-            firstArcadeMachine.GetComponent<SpriteRenderer>().enabled = false;
-            // secondArcadeMachine.GetComponent<SpriteRenderer>().enabled = false;
-            // thirdArcadeMachine.GetComponent<SpriteRenderer>().enabled = true;
-            instructionText.SetActive(false);
-        }
+
         else
         {
-            firstArcadeMachine.GetComponent<SpriteRenderer>().enabled = false;
-            // secondArcadeMachine.GetComponent<SpriteRenderer>().enabled = false;
-            // thirdArcadeMachine.GetComponent<SpriteRenderer>().enabled = false;
-            instructionText.SetActive(false);
+            controlsText.SetActive(false);
         }
     }
 
@@ -55,5 +37,39 @@ public class ArcadeSceneManager : MonoBehaviour
         Debug.Log("Loading first arcade game scene...");
         instructionText.GetComponent<TextMeshProUGUI>().enabled = false;
         StartCoroutine(levelLoader.LoadArcadeGame(1));
+    }
+
+    public void resetArcadeMachineStates()
+    {
+        foreach (ArcadeMachine machine in arcadeMachines)
+        {
+            // Reset state
+            if (machine.getArcadeMachineNumber() == 1)
+            {
+                machine.SetMachineState(ArcadeMachine.MachineState.UNLOCKED);
+            }
+            else if (machine.getArcadeMachineNumber() == 2)
+            {
+                if (PlayerPrefs.GetInt("level") >= 2)
+                {
+                    machine.SetMachineState(ArcadeMachine.MachineState.UNLOCKED);
+                }
+                else
+                {
+                    machine.SetMachineState(ArcadeMachine.MachineState.LOCKED);
+                }
+            }
+            else if (machine.getArcadeMachineNumber() == 3)
+            {
+                if (PlayerPrefs.GetInt("level") >= 3)
+                {
+                    machine.SetMachineState(ArcadeMachine.MachineState.UNLOCKED);
+                }
+                else
+                {
+                    machine.SetMachineState(ArcadeMachine.MachineState.LOCKED);
+                }
+            }
+        }
     }
 }
