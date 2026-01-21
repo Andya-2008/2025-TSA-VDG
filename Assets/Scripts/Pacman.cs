@@ -8,7 +8,7 @@ public class Pacman : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     private CircleCollider2D circleCollider;
     private Movement movement;
-
+    [SerializeField] ParticleSystem explode;
     private void Awake()
     {
         circleCollider = GetComponent<CircleCollider2D>();
@@ -59,9 +59,11 @@ public class Pacman : MonoBehaviour
         spriteRenderer.enabled = false;
         circleCollider.enabled = false;
         movement.enabled = false;
-        deathSequence.enabled = true;
+        //deathSequence.enabled = true;
+
         GetComponent<PacBall>().Ball.SetActive(false);
-        deathSequence.Restart();
+        //deathSequence.Restart();
+        explode.Play();
     }
 
 }

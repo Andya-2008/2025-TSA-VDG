@@ -14205,6 +14205,18 @@ PrefabInstance:
       propertyPath: 'checkPoints.Array.data[1]'
       value: 
       objectReference: {fileID: 1622377593}
+    - target: {fileID: 4624052437902648442, guid: e09a7563a12c8ac43ae4d9b67f14bca6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4624052437902648442, guid: e09a7563a12c8ac43ae4d9b67f14bca6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4624052437902648442, guid: e09a7563a12c8ac43ae4d9b67f14bca6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6404928725081819924, guid: e09a7563a12c8ac43ae4d9b67f14bca6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.56
@@ -14244,6 +14256,10 @@ PrefabInstance:
     - target: {fileID: 6404928725081819924, guid: e09a7563a12c8ac43ae4d9b67f14bca6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7132093005999350183, guid: e09a7563a12c8ac43ae4d9b67f14bca6, type: 3}
+      propertyPath: speed
+      value: 7.9
       objectReference: {fileID: 0}
     - target: {fileID: 7132093005999350183, guid: e09a7563a12c8ac43ae4d9b67f14bca6, type: 3}
       propertyPath: canMove
