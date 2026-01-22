@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("Hi");
             if (PlayerPrefs.GetInt("PacTutorial") != 1)
                 GameObject.Find("SkipButton").SetActive(false);
             StartCoroutine(TitleTextPlay());
@@ -77,6 +78,7 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator TitleTextPlay()
     {
+        Debug.Log("TitleTextPlay");
         if(MusicManager.Instance)
         MusicManager.Instance.PlayNewTrack(3);
         yield return new WaitForSeconds(2);

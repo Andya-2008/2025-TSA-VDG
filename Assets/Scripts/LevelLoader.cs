@@ -85,6 +85,6 @@ public class LevelLoader : MonoBehaviour
         if (levelIndex == 1)
             SceneManager.LoadScene("PinballTutorial");
         else if (levelIndex == 2)
-            SceneManager.LoadScene("Pinball2");
+            SceneManager.LoadScene("Pinball2"); // CHANGE THIS TO SECOND LEVEL
     }
 }

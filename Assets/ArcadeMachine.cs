@@ -23,6 +23,7 @@ public class ArcadeMachine : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if(PlayerPrefs.GetInt("level") == 0) { PlayerPrefs.SetInt("level", 1); }
         if (levelNum == 1)
         {
             currentState = MachineState.UNLOCKED;
