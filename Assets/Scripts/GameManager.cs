@@ -109,13 +109,13 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //DEV
-        if(Input.GetKeyDown(KeyCode.Backspace))
+        /*if(Input.GetKeyDown(KeyCode.Backspace))
         {
             pacman.gameObject.SetActive(false);
             GameObject.Find("WhiteFade").GetComponent<PlayableDirector>().Play();
             PlayerPrefs.SetInt("level", 2);
             StartCoroutine(BackToArcade());
-        }
+        }*/
         if (lives <= 0 && Input.GetKeyDown(KeyCode.Space))
         {
             RecordResume();
