@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 [DefaultExecutionOrder(-100)]
 public class GameManager : MonoBehaviour
@@ -13,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Ghost[] ghosts;
     [SerializeField] private Pacman pacman;
     [SerializeField] private Transform pellets;
-    [SerializeField] private Text gameOverText;
+    [SerializeField] private TextMeshProUGUI gameOverText;
     [SerializeField] private Text successText;
     [SerializeField] private Text scoreText;
     [SerializeField] private Text livesText;
