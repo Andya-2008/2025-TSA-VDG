@@ -7109,7 +7109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2014323573587572691, guid: 25f5544974e8f0b409f1c5070cbb2c0e, type: 3}
       propertyPath: speed
-      value: 8.8
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 2014323573587572691, guid: 25f5544974e8f0b409f1c5070cbb2c0e, type: 3}
       propertyPath: obstacleLayer.m_Bits
@@ -10643,7 +10643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2430120178087035490, guid: 8398b287235293d469d1683369c48531, type: 3}
       propertyPath: speed
-      value: 8.8
+      value: 7.6
       objectReference: {fileID: 0}
     - target: {fileID: 2430120178087035490, guid: 8398b287235293d469d1683369c48531, type: 3}
       propertyPath: obstacleLayer.m_Bits
@@ -12239,7 +12239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8436053419019976313, guid: 0d1f951e4ac24fe478d688dbf86a5c39, type: 3}
       propertyPath: speed
-      value: 8.8
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 8436053419019976313, guid: 0d1f951e4ac24fe478d688dbf86a5c39, type: 3}
       propertyPath: obstacleLayer.m_Bits
@@ -13790,7 +13790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2499942207227959287, guid: 87e861fcfe4201c4d8213cba69c0f024, type: 3}
       propertyPath: speed
-      value: 8.8
+      value: 8.2
       objectReference: {fileID: 0}
     - target: {fileID: 2499942207227959287, guid: 87e861fcfe4201c4d8213cba69c0f024, type: 3}
       propertyPath: obstacleLayer.m_Bits
@@ -18455,7 +18455,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7459737120125161729, guid: e09a7563a12c8ac43ae4d9b67f14bca6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
