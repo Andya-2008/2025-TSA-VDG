@@ -1,7 +1,5 @@
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.UIElements;
 
 public class SparkleCollision : MonoBehaviour
 {
