@@ -66,7 +66,7 @@ public class MusicManager : MonoBehaviour
             {
                 if (track == null) continue;
 
-                if (track.isPlaying)
+                if (track.isPlaying && track.volume > 0.01f)
                 {
                     pausedTracks.Add(track);
                     track.Pause();

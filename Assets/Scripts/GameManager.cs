@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] PlayableDirector TitleText;
 
+    public int level;
     
 
     private void Awake()
@@ -75,6 +76,11 @@ public class GameManager : MonoBehaviour
             if (PlayerPrefs.GetInt("PacTutorial") != 1)
                 GameObject.Find("SkipButton").SetActive(false);
             StartCoroutine(TitleTextPlay());
+        }
+
+        if (level == 2)
+        {
+            MusicManager.Instance.PlayNewTrack(4);
         }
     }
     public IEnumerator TitleTextPlay()

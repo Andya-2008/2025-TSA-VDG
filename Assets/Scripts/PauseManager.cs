@@ -17,7 +17,7 @@ public class PauseManager : MonoBehaviour
 
     private bool isTransitioning = false;
 
-    bool initPause;
+    public bool initPause;
 
     public bool tutorial;
 
