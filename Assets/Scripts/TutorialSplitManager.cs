@@ -22,13 +22,13 @@ public class TutorialSplitManager : SplitScreenManager
         {
             Camera1.SetActive(true);
             Camera2.SetActive(false);
-            SwitchPacManBall(0, true);
+            SwitchPacManBall(true);
         }
         else
         {
             Camera1.SetActive(false);
             Camera2.SetActive(true);
-            SwitchPacManBall(0, false);
+            SwitchPacManBall(false);
         }
     }
 }

@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
 
         if (level == 2)
         {
+            if(MusicManager.Instance)
             MusicManager.Instance.PlayNewTrack(4);
         }
     }
@@ -222,7 +223,7 @@ public class GameManager : MonoBehaviour
 
         if (SFXManager.Instance)
             SFXManager.Instance.PlaySFX(6);
-        GameObject.Find("SplitScreenManager").GetComponent<SplitScreenManager>().SwitchPacManBall(1, true);
+        GameObject.Find("SplitScreenManager").GetComponent<SplitScreenManager>().SwitchPacManBall(true);
 
         pacman.DeathSequence();
         SetLives(lives - 1);

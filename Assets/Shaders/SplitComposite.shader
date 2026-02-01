@@ -53,16 +53,16 @@ Shader "Hidden/SplitComposite"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float2 screenPos = i.uv * _ScreenSize;
+                float2 screenPos = i.uv;
 
                 float2 ab = _LineB - _LineA;
                 float dist = cross2d(ab, screenPos - _LineA) / length(ab);
 
-                float t = smoothstep(-_BlendWidth, _BlendWidth, dist);
+                float t = dist > 0 ? 1.0 : 0.0;
 
                 fixed4 ball = tex2D(_BallTex, i.uv);
                 fixed4 pac  = tex2D(_PacmanTex, i.uv);
-
+                
                 return lerp(ball, pac, t);
             }
             ENDCG
